@@ -1,4 +1,3 @@
-local hs = hs
 hs.ipc = require("hs.ipc")
 local util = require("utils")
 
