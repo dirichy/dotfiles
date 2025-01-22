@@ -1,1 +1,0 @@
-.config/profile/onecharcmd.sh
