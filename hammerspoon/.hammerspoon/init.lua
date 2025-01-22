@@ -1,0 +1,35 @@
+local hs = hs
+hs.ipc = require("hs.ipc")
+local util = require("utils")
+
+hs.g = {}
+require("wifi_mute")
+require("corner")
+require("rusty")
+require("vlc")
+-- require("test")
+require("cmdq")
+-- require("window_manager")
+require("scripts.caffeine")
+
+hs.hotkey.bind({ "cmd" }, "space", function()
+	hs.osascript.applescript('tell application "Alfred 5" to search')
+end)
+
+hs.hotkey.bind({ "cmd", "alt" }, "S", function()
+	hs.osascript.applescript('tell application "ClashX Pro" to toggleProxy')
+	hs.osascript.applescript('tell application "Bartender 5" to show "com.west2online.ClashXPro-Item-0"')
+end)
+
+hs.hotkey.bind({ "cmd", "alt" }, "t", function()
+	local result, aa = hs.dialog.textPrompt("请输入一些文本", "请输入你的名字:", "", "1", "2")
+	if result then
+		hs.alert.show("你输入的名字是: " .. result .. aa)
+	else
+		hs.alert.show("你输入的名字是: " .. result .. aa)
+	end
+end)
+
+hs.hotkey.bind({ "cmd" }, "escape", function()
+	hs.hid.capslock.toggle()
+end)
