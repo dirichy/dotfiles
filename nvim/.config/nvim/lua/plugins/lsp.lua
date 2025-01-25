@@ -74,7 +74,24 @@ return {
 					ignore = { "ltex" },
 				},
 			})
-			require("lspsaga").setup()
+			require("lspsaga").setup({
+				ui = {
+					border = "rounded",
+				},
+				-- Using barbecue for this instead.
+				symbol_in_winbar = {
+					enable = false,
+				},
+				lightbulb = {
+					sign = false,
+				},
+				outline = {
+					win_width = 50,
+					keys = {
+						toggle_or_jump = "<cr>",
+					},
+				},
+			})
 			require("mason").setup()
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
 			require("mason-lspconfig").setup({
