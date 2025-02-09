@@ -32,3 +32,12 @@ end)
 hs.hotkey.bind({ "cmd" }, "escape", function()
 	hs.hid.capslock.toggle()
 end)
+-- local kitty_fix_time = 0
+-- hs.g.kitty_fix = hs.application.watcher.new(function(name, type, application)
+-- 	if name == "kitty" and type == hs.application.watcher.activated and os.time() > kitty_fix_time then
+-- 		kitty_fix_time = os.time()
+-- 		application:hide()
+-- 		application:activate()
+-- 	end
+-- end)
+-- hs.g.kitty_fix:start()

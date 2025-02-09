@@ -29,7 +29,7 @@ local autosnippet = ls.extend_decorator.apply(s, { snippetType = "autosnippet" }
 -- [
 -- personal imports
 -- ]
-local tex = require("latex_snip.conditions.luasnip")
+local tex = require("nvimtex.conditions.luasnip")
 -- local auto_backslash_snippet = require("util.scaffolding").auto_backslash_snippet
 -- local symbol_snippet = require("util.scaffolding").symbol_snippet
 -- local single_command_snippet = require("util.scaffolding").single_command_snippet
@@ -52,7 +52,7 @@ local makesnip = function(_, snip, _, con, out)
 	end
 end
 
-local cmds = require("latex_snip.snip.textsnip")
+local cmds = require("nvimtex.snip.textsnip")
 local cmd2char = cmds.cmd2char
 local cmd3char = cmds.cmd3char
 local cmd4char = cmds.cmd4char

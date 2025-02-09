@@ -12,9 +12,9 @@ if vim.env.PROF then
 	})
 end
 vim.loader.enable()
+vim.g.tex_conceal = ""
 require("options")
 require("lazy_nvim")
 require("keymaps")
 require("autocmds")
 -- require("chinese.im")
-require("tiger").setup()
