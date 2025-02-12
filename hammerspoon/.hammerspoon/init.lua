@@ -41,3 +41,6 @@ end)
 -- 	end
 -- end)
 -- hs.g.kitty_fix:start()
+local afterboot = require("afterboot")
+afterboot()
+require("rime")

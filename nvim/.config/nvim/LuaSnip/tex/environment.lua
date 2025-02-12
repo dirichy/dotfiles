@@ -12,7 +12,7 @@ local fmta = require("luasnip.extras.fmt").fmta
 -- [
 -- personal imports
 -- ]
-local tex = require("latex_snip.conditions.luasnip")
+local tex = require("nvimtex.conditions.luasnip")
 local text_line_begin_leader = "%."
 local envs = {
 	pf = { name = "proof", condition = 2 },

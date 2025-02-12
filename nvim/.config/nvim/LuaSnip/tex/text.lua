@@ -1,13 +1,13 @@
 local ls = require("luasnip")
-local get_magic_comment = require("latex_snip.util").get_magic_comment
+local get_magic_comment = require("nvimtex.util").get_magic_comment
 local s = ls.snippet
 local t = ls.text_node
 local f = ls.function_node
 local i = ls.insert_node
 local fmta = require("luasnip.extras.fmt").fmta
-local tex = require("latex_snip.conditions.luasnip")
+local tex = require("nvimtex.conditions.luasnip")
 local rep = require("luasnip.extras").rep
--- local pinyin = require("latex_snip.flypy")
+-- local pinyin = require("nvimtex.flypy")
 local knowntypes = {
 	pro = { en = "Problem", zh = "问题" },
 	fig = { en = "Figure", zh = "图" },

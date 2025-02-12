@@ -1,7 +1,11 @@
 local util = require("utils")
 local function quitApp()
 	local app = hs.application.frontmostApplication()
-	app:kill()
+	if app:bundleID() == "com.valvesoftware.steam.helper" then
+		hs.eventtap.keyStroke({ "cmd" }, "q", nil, app)
+	else
+		app:kill()
+	end
 end
 local cmdQDelay = 1
 

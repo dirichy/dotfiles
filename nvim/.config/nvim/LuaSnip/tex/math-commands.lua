@@ -6,7 +6,7 @@ local i = ls.insert_node
 local f = ls.function_node
 local fmta = require("luasnip.extras.fmt").fmta
 
-local tex =require("latex_snip.conditions.luasnip")
+local tex =require("nvimtex.conditions.luasnip")
 
 local get_visual = function(args, parent)
   if #parent.snippet.env.SELECT_RAW > 0 then

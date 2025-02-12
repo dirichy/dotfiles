@@ -3,7 +3,7 @@ local s = ls.snippet
 local i = ls.insert_node
 local f = ls.function_node
 local fmta = require("luasnip.extras.fmt").fmta
-local tex =require("latex_snip.conditions.luasnip")
+local tex =require("nvimtex.conditions.luasnip")
 M = {
   s(
     { trig = "(%d+)/", regTrig = true, snippetType = "autosnippet", priority = 100 },

@@ -29,7 +29,7 @@ local autosnippet = ls.extend_decorator.apply(s, { snippetType = "autosnippet" }
 -- [
 -- personal imports
 -- ]
-local tex =require("latex_snip.conditions.luasnip")
+local tex =require("nvimtex.conditions.luasnip")
 -- local auto_backslash_snippet = require("util.scaffolding").auto_backslash_snippet
 -- local symbol_snippet = require("util.scaffolding").symbol_snippet
 -- local single_command_snippet = require("util.scaffolding").single_command_snippet

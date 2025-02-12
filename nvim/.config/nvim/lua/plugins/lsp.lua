@@ -97,13 +97,36 @@ return {
 			require("mason-lspconfig").setup({
 				ensure_installed = vim.tbl_keys(servers),
 			})
-
+			local function root_dir(fname)
+				local dotfile_roots = {
+					"~/dotfiles/hammerspoon/.hammerspoon",
+					"~/dotfiles/karabiner/.config/karabiner",
+					"~/dotfiles/lsd/.config/lsd",
+					"~/dotfiles/nvim/.config/nvim",
+					"~/dotfiles/zathura/.config/zathura",
+					"~/dotfiles/zsh/.config/zsh",
+				}
+				local parent = vim.fn.fnamemodify(fname, ":h")
+				if vim.startswith(parent, vim.fn.expand("~/dotfiles/")) then
+					for _, root_dir in ipairs(dotfile_roots) do
+						if vim.startswith(parent, vim.fn.expand(root_dir)) then
+							return root_dir
+						end
+					end
+					return vim.fn.getcwd()
+				end
+				return require("lspconfig").util.find_git_ancestor(fname)
+			end
 			require("mason-lspconfig").setup_handlers({
 				-- The first entry (without a key) will be the default handler
 				-- and will be called for each installed server that doesn't have
 				-- a dedicated handler.
 				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup({ on_attach = on_attach, capabilities = capabilities })
+					require("lspconfig")[server_name].setup({
+						on_attach = on_attach,
+						capabilities = capabilities,
+						root_dir = root_dir,
+					})
 				end,
 				-- Next, you can provide a dedicated handler for specific servers.
 				-- For example, a handler override for the `rust_analyzer`:

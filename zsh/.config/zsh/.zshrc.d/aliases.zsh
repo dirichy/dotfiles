@@ -3,6 +3,7 @@
 # .aliases - Set whatever shell aliases you want.
 #
 
+alias fk='open /Applications/Finder.app .'
 alias bypy='python3 -m bypy'
 # single character aliases - be sparing!
 alias _=sudo

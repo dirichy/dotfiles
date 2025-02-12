@@ -2,7 +2,7 @@ local ls = require("luasnip")
 local s = ls.snippet
 local t = ls.text_node
 
-local tex =require("latex_snip.conditions.luasnip")
+local tex =require("nvimtex.conditions.luasnip")
 return {
   s({ trig = "...", wordTrig = false, snippetType = "autosnippet" }, {
     t("\\cdots"),

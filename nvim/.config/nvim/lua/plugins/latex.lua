@@ -29,7 +29,7 @@ return {
 	-- 	dir = vim.fn.isdirectory("/Users/dirichy/latex.nvim/") == 1 and "/Users/dirichy/latex.nvim",
 	-- 	ft = { "tex" },
 	-- 	config = function()
-	-- 		require("latex_snip").setup()
+	-- 		require("nvimtex").setup()
 	-- 	end,
 	-- },
 	{

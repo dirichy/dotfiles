@@ -1,7 +1,14 @@
+local redis = require("redis").connect("127.0.0.1", 6379)
 local M = {}
 local system = vim.uv.os_uname().sysname
 local sshtty = vim.env.SSH_TTY
-local tex = require("latex_snip.conditions.luasnip")
+local tex = require("nvimtex.conditions.luasnip")
+local prev_state = nil
+local return_state = nil
+local bool_table = {
+	["true"] = true,
+	["false"] = false,
+}
 if sshtty then
 	return
 end
@@ -23,14 +30,25 @@ function M.cursorcond()
 		return true
 	end
 end
+
 function M.refersh()
 	if not vim.g.imselect_enabled then
 		return
+	end
+	if redis:get("last_write") == "rime" then
+		prev_state = bool_table[redis:get("ascii_mode")]
 	end
 	if M.modecond() and M.langcond() and M.cursorcond() then
 		M.enableim()
 	else
 		M.disableim()
+	end
+end
+local prev_cursor_state = M.cursorcond()
+function M.cursor_refersh()
+	if prev_cursor_state ~= M.cursorcond() then
+		M.refersh()
+		prev_cursor_state = M.cursorcond()
 	end
 end
 
@@ -42,56 +60,48 @@ if system == "Linux" then
 		vim.cmd("silent !fcitx-remote -c")
 	end
 elseif system == "Darwin" then
-	-- local input_source = {
-	-- 	zh = "im.rime.inputmethod.Squirrel.Hans",
-	-- 	en = "com.apple.keylayout.ABC",
-	-- }
-	-- local change_command = vim.fn.executable("issw") == 1 and "issw -V "
-	-- 	or vim.fn.executable("macism") == 1 and "macism "
-	-- 	or error("No tool to change input method, install issw or macism!")
-	-- M.getcurrent = function()
-	-- 	local handle = io.popen(change_command)
-	-- 	local output
-	-- 	if handle then
-	-- 		output = handle:read("*a")
-	-- 		handle:close()
-	-- 	end
-	-- 	return output
-	-- end
-	-- local stored_im = input_source["en"]
-	-- local enabled = false
-	-- local i = 0
-	-- M.enableim = function()
-	-- 	if enabled then
-	-- 		return
-	-- 	end
-	-- 	vim.cmd("silent !" .. change_command .. stored_im)
-	-- 	enabled = true
-	-- end
-	-- M.disableim = function()
-	-- 	if not enabled then
-	-- 		return
-	-- 	end
-	-- 	stored_im = M.getcurrent()
-	-- 	vim.cmd("silent !" .. change_command .. input_source["en"])
-	-- 	enabled = false
-	-- end
 	M.enableim = function()
-		vim.cmd(
-			[[silent !hs -c 'hs.eventtap.keyStroke({"shift","ctrl","alt"},"9",nil,hs.application.applicationForBundleID("im.rime.inputmethod.Squirrel"))']]
-		)
+		-- vim.cmd(
+		-- 	[[silent !hs -c 'hs.eventtap.keyStroke({"shift","ctrl","alt"},"9",nil,hs.application.applicationForBundleID("im.rime.inputmethod.Squirrel"))']]
+		-- )
+		if return_state ~= nil then
+			redis:set("ascii_mode", return_state)
+		else
+			redis:set("ascii_mode", true)
+		end
+		redis:set("last_write", "neovim")
+		return_state = nil
 	end
 	M.disableim = function()
-		vim.cmd(
-			[[silent !hs -c 'hs.eventtap.keyStroke({"shift","ctrl","alt"},"0",nil,hs.application.applicationForBundleID("im.rime.inputmethod.Squirrel"))']]
-		)
+		-- vim.cmd(
+		-- 	[[silent !hs -c 'hs.eventtap.keyStroke({"shift","ctrl","alt"},"0",nil,hs.application.applicationForBundleID("im.rime.inputmethod.Squirrel"))']]
+		-- )
+		return_state = prev_state
+		redis:set("ascii_mode", true)
+		redis:set("last_write", "neovim")
 	end
 else
 	error("Imselect only support linux and mac now.")
 end
 
-vim.api.nvim_create_autocmd({ "ModeChanged", "CursorMovedI" }, {
+vim.api.nvim_create_autocmd({ "ModeChanged" }, {
 	callback = M.refersh,
+})
+
+vim.api.nvim_create_autocmd({ "CursorMovedI" }, {
+	callback = function()
+		vim.schedule(function()
+			M.cursor_refersh()
+		end)
+	end,
+})
+vim.api.nvim_create_autocmd({ "User" }, {
+	pattern = { "LuasnipInsertNodeEnter", "LuasnipInsertNodeLeave" },
+	callback = function()
+		vim.schedule(function()
+			M.cursor_refersh()
+		end)
+	end,
 })
 
 return M

@@ -12,7 +12,7 @@ local r = ls.restore_node
 local fmta = require("luasnip.extras.fmt").fmta
 local autosnippet = ls.extend_decorator.apply(s, { snippetType = "autosnippet" })
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
-local latex = require("latex_snip.conditions.luasnip")
+local latex = require("nvimtex.conditions.luasnip")
 latex.in_table = function()
 	return false
 end
@@ -60,7 +60,7 @@ end
 -- [
 -- personal imports
 -- ]
-local tex = require("latex_snip.conditions.luasnip")
+local tex = require("nvimtex.conditions.luasnip")
 
 -- Generating functions for Matrix/Cases - thanks L3MON4D3!
 local generate_matrix = function(args, snip)

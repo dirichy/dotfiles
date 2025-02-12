@@ -6,7 +6,7 @@ local f = ls.function_node
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
 local rep = require("luasnip.extras").rep
 local fmta = require("luasnip.extras.fmt").fmta
-local tex = require("latex_snip.conditions.luasnip")
+local tex = require("nvimtex.conditions.luasnip")
 M = {
 	s({ trig = "pkg", snippetType = "autosnippet" }, {
 		t("\\usepackage{"),
