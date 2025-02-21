@@ -82,7 +82,9 @@ M = {
 				i(0),
 			}
 		),
-		{ condition = tex.in_text * line_begin }
+		{ condition = tex.in_text * line_begin * function(_, _, captures)
+			return envs[captures[1]]
+		end }
 	),
 	s({ trig = "。", snippetType = "autosnippet", priority = 2000 }, {
 		t("."),

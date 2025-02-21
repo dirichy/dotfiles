@@ -1,0 +1,215 @@
+{
+    "profiles": [
+        {
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "capslock as escape",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "caps_lock" },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "escape" },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "esc_down",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "esc_down",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "caps_lock" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "k" },
+                                "to": [{ "shell_command": "open -a kitty.app" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Use fn+hjkl to move mouse, fn+a to tap and fn+s to right tap",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "j",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "mouse_key": { "vertical_wheel": 32 } }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "k",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "mouse_key": { "vertical_wheel": -32 } }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "l",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "mouse_key": { "horizontal_wheel": -32 } }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "h",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "mouse_key": { "horizontal_wheel": 32 } }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "a",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "pointing_button": "button1" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "s",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [{ "pointing_button": "button2" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Let fn+f4 behave same as command+space, so that can open alfred",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "f4",
+                                    "modifiers": {
+                                        "mandatory": ["fn"],
+                                        "optional": ["any"]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "spacebar",
+                                        "modifiers": ["left_command"]
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "shift alone to switch input method ascii_mode",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "left_shift" },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "shell_command": "/usr/local/bin/hs -c 'hs.rime.ascii_mode()'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "change left_control and fn, use fn to change rime ascii_mode",
+                        "manipulators": [
+                            {
+                                "from": { "apple_vendor_top_case_key_code": "keyboard_fn" },
+                                "to": [{ "key_code": "left_control" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "left_control" },
+                                "to": [
+                                    {
+                                        "apple_vendor_top_case_key_code": "keyboard_fn",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "shell_command": "/usr/local/bin/hs -c 'hs.rime.ascii_mode()'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "caps_lock" },
+                                "to": [{ "key_code": "left_ctrl" }],
+                                "to_if_alone": [{ "key_code": "escape" }]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "hammerspoon auto generated",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": { "mandatory": ["right_command", "fn"] }
+                                },
+                                "to": { "shell_command": "/usr/local//bin/hs -c 'hs.karabiner.functions[1]()'" },
+                                "type": "basic"
+                            }
+                        ]
+                    }
+                ]
+            },
+            "fn_function_keys": [
+                {
+                    "from": { "key_code": "f6" },
+                    "to": [{ "consumer_key_code": "play_or_pause" }]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
+        }
+    ]
+}

@@ -67,6 +67,8 @@ return {
 					javascript = { "prettierd", "prettier", stop_after_first = true },
 					tex = { "tex-fmt" },
 					c = { "clang-format" },
+					json = { "clang-format" },
+					zsh = { "beautysh" },
 				},
 			})
 			vim.api.nvim_create_autocmd("BufWritePre", {

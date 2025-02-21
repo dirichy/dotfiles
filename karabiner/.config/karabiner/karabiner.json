@@ -4,6 +4,287 @@
             "complex_modifications": {
                 "rules": [
                     {
+                        "description": "Use esc+number to shottr",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "1" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Capture Screen\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "2" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Capture Area\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "3" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Scrolling Capture\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "9" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Recongize Text/QR\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "7" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Delayed Screenshot (3S)\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "8" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Repeat Area Capture\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "5" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Capture Active Window\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "6" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Capture Any Window\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "4" },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Scrolling (Up)\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Use esc+key to open app",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "q" },
+                                "to": { "shell_command": "open -a \"QQ.app\"" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "c" },
+                                "to": { "shell_command": "open -a \"Google Chrome.app\"" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "e" },
+                                "to": { "shell_command": "open -a \"Karabiner-EventViewer.app\"" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "d" },
+                                "to": { "shell_command": "open -a \"Eudic.app\"" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "w" },
+                                "to": { "shell_command": "open -a \"WeChat.app\"" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "k" },
+                                "to": { "shell_command": "open -a \"kitty.app\"" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "t" },
+                                "to": { "shell_command": "open -a \"Telegram.app\"" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "m" },
+                                "to": { "shell_command": "open -a \"MenubarX.app\"" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "s" },
+                                "to": { "shell_command": "open -a \"Steam.app\"" },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "capslock as escape",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "key_code": "escape",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [
+                                    {
+                                        "set_variable": {
+                                            "name": "esc_down",
+                                            "value": 1
+                                        }
+                                    }
+                                ],
+                                "to_after_key_up": [
+                                    {
+                                        "set_variable": {
+                                            "name": "esc_down",
+                                            "value": 0
+                                        }
+                                    }
+                                ],
+                                "to_if_alone": [{ "key_code": "caps_lock" }],
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "name": "esc_down",
+                                        "type": "variable_if",
+                                        "value": 1
+                                    }
+                                ],
+                                "from": { "key_code": "k" },
+                                "to": [{ "shell_command": "open -a kitty.app" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Use fn+hjkl to move mouse, fn+a to tap and fn+s to right tap",
                         "manipulators": [
                             {
@@ -94,6 +375,61 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "shift alone to switch input method ascii_mode",
+                        "manipulators": [
+                            {
+                                "from": { "key_code": "left_shift" },
+                                "to": [
+                                    {
+                                        "key_code": "left_shift",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "shell_command": "/usr/local/bin/hs -c 'hs.rime.ascii_mode()'" }],
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
+                        "description": "change left_control and fn, use fn to change rime ascii_mode",
+                        "manipulators": [
+                            {
+                                "from": { "apple_vendor_top_case_key_code": "keyboard_fn" },
+                                "to": [{ "key_code": "left_control" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "left_control" },
+                                "to": [
+                                    {
+                                        "apple_vendor_top_case_key_code": "keyboard_fn",
+                                        "lazy": true
+                                    }
+                                ],
+                                "to_if_alone": [{ "shell_command": "/usr/local/bin/hs -c 'hs.rime.ascii_mode()'" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": { "key_code": "caps_lock" },
+                                "to": [{ "key_code": "left_ctrl" }],
+                                "to_if_alone": [{ "key_code": "escape" }]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "hammerspoon auto generated",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "e",
+                                    "modifiers": { "mandatory": ["right_command", "fn"] }
+                                },
+                                "to": { "shell_command": "/usr/local//bin/hs -c 'hs.karabiner.functions[1]()'" },
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
@@ -105,24 +441,6 @@
             ],
             "name": "Default profile",
             "selected": true,
-            "simple_modifications": [
-                {
-                    "from": { "apple_vendor_top_case_key_code": "keyboard_fn" },
-                    "to": [{ "key_code": "left_control" }]
-                },
-                {
-                    "from": { "key_code": "caps_lock" },
-                    "to": [{ "key_code": "escape" }]
-                },
-                {
-                    "from": { "key_code": "escape" },
-                    "to": [{ "pointing_button": "button1" }]
-                },
-                {
-                    "from": { "key_code": "left_control" },
-                    "to": [{ "apple_vendor_top_case_key_code": "keyboard_fn" }]
-                }
-            ],
             "virtual_hid_keyboard": { "keyboard_type_v2": "ansi" }
         }
     ]

@@ -250,6 +250,8 @@ return {
 		ft = "lua",
 		opts = {
 			library = {
+				"~/.luarocks/lib/lua/5.1/",
+				"/opt/homebrew/lib/lua/5.4/",
 				{ path = "~/Documents/.lib/LuaTeX_Lua-API/library/", words = { "tex" } },
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				{ path = "~/.hammerspoon/Spoons/EmmyLua.spoon/annotations/", words = { "hs" } },

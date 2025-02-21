@@ -3,8 +3,8 @@ local util = require("utils")
 
 hs.g = {}
 require("wifi_mute")
-require("corner")
-require("rusty")
+-- require("corner")
+-- require("rusty")
 require("vlc")
 -- require("test")
 require("cmdq")
@@ -20,18 +20,15 @@ hs.hotkey.bind({ "cmd", "alt" }, "S", function()
 	hs.osascript.applescript('tell application "Bartender 5" to show "com.west2online.ClashXPro-Item-0"')
 end)
 
-hs.hotkey.bind({ "cmd", "alt" }, "t", function()
-	local result, aa = hs.dialog.textPrompt("请输入一些文本", "请输入你的名字:", "", "1", "2")
-	if result then
-		hs.alert.show("你输入的名字是: " .. result .. aa)
-	else
-		hs.alert.show("你输入的名字是: " .. result .. aa)
-	end
-end)
+-- hs.hotkey.bind({ "cmd", "alt" }, "t", function()
+-- 	local result, aa = hs.dialog.textPrompt("请输入一些文本", "请输入你的名字:", "", "1", "2")
+-- 	if result then
+-- 		hs.alert.show("你输入的名字是: " .. result .. aa)
+-- 	else
+-- 		hs.alert.show("你输入的名字是: " .. result .. aa)
+-- 	end
+-- end)
 
-hs.hotkey.bind({ "cmd" }, "escape", function()
-	hs.hid.capslock.toggle()
-end)
 -- local kitty_fix_time = 0
 -- hs.g.kitty_fix = hs.application.watcher.new(function(name, type, application)
 -- 	if name == "kitty" and type == hs.application.watcher.activated and os.time() > kitty_fix_time then
@@ -44,3 +41,9 @@ end)
 local afterboot = require("afterboot")
 afterboot()
 require("rime")
+-- require("karabiner")
+-- hs.karabiner.setup()
+-- hs.karabiner.press({ "right_command", "fn" }, "e", function()
+-- 	hs.alert("success!")
+-- end)
+-- hs.karabiner.write()

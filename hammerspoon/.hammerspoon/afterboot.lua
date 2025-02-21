@@ -7,7 +7,7 @@ return function()
 	local useless_app = {
 		"microsoft autoupdate",
 	}
-	hs.g.boot_timer = hs.timer.doAfter(10, function()
+	hs.g.boot_timer = hs.timer.doAfter(5, function()
 		for _, appname in ipairs(app_with_useless_window) do
 			local app = hs.application.find(appname)
 			if app then

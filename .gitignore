@@ -36,5 +36,13 @@ Temporary Items
 lazy-lock.json
 /hammerspoon/.hammerspoon/Spoons/*
 /zsh/.config/zsh/.antidote
+/rime/Library/Rime/build/*
+/rime/Library/Rime/extended.userdb/*
+/rime/Library/Rime/easy_english.userdb/*
+/rime/Library/Rime/sync/*
+/rime/Library/Rime/math_flypy.userdb/*
+/rime/Library/Rime/zh-hans-t-essay-bgw.gram
+/zsh/.config/zsh/.zsh_sessions/*
+/karabiner/.config/karabiner/automatic_backups/*
 
 # End of https://www.toptal.com/developers/gitignore/api/macos

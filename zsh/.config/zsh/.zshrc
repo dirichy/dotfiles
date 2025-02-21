@@ -7,7 +7,7 @@
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+    source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
 # Lazy-load (autoload) Zsh function files from a directory.
@@ -20,7 +20,7 @@ autoload -Uz $ZFUNCDIR/*(.:t)
 
 # Clone antidote if necessary.
 if [[ ! -d ${ZDOTDIR:-$HOME}/.antidote ]]; then
-  git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-$HOME}/.antidote
+    git clone https://github.com/mattmc3/antidote ${ZDOTDIR:-$HOME}/.antidote
 fi
 
 # Create an amazing Zsh config using antidote plugins.
@@ -29,10 +29,10 @@ antidote load
 
 # Source anything in .zshrc.d.
 for _rc in ${ZDOTDIR:-$HOME}/.zshrc.d/*.zsh; do
-  # Ignore tilde files.
-  if [[ $_rc:t != '~'* ]]; then
-    source "$_rc"
-  fi
+    # Ignore tilde files.
+    if [[ $_rc:t != '~'* ]]; then
+        source "$_rc"
+    fi
 done
 unset _rc
 
@@ -44,3 +44,4 @@ source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
 chruby ruby-3.3.5
 . "$HOME/.cargo/env"
+. "${ZDOTDIR:-$HOME}/scripts/baipan/main.zsh"

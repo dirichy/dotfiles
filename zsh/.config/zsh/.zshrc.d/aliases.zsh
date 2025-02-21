@@ -3,7 +3,15 @@
 # .aliases - Set whatever shell aliases you want.
 #
 
-alias fk='open /Applications/Finder.app .'
+python(){
+    local abspython="$(whence -p python)"
+    if [ -n "$abspython" ]; then
+        "$abspython" "$@"
+    else
+        python3 "$@"
+    fi
+}
+alias fk='open -a Finder.app .'
 alias bypy='python3 -m bypy'
 # single character aliases - be sparing!
 alias _=sudo
@@ -42,12 +50,12 @@ alias zshrc='${EDITOR:-vim} "${ZDOTDIR:-$HOME}"/.zshrc'
 alias zbench='for i in {1..10}; do /usr/bin/time zsh -lic exit; done'
 alias zdot='cd ${ZDOTDIR:-~}'
 function cd() {
-	if [[ -z $(command -v z) ]]; then
-		\builtin cd $*
-		return $?
-	fi
-	z $*
-	return $?
+    if [[ -z $(command -v z) ]]; then
+        \builtin cd $*
+        return $?
+    fi
+    z $*
+    return $?
 }
 # for macos
 
