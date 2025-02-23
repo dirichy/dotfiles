@@ -69,6 +69,16 @@ return {
 					c = { "clang-format" },
 					json = { "clang-format" },
 					zsh = { "beautysh" },
+					html = { "prettierd" },
+					liquid = function(bufer)
+						local formter_by_name = {
+							html = { "prettierd" },
+							json = { "clang-format" },
+						}
+						local real_filetype = vim.api.nvim_buf_get_name(bufer)
+						real_filetype = real_filetype:match("[^.]*$")
+						return formter_by_name[real_filetype] or {}
+					end,
 				},
 			})
 			vim.api.nvim_create_autocmd("BufWritePre", {

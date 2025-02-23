@@ -45,4 +45,5 @@ lazy-lock.json
 /zsh/.config/zsh/.zsh_sessions/*
 /karabiner/.config/karabiner/automatic_backups/*
 
+/rime/Library/Rime/user.yaml
 # End of https://www.toptal.com/developers/gitignore/api/macos
