@@ -32,7 +32,7 @@ switches:
 
 engine:
   processors:
-    # - lua_processor@im_select
+    - lua_processor@hammerspoon
     - lua_processor@auto_put
     - ascii_composer # Windows 用户请解除此行注释，否则将会无法切换到英文输入
     - recognizer

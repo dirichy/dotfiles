@@ -387,7 +387,7 @@
                                         "lazy": true
                                     }
                                 ],
-                                "to_if_alone": [{ "shell_command": "/usr/local/bin/hs -c 'hs.rime.ascii_mode()'" }],
+                                "to_if_alone": [{ "shell_command": "/opt/homebrew/bin/hs -c 'hs.rime.ascii_mode()'" }],
                                 "type": "basic"
                             }
                         ]
@@ -408,13 +408,14 @@
                                         "lazy": true
                                     }
                                 ],
-                                "to_if_alone": [{ "shell_command": "/usr/local/bin/hs -c 'hs.rime.ascii_mode()'" }],
+                                "to_if_alone": [{ "shell_command": "/opt/homebrew/bin/hs -c 'hs.rime.ascii_mode()'" }],
                                 "type": "basic"
                             },
                             {
                                 "from": { "key_code": "caps_lock" },
-                                "to": [{ "key_code": "left_ctrl" }],
-                                "to_if_alone": [{ "key_code": "escape" }]
+                                "to": [{ "key_code": "left_control" }],
+                                "to_if_alone": [{ "key_code": "escape" }],
+                                "type": "basic"
                             }
                         ]
                     },

@@ -47,3 +47,6 @@ lazy-lock.json
 
 /rime/Library/Rime/user.yaml
 # End of https://www.toptal.com/developers/gitignore/api/macos
+rime/Library/Rime/default.yaml
+rime/Library/Rime/installation.yaml
+rime/Library/Rime/default.yaml

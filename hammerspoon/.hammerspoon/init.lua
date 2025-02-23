@@ -9,7 +9,7 @@ require("vlc")
 -- require("test")
 require("cmdq")
 -- require("window_manager")
-require("scripts.caffeine")
+-- require("scripts.caffeine")
 
 hs.hotkey.bind({ "cmd" }, "space", function()
 	hs.osascript.applescript('tell application "Alfred 5" to search')

@@ -5,7 +5,7 @@ config_version: "2023-12-18"
 
 schema_list:
   # - schema: lufs_flypy # 小鹤双拼
-  - schema: tiger
+  # - schema: tiger
   # - schema: tigress
   # - schema: PY_c
   # - schema: hello

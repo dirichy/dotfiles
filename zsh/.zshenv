@@ -1,1 +1,1 @@
-. /Users/dirichy/.config/zsh/.zshenv
+. ~/.config/zsh/.zshenv
