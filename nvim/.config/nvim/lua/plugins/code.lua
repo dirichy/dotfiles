@@ -70,6 +70,7 @@ return {
 					json = { "clang-format" },
 					zsh = { "beautysh" },
 					html = { "prettierd" },
+					yaml = { "prettierd" },
 					liquid = function(bufer)
 						local formter_by_name = {
 							html = { "prettierd" },

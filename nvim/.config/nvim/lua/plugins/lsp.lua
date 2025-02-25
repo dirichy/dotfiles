@@ -3,6 +3,7 @@ return {
 		"neovim/nvim-lspconfig",
 		keys = {
 			{ "<leader>om", "<cmd>Mason<cr>", desc = "Open Mason(LSP install)" },
+			{ "<leader>tc", "<cmd>LspStart ltex<cr>", desc = "Start Ltex to check document" },
 		},
 		cmd = { "Mason", "Neoconf" },
 		event = { "BufReadPost", "BufNewFile" },
@@ -146,6 +147,9 @@ return {
 				-- end,
 				["ltex"] = function()
 					require("lspconfig")["ltex"].setup({
+						filetypes = { "tex", "latex", "md", "markdown" },
+						root_dir = root_dir,
+						autostart = false,
 						on_attach = function(_, bufer)
 							on_attach(_, bufer)
 							require("ltex_extra").setup({
