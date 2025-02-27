@@ -12,89 +12,7 @@ local fmt = require("luasnip.extras.fmt").fmt
 local fmta = require("luasnip.extras.fmt").fmta
 local rep = require("luasnip.extras").rep
 local line_begin = require("luasnip.extras.expand_conditions").line_begin
-
-local keywords = {
-	["and"] = true,
-	["break"] = true,
-	["do"] = true,
-	["else"] = true,
-	["elseif"] = true,
-	["end"] = true,
-	["false"] = true,
-	["for"] = true,
-	["function"] = true,
-	["if"] = true,
-	["in"] = true,
-	["local"] = true,
-	["nil"] = true,
-	["not"] = true,
-	["or"] = true,
-	["repeat"] = true,
-	["return"] = true,
-	["then"] = true,
-	["true"] = true,
-	["until"] = true,
-	["while"] = true,
-}
-local function keyword_as_key_condition(_, _, captures)
-	if not keywords[captures[1]] then
-		return false
-	end
-	local cursor = vim.api.nvim_win_get_cursor(0)
-	cursor[1] = cursor[1] - 1
-	cursor[2] = cursor[2] - 2
-	if cursor[2] < 0 then
-		cursor[2] = 0
-	end
-	local node = vim.treesitter.get_node({ pos = cursor })
-	if not node then
-		return false
-	end
-	local parent = node:parent()
-	if not parent then
-		return false
-	end
-	if parent:type() == "dot_index_expression" and node:equal(parent:field("field")[1]) then
-		return true
-	end
-	local grand_parent = parent:parent()
-	if not grand_parent then
-		return
-	end
-	if
-		grand_parent:type() == "table_constructor"
-		and parent:type() == "field"
-		and node:equal(parent:field("value")[1])
-	then
-		return true
-	end
-	return false
-end
-return {
-	s(
-		{ trig = "([a-z]*)=", snippetType = "autosnippet", regTrig = true, wordTrig = false },
-		fmta('["<>"]=<>', {
-			f(function(_, snip)
-				return snip.captures[1]
-			end),
-			i(0),
-		}),
-		{
-			condition = keyword_as_key_condition,
-		}
-	),
-	s(
-		{ trig = "%.([a-z]*)", snippetType = "autosnippet", regTrig = true, wordTrig = false },
-		fmta('["<>"]<>', {
-			f(function(_, snip)
-				return snip.captures[1]
-			end),
-			i(0),
-		}),
-		{
-			condition = keyword_as_key_condition,
-		}
-	),
+local M = {
 	s(
 		"localreq",
 		fmt('local {} = require("{}")', {
@@ -103,7 +21,7 @@ return {
 		})
 	),
 	s(
-		"lzayreq",
+		"lazyreq",
 		fmt('local {} = util.lazyreq("{}")', {
 			l(l._1:match("[^.]*$"):gsub("[^%a]+", "_"), 1),
 			i(1, "module"),
@@ -141,9 +59,7 @@ return {
 	s(
 		{ trig = "starsnip", snippetType = "autosnippet" },
 		fmta(
-			[[
-      s(
-        { trig = "<>", snippetType = "autosnippet" },
+			[[ s( { trig = "<>", snippetType = "autosnippet" },
         c(1, { sn(nil, { t("\\<>{"), i(1), t("}") }), sn(nil, { t("\\<>*{"), i(1), t("}") }) }),
         { condition = tex.<> }
       ),
@@ -192,3 +108,4 @@ s({ trig = "<>", snippetType = "autosnippet" },
 		{ condition = line_begin }
 	),
 }
+return M
