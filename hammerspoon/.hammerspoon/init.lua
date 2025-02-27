@@ -3,6 +3,7 @@ local util = require("utils")
 
 hs.g = {}
 require("wifi_mute")
+require("pasteboard")
 -- require("corner")
 -- require("rusty")
 require("vlc")
