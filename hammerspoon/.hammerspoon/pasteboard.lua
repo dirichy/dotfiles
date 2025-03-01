@@ -28,22 +28,22 @@ for i = 0, 9 do
 	M.RegisterCache[i] = {}
 	M.registermodal:bind({}, tostring(i), function()
 		M.currentRegister = i
+		hs.pasteboard.writeAllData(M.RegisterCache[i])
 		M.registermodal:exit()
-		M.pastemodal:enter()
 	end)
 end
 for i = string.byte("a"), string.byte("z") do
 	M.RegisterCache[string.char(i)] = {}
 	M.registermodal:bind({}, string.char(i), function()
 		M.currentRegister = string.char(i)
+		hs.pasteboard.writeAllData(M.RegisterCache[string.char(i)])
 		M.registermodal:exit()
-		M.pastemodal:enter()
 	end)
 end
 M.registermodal:bind({ "shift" }, "'", function()
 	M.currentRegister = '"'
+	hs.pasteboard.writeAllData(M.RegisterCache['"'])
 	M.registermodal:exit()
-	M.pastemodal:enter()
 end)
 function M.exit()
 	M.pastemodal:exit()

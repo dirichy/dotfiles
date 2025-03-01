@@ -1,7 +1,7 @@
 local M = {}
 M.opts = {
 	description = "hammerspoon auto generated",
-	ipcpath = "/usr/local/",
+	ipcpath = "/opt/homebrew/bin",
 }
 local json = require("JSON")
 M.functions = {}

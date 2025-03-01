@@ -8,6 +8,7 @@ local shortcuts = {
 	s = "Steam.app",
 	t = "Telegram.app",
 	w = "WeChat.app",
+	n = "noteful.app",
 }
 local JSON = require("JSON")
 local applaucher =
