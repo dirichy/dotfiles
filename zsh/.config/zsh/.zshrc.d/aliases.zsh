@@ -15,8 +15,9 @@ alias fk='open -a Finder.app .'
 alias bypy='python3 -m bypy'
 # single character aliases - be sparing!
 alias _=sudo
-alias l='lsd -lhA'
+if [ -n "$(whence lsd)" ]; then
 alias ls='lsd'
+fi
 # alias g=git
 
 # mask built-ins with better defaults
@@ -26,6 +27,7 @@ alias ls='lsd'
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias l.='ls -ld .*'
+alias l='ls -lhA'
 
 # fix common typos
 alias q='exit'
