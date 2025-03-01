@@ -43,5 +43,5 @@ fzf --zsh | eval
 source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 source /opt/homebrew/opt/chruby/share/chruby/auto.sh
 chruby ruby-3.3.5
-. "$HOME/.cargo/env"
+[[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 . "${ZDOTDIR:-$HOME}/scripts/baipan/main.zsh"
