@@ -50,3 +50,5 @@ lazy-lock.json
 rime/Library/Rime/default.yaml
 rime/Library/Rime/installation.yaml
 rime/Library/Rime/default.yaml
+zsh/.config/zsh/.p10k.zsh
+zsh/.config/zsh/.zsh_plugins.zsh
