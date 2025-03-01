@@ -340,10 +340,11 @@ return {
 				desc = "Paste image from system clipboard",
 			},
 		},
+    enabled = not vim.uv.os_uname().release:match("android")
 	},
 	{
 		"3rd/image.nvim",
-		enabled = not vim.env.SSH_TTY,
+		enabled = not vim.env.SSH_TTY and not vim.uv.os_uname().release:match("android"),
 		lazy = true,
 		config = function()
 			-- default config
