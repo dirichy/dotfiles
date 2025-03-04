@@ -4,19 +4,27 @@ return {
 		"tanvirtin/vgit.nvim",
 		dependencies = { "nvim-lua/plenary.nvim", "nvim-tree/nvim-web-devicons" },
 		-- Lazy loading on 'VimEnter' event is necessary.
-		event = "VimEnter",
+		keys = {
+			{
+				"]h",
+				function()
+					require("vgit").hunk_up()
+				end,
+				desc = "prev hunk",
+				mode = { "n" },
+			},
+			{
+				"[h",
+				mode = { "n" },
+				function()
+					require("vgit").hunk_down()
+				end,
+				desc = "Go down in the direction of the hunk",
+			},
+		},
 		config = function()
 			require("vgit").setup({
 				keymaps = {
-					["n <C-k>"] = function()
-						require("vgit").hunk_up()
-					end,
-					{
-						mode = "n",
-						key = "<C-j>",
-						handler = "hunk_down",
-						desc = "Go down in the direction of the hunk",
-					},
 					["n <leader>gs"] = function()
 						require("vgit").buffer_hunk_stage()
 					end,
@@ -340,7 +348,7 @@ return {
 				desc = "Paste image from system clipboard",
 			},
 		},
-    enabled = not vim.uv.os_uname().release:match("android")
+		enabled = not vim.uv.os_uname().release:match("android"),
 	},
 	{
 		"3rd/image.nvim",

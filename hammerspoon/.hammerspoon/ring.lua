@@ -1,4 +1,3 @@
-local hs = hs
 ---@class ring.Chooser
 ---@field rings ring.Ring[]
 ---@field preview? function
@@ -163,6 +162,9 @@ function M:update()
 	-- 计算鼠标到圆心的距离
 	local distanceFromCenter = math.sqrt(dx ^ 2 + dy ^ 2)
 	-- 根据距离决定是内层还是外层的圆弧变红
+	if not self.rings then
+		return
+	end
 	if distanceFromCenter < self.rings[1].trigDistance[1] then
 		self:preview()
 	end

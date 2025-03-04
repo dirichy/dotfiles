@@ -24,6 +24,14 @@ local function condition(_, _, captures)
 		return false
 	end
 	if parent:type() == "dot_index_expression" and node:equal(parent:field("field")[1]) then
+		local grand_parent = parent:parent()
+		if
+			grand_parent
+			and grand_parent:type() == "function_declaration"
+			and parent:equal(grand_parent:field("name")[1])
+		then
+			return false
+		end
 		return true
 	end
 	local grand_parent = parent:parent()

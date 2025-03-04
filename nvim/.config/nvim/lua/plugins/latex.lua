@@ -33,6 +33,7 @@ return {
 	-- 	end,
 	-- },
 	{
+		enabled = false,
 		vim.fn.isdirectory("/Users/dirichy/latex_concealer.nvim/") == 0 and "dirichy/latex_concealer.nvim",
 		dir = vim.fn.isdirectory("/Users/dirichy/latex_concealer.nvim/") == 1 and "/Users/dirichy/latex_concealer.nvim",
 		ft = "tex",

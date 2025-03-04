@@ -2,13 +2,14 @@ local shortcuts = {
 	c = "Google Chrome.app",
 	d = "Eudic.app",
 	e = "Karabiner-EventViewer.app",
+	g = "Gnucash.app",
 	k = "kitty.app",
 	m = "MenubarX.app",
+	n = "noteful.app",
 	q = "QQ.app",
 	s = "Steam.app",
 	t = "Telegram.app",
 	w = "WeChat.app",
-	n = "noteful.app",
 }
 local JSON = require("JSON")
 local applaucher =
