@@ -4056,7 +4056,7 @@ extraintf=http
 #global-key-faster=
 
 # Faster (string)
-key-faster=Command-Shift-+
+key-faster=
 
 # Slower (string)
 #global-key-slower=
@@ -4074,13 +4074,13 @@ key-rate-normal==
 #global-key-rate-faster-fine=
 
 # Faster (fine) (string)
-key-rate-faster-fine=f
+key-rate-faster-fine=Command-Shift-+
 
 # Slower (fine) (string)
 #global-key-rate-slower-fine=
 
 # Slower (fine) (string)
-key-rate-slower-fine=s
+key-rate-slower-fine=Command--
 
 # Next (string)
 #global-key-next=
@@ -4296,13 +4296,13 @@ key-subsync-apply=
 #global-key-audiodelay-up=
 
 # Audio delay up (string)
-key-audiodelay-up=Shift-+
+key-audiodelay-up=]
 
 # Audio delay down (string)
 #global-key-audiodelay-down=
 
 # Audio delay down (string)
-key-audiodelay-down=-
+key-audiodelay-down=[
 
 # Cycle audio track (string)
 #global-key-audio-track=

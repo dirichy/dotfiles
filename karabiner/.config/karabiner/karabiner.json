@@ -10,6 +10,191 @@
                 "parameters": { "basic.to_delayed_action_delay_milliseconds": 200 },
                 "rules": [
                     {
+                        "description": "Keybind for using joncon to control vlc, see github.com/dirichy/dotfiles",
+                        "manipulators": [
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button15" },
+                                "to": { "key_code": "open_bracket" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button16" },
+                                "to": { "key_code": "close_bracket" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button2" },
+                                "to": { "key_code": "l" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button3" },
+                                "to": {
+                                    "key_code": "period",
+                                    "modifiers": ["command"]
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button4" },
+                                "to": { "key_code": "h" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button5" },
+                                "to": {
+                                    "key_code": "n",
+                                    "modifiers": ["shift"]
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button6" },
+                                "to": { "key_code": "n" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button10" },
+                                "to": {
+                                    "key_code": "equal_sign",
+                                    "modifiers": ["command", "shift"]
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button12" },
+                                "to": {
+                                    "key_code": "f",
+                                    "modifiers": ["command"]
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button13" },
+                                "to": {
+                                    "key_code": "hyphen",
+                                    "modifiers": ["command"]
+                                },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "pointing_button": "button1" },
+                                "to": { "key_code": "spacebar" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "generic_desktop": "dpad_up" },
+                                "to": { "key_code": "left_arrow" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "generic_desktop": "dpad_right" },
+                                "to": { "key_code": "up_arrow" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "generic_desktop": "dpad_left" },
+                                "to": { "key_code": "down_arrow" },
+                                "type": "basic"
+                            },
+                            {
+                                "conditions": [
+                                    {
+                                        "identifiers": [{ "vendor_id": 1406 }],
+                                        "type": "device_if"
+                                    }
+                                ],
+                                "from": { "generic_desktop": "dpad_down" },
+                                "to": { "key_code": "right_arrow" },
+                                "type": "basic"
+                            }
+                        ]
+                    },
+                    {
                         "description": "Keybind for hammerspoon space_as_modifier_for_number.lua, see github.com/dirichy/dotfiles",
                         "manipulators": [
                             {
@@ -804,45 +989,7 @@
                         "vendor_id": 1406
                     },
                     "ignore": false,
-                    "ignore_vendor_events": true,
-                    "simple_modifications": [
-                        {
-                            "from": { "generic_desktop": "dpad_down" },
-                            "to": [{ "key_code": "right_arrow" }]
-                        },
-                        {
-                            "from": { "generic_desktop": "dpad_left" },
-                            "to": [{ "key_code": "down_arrow" }]
-                        },
-                        {
-                            "from": { "generic_desktop": "dpad_right" },
-                            "to": [{ "key_code": "up_arrow" }]
-                        },
-                        {
-                            "from": { "generic_desktop": "dpad_up" },
-                            "to": [{ "key_code": "left_arrow" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button1" },
-                            "to": [{ "key_code": "spacebar" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button10" },
-                            "to": [{ "key_code": "close_bracket" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button13" },
-                            "to": [{ "key_code": "open_bracket" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button15" },
-                            "to": [{ "key_code": "f" }]
-                        },
-                        {
-                            "from": { "pointing_button": "button16" },
-                            "to": [{ "key_code": "g" }]
-                        }
-                    ]
+                    "ignore_vendor_events": true
                 },
                 {
                     "identifiers": {
