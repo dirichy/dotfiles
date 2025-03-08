@@ -1,10 +1,123 @@
 {
-    "global": { "show_in_menu_bar": false },
+    "global": {
+        "filter_useless_events_from_specific_devices": false,
+        "show_in_menu_bar": false
+    },
+    "machine_specific": { "krbn-b143febb-e0bb-4373-963a-17c55ec38bd4": { "enable_multitouch_extension": true } },
     "profiles": [
         {
             "complex_modifications": {
                 "parameters": { "basic.to_delayed_action_delay_milliseconds": 200 },
                 "rules": [
+                    {
+                        "description": "Keybind for hammerspoon space_as_modifier_for_number.lua, see github.com/dirichy/dotfiles",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "2" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Capture Area\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "1" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Capture Screen\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "9" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Recongize Text/QR\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "3" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Scrolling Capture\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "8" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "parameters": { "basic.simultaneous_threshold_milliseconds": 100 },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Repeat Area Capture\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "7" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "parameters": { "basic.simultaneous_threshold_milliseconds": 100 },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Delayed Screenshot (3S)\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "6" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "parameters": { "basic.simultaneous_threshold_milliseconds": 100 },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Capture Any Window\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "5" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "parameters": { "basic.simultaneous_threshold_milliseconds": 100 },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Capture Active Window\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
+                                    "simultaneous": [
+                                        { "key_code": "spacebar" },
+                                        { "key_code": "4" }
+                                    ],
+                                    "simultaneous_options": { "key_down_order": "strict" }
+                                },
+                                "parameters": { "basic.simultaneous_threshold_milliseconds": 100 },
+                                "to": { "shell_command": "echo 'tell application \"System Events\" to tell process \"Shottr\"\n        click menu item \"Scrolling (Up)\" of menu \"more\" of menu item \"more\" of menu 1 of menu bar 2\n    end tell' | osascript\n  " },
+                                "type": "basic"
+                            }
+                        ]
+                    },
                     {
                         "description": "Keybind for hammerspoon loop.lua, see github.com/dirichy/dotfiles",
                         "manipulators": [
@@ -475,6 +588,14 @@
                         "manipulators": [
                             {
                                 "from": {
+                                    "apple_vendor_keyboard_key_code": "language",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "vk_none" }],
+                                "type": "basic"
+                            },
+                            {
+                                "from": {
                                     "key_code": "caps_lock",
                                     "modifiers": { "optional": ["any"] }
                                 },
@@ -675,6 +796,81 @@
                     }
                 ]
             },
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_game_pad": true,
+                        "product_id": 8199,
+                        "vendor_id": 1406
+                    },
+                    "ignore": false,
+                    "ignore_vendor_events": true,
+                    "simple_modifications": [
+                        {
+                            "from": { "generic_desktop": "dpad_down" },
+                            "to": [{ "key_code": "right_arrow" }]
+                        },
+                        {
+                            "from": { "generic_desktop": "dpad_left" },
+                            "to": [{ "key_code": "down_arrow" }]
+                        },
+                        {
+                            "from": { "generic_desktop": "dpad_right" },
+                            "to": [{ "key_code": "up_arrow" }]
+                        },
+                        {
+                            "from": { "generic_desktop": "dpad_up" },
+                            "to": [{ "key_code": "left_arrow" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button1" },
+                            "to": [{ "key_code": "spacebar" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button10" },
+                            "to": [{ "key_code": "close_bracket" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button13" },
+                            "to": [{ "key_code": "open_bracket" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button15" },
+                            "to": [{ "key_code": "f" }]
+                        },
+                        {
+                            "from": { "pointing_button": "button16" },
+                            "to": [{ "key_code": "g" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_game_pad": true,
+                        "product_id": 8198,
+                        "vendor_id": 1406
+                    },
+                    "ignore_vendor_events": true
+                },
+                {
+                    "identifiers": {
+                        "is_pointing_device": true,
+                        "product_id": 641,
+                        "vendor_id": 1452
+                    },
+                    "pointing_motion_xy_multiplier": 1.3
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "vendor_id": 29
+                    },
+                    "ignore": false,
+                    "ignore_vendor_events": true,
+                    "treat_as_built_in_keyboard": true
+                }
+            ],
             "fn_function_keys": [
                 {
                     "from": { "key_code": "f6" },
