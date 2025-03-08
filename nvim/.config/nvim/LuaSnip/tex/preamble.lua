@@ -88,7 +88,7 @@ M = {
 		{ condition = tex.in_preamble * line_begin }
 	),
 	s(
-		{ trig = ".do", snippetType = "autosnippet", priority = 1000 },
+		{ trig = " ", snippetType = "autosnippet", priority = 1000 },
 		fmta(
 			[[
 %arara: <>
@@ -116,6 +116,8 @@ M = {
 \usepackage{amsmath,amssymb,amsthm,bbm}
 \newtheorem{definition}{Definition}
 \newtheorem{theorem}{Theorem}
+\newtheorem{problem}{Problem}
+\newtheorem{solution}{Solution}
 \everymath{\displaystyle}
 \newlength\inlineHeight
 \newlength\inlineWidth
