@@ -1204,6 +1204,7 @@ return {
 	},
 	{
 		"numToStr/Comment.nvim",
+		event = "VeryLazy",
 		keys = {
 			{ "gc" },
 			{ "gb" },
@@ -1212,6 +1213,7 @@ return {
 			require("Comment").setup()
 			local ft = require("Comment.ft")
 			ft.tex = { "%%s", "\\iffalse\n%s\n\\fi" }
+			ft.ly = { "%%s", "%%{ %s %%}" }
 		end,
 	},
 	{
