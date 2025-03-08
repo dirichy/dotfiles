@@ -16,7 +16,7 @@ alias bypy='python3 -m bypy'
 # single character aliases - be sparing!
 alias _=sudo
 if [ -n "$(whence lsd)" ]; then
-alias ls='lsd'
+    alias ls='lsd'
 fi
 # alias g=git
 
@@ -61,5 +61,5 @@ function cd() {
 }
 # for macos
 
-alias vlc="/Applications/VLC.app/Contents/MacOS/VLC"
+alias vlc="LANG=zh_CN.UTF-8 /Applications/VLC.app/Contents/MacOS/VLC"
 alias sshfsnas="sshfs -o follow_symlinks ldirichy:/home/dirichy /Users/dirichy/ldirichy"

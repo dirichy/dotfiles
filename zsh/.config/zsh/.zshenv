@@ -11,17 +11,21 @@ export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
 export ZDOTDIR=${ZDOTDIR:-$XDG_CONFIG_HOME/zsh}
+export C_INCLUDE_PATH="/opt/homebrew/include:$C_INCLUDE_PATH"
+export LIBRARY_PATH="/opt/homebrew/lib:$LIBRARY_PATH"
+export LD_LIBRARY_PATH="/opt/homebrew/lib:$LD_LIBRARY_PATH"
+
 
 # Ensure path arrays do not contain duplicates.
 typeset -gU path fpath
 
 # Set the list of directories that zsh searches for commands.
 path=(
-  $HOME/{,s}bin(N)
-  $HOME/.local/{,s}bin(N)
-  /opt/{homebrew,local}/{,s}bin(N)
-  /usr/local/{,s}bin(N)
-  $path
+    $HOME/{,s}bin(N)
+    $HOME/.local/{,s}bin(N)
+    /opt/{homebrew,local}/{,s}bin(N)
+    /usr/local/{,s}bin(N)
+    $path
 )
 export EDITOR=nvim
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 all_proxy=socks5://127.0.0.1:7890
