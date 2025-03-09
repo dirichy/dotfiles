@@ -3525,7 +3525,7 @@ auhal-audio-device=0
 audio-visual=any
 
 # Audio resampler (string)
-#audio-resampler=
+audio-resampler=any
 
 # Enable video (boolean)
 #video=1
@@ -3957,13 +3957,13 @@ video-on-top=1
 #start-paused=0
 
 # Auto start (boolean)
-#playlist-autostart=1
+playlist-autostart=0
 
 # Pause on audio communication (boolean)
 #playlist-cork=1
 
 # Use media library (boolean)
-#media-library=0
+media-library=1
 
 # Display playlist tree (boolean)
 #playlist-tree=0
@@ -4056,13 +4056,13 @@ extraintf=http
 #global-key-faster=
 
 # Faster (string)
-key-faster=
+key-faster=Command-Shift-)
 
 # Slower (string)
 #global-key-slower=
 
 # Slower (string)
-#key-slower=Command+-
+key-slower=Command-Shift-(
 
 # Normal rate (string)
 #global-key-rate-normal=
@@ -4260,7 +4260,7 @@ key-subdelay-down=
 #global-key-subsync-markaudio=
 
 # Subtitle sync / bookmark audio timestamp (string)
-key-subsync-markaudio=
+key-subsync-markaudio=Command-=
 
 # Subtitle sync / bookmark subtitle timestamp (string)
 #global-key-subsync-marksub=
@@ -4536,7 +4536,7 @@ key-loop=
 #global-key-zoom-original=
 
 # 1:1 Original (string)
-#key-zoom-original=Command+1
+key-zoom-original=
 
 # 2:1 Double (string)
 #global-key-zoom-double=
@@ -4554,13 +4554,13 @@ key-loop=
 #medium-jump-size=60
 
 # Long jump length (integer)
-#long-jump-size=300
+long-jump-size=9999
 
 # Set playlist bookmark 1 (string)
 #global-key-set-bookmark1=
 
 # Set playlist bookmark 1 (string)
-#key-set-bookmark1=Command+F1
+key-set-bookmark1=Command-1
 
 # Set playlist bookmark 2 (string)
 #global-key-set-bookmark2=
@@ -4701,13 +4701,13 @@ key-loop=
 #key-subtitle-text-scale-down=Command+Mouse Wheel Down
 
 # Playlist bookmark 1 (string)
-#bookmark1=
+bookmark1=file:///Users/dirichy/edance/p03-64.mp4
 
 # Playlist bookmark 2 (string)
-#bookmark2=
+bookmark2=file:///Users/dirichy/edance/p03-64.mp4
 
 # Playlist bookmark 3 (string)
-#bookmark3=
+bookmark3=file:///Users/dirichy/edance/p03-64.mp4
 
 # Playlist bookmark 4 (string)
 #bookmark4=
