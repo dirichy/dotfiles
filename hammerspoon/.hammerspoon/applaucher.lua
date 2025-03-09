@@ -1,4 +1,5 @@
 local shortcuts = {
+	a = "Karabiner-Elements.app",
 	c = "Google Chrome.app",
 	d = "Eudic.app",
 	e = "Karabiner-EventViewer.app",
@@ -10,18 +11,21 @@ local shortcuts = {
 	s = "Steam.app",
 	t = "Telegram.app",
 	w = "WeChat.app",
+	spacebar = "Alfred 5.app",
 }
 local JSON = require("JSON")
-local applaucher =
-	{ title = "applaucher", rules = { {
-		description = "Use esc+key to open app",
+local applaucher = {
+	title = "applaucher",
+	rules = { {
+		description = "Use thumb_on_touch+key to open app",
 		manipulators = {},
-	} } }
+	} },
+}
 for key, value in pairs(shortcuts) do
 	local mani = {
 		from = { key_code = key },
 		to = { shell_command = 'open -a "' .. value .. '"' },
-		conditions = { { type = "variable_if", name = "esc_down", value = 1 } },
+		conditions = { { type = "variable_if", name = "multitouch_extension_palm_count_total", value = 1 } },
 		type = "basic",
 	}
 	applaucher.rules[1].manipulators[#applaucher.rules[1].manipulators + 1] = mani
