@@ -54,8 +54,8 @@ local mod2_keymap = {
 local mod12_keymap = {
 	[10] = vlc_map.normal_speed,
 	[13] = vlc_map.normal_speed,
-	[2] = vlc_map.prev,
-	[4] = vlc_map.next,
+	[4] = vlc_map.prev,
+	[2] = vlc_map.next,
 }
 local virtul_mod = {
 	[15] = { name = "joncon_mod_1", alone = { pointing_button = "button1" } },

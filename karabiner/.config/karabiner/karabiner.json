@@ -30,7 +30,10 @@
                                     }
                                 ],
                                 "from": { "pointing_button": "button4" },
-                                "to": { "key_code": "n" },
+                                "to": {
+                                    "key_code": "n",
+                                    "modifiers": ["shift"]
+                                },
                                 "type": "basic"
                             },
                             {
@@ -72,10 +75,7 @@
                                     }
                                 ],
                                 "from": { "pointing_button": "button2" },
-                                "to": {
-                                    "key_code": "n",
-                                    "modifiers": ["shift"]
-                                },
+                                "to": { "key_code": "n" },
                                 "type": "basic"
                             },
                             {
@@ -518,8 +518,8 @@
                                         "type": "device_if"
                                     }
                                 ],
-                                "from": { "generic_desktop": "dpad_left" },
-                                "to": { "mouse_key": { "y": 1536 } },
+                                "from": { "generic_desktop": "dpad_up" },
+                                "to": { "mouse_key": { "x": -1536 } },
                                 "type": "basic"
                             },
                             {
@@ -529,8 +529,8 @@
                                         "type": "device_if"
                                     }
                                 ],
-                                "from": { "generic_desktop": "dpad_up" },
-                                "to": { "mouse_key": { "x": -1536 } },
+                                "from": { "generic_desktop": "dpad_left" },
+                                "to": { "mouse_key": { "y": 1536 } },
                                 "type": "basic"
                             },
                             {
