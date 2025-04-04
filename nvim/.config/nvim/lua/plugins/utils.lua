@@ -1205,10 +1205,6 @@ return {
 	{
 		"numToStr/Comment.nvim",
 		event = "VeryLazy",
-		keys = {
-			{ "gc" },
-			{ "gb" },
-		},
 		config = function()
 			require("Comment").setup()
 			local ft = require("Comment.ft")
