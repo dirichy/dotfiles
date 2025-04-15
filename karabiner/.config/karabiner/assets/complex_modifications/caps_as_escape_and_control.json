@@ -43,7 +43,13 @@
           ],
           "to_if_alone": [
             {
-              "key_code": "caps_lock"
+              "key_code": "c",
+              "modifiers": [
+                "control",
+                "shift",
+                "command",
+                "option"
+              ]
             }
           ],
           "type": "basic"
