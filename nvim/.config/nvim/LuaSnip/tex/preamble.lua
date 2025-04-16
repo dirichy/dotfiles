@@ -107,8 +107,8 @@ M = {
 				end, { 1 }),
 				i(1),
 				d(2, function()
-					local input = vim.fn.input({ prompt = "Math?y/n" }):lower()
-					if input == "y" then
+					-- local input = vim.fn.input({ prompt = "Math?y/n" }):lower()
+					if true then
 						return sn(
 							nil,
 							fmta(
