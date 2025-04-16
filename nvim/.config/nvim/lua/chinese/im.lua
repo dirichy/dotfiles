@@ -24,7 +24,7 @@ end
 
 function M.cursorcond()
 	if vim.bo.filetype == "tex" or vim.bo.filetype == "latex" then
-		return tex.in_text()
+		return tex.im_enable()
 	else
 		return true
 	end
