@@ -114,7 +114,7 @@ M = {
 		t("\\item"),
 	}, { condition = tex.in_item * line_begin }),
 	s(
-		{ trig = ";j", snippetType = "autosnippet" },
+		{ trig = "[;j]j", regTrig = true, snippetType = "autosnippet" },
 		fmta(
 			[[
       \(<>\)<>
@@ -127,7 +127,7 @@ M = {
 		{ condition = tex.in_text }
 	),
 	s(
-		{ trig = ";t", snippetType = "autosnippet" },
+		{ trig = "[;t]t", regTrig = true, snippetType = "autosnippet" },
 		fmta(
 			[[
       \[
