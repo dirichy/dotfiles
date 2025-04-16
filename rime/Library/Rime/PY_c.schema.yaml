@@ -64,6 +64,7 @@ engine:
   processors:
     # 1.2版本加入的- fluid_editor # 将字符按键记入输入上下文，将输入法连缀成一串
     - lua_processor@hammerspoon
+    - lua_processor@auto_put
     - ascii_composer # 处理英文模式及中英文切换
     - recognizer # 与 matcher 搭配，处理符合特定规则的输入码，如网址、反查等
     - key_binder # 在特定条件下将按键绑定到其他按键，如重定义逗号、句号为候选翻页键
