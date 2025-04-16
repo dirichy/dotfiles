@@ -53,10 +53,23 @@ return {
 		},
 		config = function()
 			require("conform").setup({
-				formatters = { ["tex-fmt"] = {
-					command = "tex-fmt",
-					args = { "--stdin", "--keep" },
-				} },
+				formatters = {
+					["tex-fmt"] = {
+						command = "tex-fmt",
+						args = { "--stdin", "--keep" },
+					},
+					["pangu"] = {
+						command = "sed",
+						args = {
+							"-E",
+							"-e",
+							[[s/([一-龥])\\\(/\1 \\\(/g]],
+							"-e",
+							[[s/\\\)([一-龥])/\\) \1/g]],
+						},
+						stdin = true,
+					},
+				},
 				formatters_by_ft = {
 					lua = { "stylua" },
 					-- Conform will run multiple formatters sequentially
@@ -65,7 +78,7 @@ return {
 					rust = { "rustfmt", lsp_format = "fallback" },
 					-- Conform will run the first available formatter
 					javascript = { "prettierd", "prettier", stop_after_first = true },
-					tex = { "tex-fmt", "injected" },
+					tex = { "tex-fmt", "injected", "pangu" },
 					c = { "clang-format" },
 					json = { "clang-format" },
 					zsh = { "beautysh" },
