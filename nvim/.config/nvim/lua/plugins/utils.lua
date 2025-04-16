@@ -1091,12 +1091,14 @@ return {
 		"folke/flash.nvim",
 		lazy = true,
 		event = "VeryLazy",
+		dependencies = { "rainzm/flash-zh.nvim" },
 		keys = {
 			{
 				"s",
 				mode = { "n", "x", "o" },
 				function()
-					require("flash").jump()
+					require("flash-zh").jump({ chinese_only = false })
+					-- require("flash").jump()
 				end,
 				desc = "Flash",
 			},
