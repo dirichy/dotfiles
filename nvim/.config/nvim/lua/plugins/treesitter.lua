@@ -47,8 +47,8 @@ return {
 					["af"] = { query = "@function.outer", desc = "Select Function Outer" },
 					["if"] = { query = "@function.inner", desc = "Select Function Inner" },
 					["ac"] = { query = "@command.outer", desc = "Select Command Outer" },
-					["am"] = { query = "@math_environment.outer", desc = "Select Mathzone Outer" },
-					["im"] = { query = "@math_environment.inner", desc = "Select MathZone Inner" },
+					["am"] = { query = "@tex.math.outer", desc = "Select Mathzone Outer" },
+					["im"] = { query = "@tex.math.inner", desc = "Select MathZone Inner" },
 					-- You can optionally set descriptions to the mappings (used in the desc parameter of
 					-- nvim_buf_set_keymap) which plugins like which-key display
 					["ic"] = { query = "@command.inner", desc = "Select Command Inner" },
