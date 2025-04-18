@@ -29,8 +29,9 @@ local envs = {
 	co = { name = "corollary", condition = 2, label = "cor" },
 	th = { name = "theorem", condition = 2, label = "the" },
 	fr = { name = "frame", condition = 2 },
-	fg = { name = "figure", condition = 2, prefix = "\\centering" },
+	fg = { name = "figure", condition = 2, prefix = "\\centering", option = "!htbp" },
 	ct = { name = "center", condition = 2 },
+	tp = { name = "tikzpicture", condition = 2 },
 }
 local make_label = function(_, snip)
 	local env = envs[snip.captures[1]]
@@ -62,7 +63,7 @@ M = {
 		{ trig = text_line_begin_leader .. "(%a%a)", regTrig = true, snippetType = "autosnippet", priority = 100 },
 		fmta(
 			[[
-\begin{<>}<>
+\begin{<>}<><>
   <><>
 \end{<>}
 <>
@@ -70,6 +71,9 @@ M = {
 			{
 				f(function(_, snip)
 					return envs[snip.captures[1]].name
+				end),
+				f(function(_, snip)
+					return envs[snip.captures[1]].option and "[" .. envs[snip.captures[1]].option .. "]" or ""
 				end),
 				d(1, make_label),
 				f(function(_, snip)
