@@ -15,22 +15,32 @@ local fmta = require("luasnip.extras.fmt").fmta
 local tex = require("nvimtex.conditions.luasnip")
 local text_line_begin_leader = "%."
 local envs = {
-	pf = { name = "proof", condition = 2 },
-	so = { name = "solution", condition = 2 },
-	ex = { name = "exercise", condition = 2, label = "exe" },
+	al = {
+		name = function()
+			if tex.in_math() then
+				return "aligned"
+			else
+				return "align"
+			end
+		end,
+		condition = 2,
+	},
+	co = { name = "corollary", condition = 2, label = "cor" },
 	cr = { name = "center", condition = 2 },
-	pr = { name = "problem", condition = 2, label = "pro" },
-	le = { name = "lemma", condition = 2, label = "lem" },
+	ct = { name = "center", condition = 2 },
+	de = { name = "definition", condition = 2, label = "def" },
 	en = { name = "enumerate", condition = 2, prefix = "\\item " },
 	ep = { name = "example", confition = 2, label = "exa" },
-	it = { name = "itemize", condition = 2, prefix = "\\item " },
 	eq = { name = "equation", condition = 2, label = "equ" },
-	de = { name = "definition", condition = 2, label = "def" },
-	co = { name = "corollary", condition = 2, label = "cor" },
-	th = { name = "theorem", condition = 2, label = "the" },
-	fr = { name = "frame", condition = 2 },
+	ex = { name = "exercise", condition = 2, label = "exe" },
 	fg = { name = "figure", condition = 2, prefix = "\\centering", option = "!htbp" },
-	ct = { name = "center", condition = 2 },
+	fr = { name = "frame", condition = 2 },
+	it = { name = "itemize", condition = 2, prefix = "\\item " },
+	le = { name = "lemma", condition = 2, label = "lem" },
+	pf = { name = "proof", condition = 2 },
+	pr = { name = "problem", condition = 2, label = "pro" },
+	so = { name = "solution", condition = 2 },
+	th = { name = "theorem", condition = 2, label = "the" },
 	tp = { name = "tikzpicture", condition = 2 },
 }
 local make_label = function(_, snip)
@@ -60,7 +70,7 @@ local make_label = function(_, snip)
 end
 M = {
 	s(
-		{ trig = text_line_begin_leader .. "(%a%a)", regTrig = true, snippetType = "autosnippet", priority = 100 },
+		{ trig = text_line_begin_leader .. "(%a%a)", regTrig = true, snippetType = "autosnippet", priority = 10000 },
 		fmta(
 			[[
 \begin{<>}<><>
@@ -70,7 +80,12 @@ M = {
       ]],
 			{
 				f(function(_, snip)
-					return envs[snip.captures[1]].name
+					local name = envs[snip.captures[1]].name
+					if type(name) == "string" then
+						return name
+					else
+						return name()
+					end
 				end),
 				f(function(_, snip)
 					return envs[snip.captures[1]].option and "[" .. envs[snip.captures[1]].option .. "]" or ""
@@ -81,18 +96,23 @@ M = {
 				end),
 				i(2),
 				f(function(_, snip)
-					return envs[snip.captures[1]].name
+					local name = envs[snip.captures[1]].name
+					if type(name) == "string" then
+						return name
+					else
+						return name()
+					end
 				end),
 				i(0),
 			}
 		),
-		{ condition = tex.in_text * line_begin * function(_, _, captures)
+		{ condition = line_begin * function(_, _, captures)
 			return envs[captures[1]]
 		end }
 	),
 	s({ trig = "。", snippetType = "autosnippet", priority = 2000 }, {
 		t("."),
-	}, { condition = tex.in_text * line_begin }),
+	}, { condition = line_begin }),
 	s(
 		{ trig = text_line_begin_leader .. "eg", regTrig = true, snippetType = "autosnippet", priority = 1000 },
 		fmta(
