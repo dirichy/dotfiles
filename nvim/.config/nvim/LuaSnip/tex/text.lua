@@ -14,6 +14,11 @@ local knowntypes = {
 	lem = { en = "Lemma", zh = "引理" },
 	equ = { en = "Equation", zh = "公式" },
 	unknown = { en = "", zh = "" },
+	the = { en = "Theorem", zh = "定理" },
+	cor = { en = "Corollary", zh = "推论" },
+	def = { en = "Definition", zh = "定义" },
+	exa = { en = "Example", zh = "例" },
+	exe = { en = "Exercise", zh = "练习" },
 }
 
 return {
