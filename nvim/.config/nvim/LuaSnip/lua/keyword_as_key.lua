@@ -85,7 +85,7 @@ end
 local M = {
 	--keywords as table key, e.g., convert {end=1} into {["end"]=1}
 	s(
-		{ trig = "([a-z]*)=", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+		{ trig = "([a-z_]*)=", snippetType = "autosnippet", regTrig = true, wordTrig = false },
 		fmta('["<>"]=<>', {
 			f(function(_, snip)
 				return snip.captures[1]
@@ -98,7 +98,7 @@ local M = {
 	),
 	--keywords key indexing, e.g., convert x.when into x["when"]
 	s(
-		{ trig = "%.([a-z]*)", snippetType = "autosnippet", regTrig = true, wordTrig = false },
+		{ trig = "%.([a-z_]*)", snippetType = "autosnippet", regTrig = true, wordTrig = false },
 		fmta('["<>"]<>', {
 			f(function(_, snip)
 				return snip.captures[1]
@@ -115,7 +115,7 @@ local M = {
 	-- So we need to convert it back when you continue type.
 	-- In fact, we will convert a["in"]s into a.ins.
 	s({
-		trig = [=[%["(%a*)"%](%a)]=],
+		trig = [=[%["(%a*)"%]([%a_])]=],
 		wordTrig = false,
 		regTrig = true,
 		snippetType = "autosnippet",
