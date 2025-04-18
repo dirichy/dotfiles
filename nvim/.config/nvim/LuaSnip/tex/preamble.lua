@@ -145,7 +145,9 @@ M = {
 				i(0),
 			}
 		),
-		{ condition = tex.in_preamble * line_begin }
+		{ condition = tex.in_preamble * line_begin * function()
+			return vim.api.nvim_buf_line_count(0) == 1
+		end }
 	),
 }
 return M
