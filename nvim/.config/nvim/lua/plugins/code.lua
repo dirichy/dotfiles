@@ -129,6 +129,7 @@ return {
 		version = "*", -- Use for stability; omit to use `main` branch for the latest features
 		event = "VeryLazy",
 		config = function()
+			local config = require("nvim-surround.config")
 			require("nvim-surround").setup({
 				surrounds = {
 					["b"] = {
@@ -148,6 +149,44 @@ return {
 					["`"] = {
 						add = { "`", "'" },
 						find = "%b`'",
+					},
+					["e"] = {
+						add = function()
+							local result = config.get_input("Enter the environment name: ")
+							if result then
+								return { { "\\begin{" .. result .. "}" }, { "\\end{" .. result .. "}" } }
+							end
+						end,
+						find = "\\begin(%b{}).*\\end%1",
+						delete = "^(\\begin%b{})().*(\\end%{})()$",
+					},
+					["m"] = {
+						add = function()
+							local result = config.get_input(
+								"Enter math environment type, (j=\\(\\) t=\\[\\] e=equation default=j): "
+							)
+							local mathtype = {
+								j = { "\\(", "\\)" },
+								t = { "\\[", "\\]" },
+								e = { "\\begin{equation}", "\\end{equation}" },
+							}
+							if result and mathtype[result] then
+								return mathtype[result]
+							else
+								return mathtype.j
+							end
+						end,
+						find = function()
+							return config.get_selection({ motion = "am" })
+						end,
+						delete = function()
+							return config.get_selections({
+								char = "m",
+								exclude = function()
+									return config.get_selection({ motion = "im" })
+								end,
+							})
+						end,
 					},
 				},
 			})
