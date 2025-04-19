@@ -168,7 +168,7 @@ return {
 							local mathtype = {
 								j = { "\\(", "\\)" },
 								t = { "\\[", "\\]" },
-								e = { "\\begin{equation}", "\\end{equation}" },
+								e = { { "\\begin{equation}", "" }, { "\\end{equation}", "" } },
 							}
 							if result and mathtype[result] then
 								return mathtype[result]
@@ -177,15 +177,19 @@ return {
 							end
 						end,
 						find = function()
-							return config.get_selection({ motion = "am" })
+							return config.get_selection({
+								query = { capture = "@tex.math.outer", type = "textobjects" },
+							})
 						end,
 						delete = function()
-							return config.get_selections({
-								char = "m",
-								exclude = function()
-									return config.get_selection({ motion = "im" })
-								end,
-							})
+							return config.get_selections({ char = "m", pattern = "^(\\%(%s*\n*)().*(\\%)%s*\n*)()$" })
+								or config.get_selections({ char = "m", pattern = "^(\\%[%s*\n*)().*(\\%]%s*\n*)()$" })
+								or config.get_selections({
+									char = "m",
+									pattern = "^(\\begin%b{}%s*\n*)().*(\\end%b{}%s*\n*)()$",
+								})
+								or config.get_selections({ char = "m", pattern = "^(%$%$%s*\n*)().*(%$%$%s*\n*)()" })
+								or config.get_selections({ char = "m", pattern = "^(%$%s*\n*)().*(%$%s*\n*)()" })
 						end,
 					},
 				},
