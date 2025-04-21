@@ -14,7 +14,7 @@ return {
 			{
 				"<leader>tb",
 				function()
-					vim.cmd.write()
+					vim.cmd.wall()
 					require("nvimtex.compile.arara")()
 				end,
 				desc = "Compile LaTeX File",
