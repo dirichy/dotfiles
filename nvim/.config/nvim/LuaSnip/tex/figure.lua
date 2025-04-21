@@ -50,7 +50,7 @@ local M = {
 			i(2),
 			i(0),
 		}),
-		{ condition = tex.in_fig }
+		{ condition = tex.in_env({ "figure", "subfigure" }, false) }
 	),
 	s(
 		{ trig = "sbf", snippetType = "autosnippet" },
