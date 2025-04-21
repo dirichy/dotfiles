@@ -29,26 +29,47 @@ local autosnippet = ls.extend_decorator.apply(s, { snippetType = "autosnippet" }
 -- [
 -- personal imports
 -- ]
-local tex =require("nvimtex.conditions.luasnip")
+local tex = require("nvimtex.conditions.luasnip")
 -- local auto_backslash_snippet = require("util.scaffolding").auto_backslash_snippet
 -- local symbol_snippet = require("util.scaffolding").symbol_snippet
 -- local single_command_snippet = require("util.scaffolding").single_command_snippet
 -- local postfix_snippet = require("util.scaffolding").postfix_snippet
 local M = {
-  s(
-    { trig = "grf", snippetType = "autosnippet" },
-    fmta("\\includegraphics{<>}%![](<>)", {
-      i(1),
-      rep(1),
-    }),
-    { condition = tex.in_fig }
-  ),
-  s(
-    { trig = "cpt", snippetType = "autosnippet" },
-    fmta("\\caption{<>}", {
-      i(1),
-    }),
-    { condition = tex.in_fig }
-  ),
+	s(
+		{ trig = "grf", snippetType = "autosnippet" },
+		fmta("\\includegraphics{<>}%![](<>)", {
+			i(1),
+			rep(1),
+		}),
+		{ condition = tex.in_fig }
+	),
+	s(
+		{ trig = "cpt", snippetType = "autosnippet" },
+		fmta("\\caption{<>}\\label{fig:<>}<>", {
+			i(1),
+			i(2),
+			i(0),
+		}),
+		{ condition = tex.in_fig }
+	),
+	s(
+		{ trig = "sbf", snippetType = "autosnippet" },
+		fmta(
+			[[
+      \begin{subfigure}[<>]{<>\textwidth}
+      \centering
+      <>
+      \end{subfigure}\qquad
+      <>
+      ]],
+			{
+				i(1),
+				i(2),
+				i(3),
+				i(0),
+			}
+		),
+		{ condition = tex.in_fig }
+	),
 }
 return M
