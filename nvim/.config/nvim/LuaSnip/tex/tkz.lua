@@ -25,7 +25,7 @@ local types = require("luasnip.util.types")
 local parse = require("luasnip.util.parser").parse_snippet
 local ms = ls.multi_snippet
 local autosnippet = ls.extend_decorator.apply(s, { snippetType = "autosnippet" })
-
+local position = { b = "below", r = "right", l = "left", a = "above" }
 -- [
 -- personal imports
 -- ]
@@ -34,7 +34,7 @@ local tex = require("nvimtex.conditions.luasnip")
 -- local symbol_snippet = require("util.scaffolding").symbol_snippet
 -- local single_command_snippet = require("util.scaffolding").single_command_snippet
 local function condition(...)
-	return tex.in_fig(...)
+	return tex.in_env("tikzpicture", false)
 end
 local M = {
 	s(
@@ -46,6 +46,89 @@ local M = {
 			i(0),
 		}),
 		{ condition = condition }
+	),
+	s(
+		{ trig = "dac", snippetType = "autosnippet" },
+		fmta("\\tkzDarc<><><>{<>}{<>}{<>}<>", {
+			f(function(args, _)
+				if args[1][1] ~= "" then
+					return "["
+				else
+					return ""
+				end
+			end, { 1 }),
+			i(1),
+			f(function(args, _)
+				if args[1][1] ~= "" then
+					return "]"
+				else
+					return ""
+				end
+			end, { 1 }),
+			i(2),
+			i(3),
+			i(4),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "lac", snippetType = "autosnippet" },
+		fmta("\\tkzLabelArc[right=2pt](<>,<>,<>){\\(<>\\)}<>", {
+			i(1),
+			i(2),
+			i(3),
+			i(4),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "dsg", snippetType = "autosnippet" },
+		fmta("\\tkzDrawSegment[dash pattern={on 2pt off 2pt}](<>,<>)<>", {
+			i(1),
+			i(2),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "dsp", snippetType = "autosnippet" },
+		fmta("\\tkzDefPointWith[linear, K=<>](<>,<>)\\tkzGetPoint{<>}<>", {
+			i(1),
+			i(2),
+			i(3),
+			i(4),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "dps", snippetType = "autosnippet" },
+		fmta("\\tkzDrawPoints(<>)<>", {
+			i(1),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "lp(%a)", regTrig = true, snippetType = "autosnippet" },
+		fmta("\\tkzLabelPoints[<>](<>)<>", {
+			f(function(_, snip)
+				return position[snip.captures[1]]
+			end),
+			i(1),
+			i(0),
+		}),
+		{
+			condition = function(_, _, captures)
+				if position[captures[1]] == nil then
+					return false
+				else
+					return true
+				end
+			end,
+		}
 	),
 	s(
 		{ trig = "icc", snippetType = "autosnippet" },
