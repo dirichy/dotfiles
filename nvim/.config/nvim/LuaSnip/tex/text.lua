@@ -10,6 +10,7 @@ local rep = require("luasnip.extras").rep
 -- local pinyin = require("nvimtex.flypy")
 local knowntypes = {
 	pro = { en = "Problem", zh = "问题" },
+	pp = { en = "Proposition", zh = "命题" },
 	fig = { en = "Figure", zh = "图" },
 	lem = { en = "Lemma", zh = "引理" },
 	equ = { en = "Equation", zh = "公式" },
