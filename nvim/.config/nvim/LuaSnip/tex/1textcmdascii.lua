@@ -56,19 +56,24 @@ local cmds = require("nvimtex.snip.textsnip")
 local cmd2char = cmds.cmd2char
 local cmd3char = cmds.cmd3char
 local cmd4char = cmds.cmd4char
+local function makecondition(t)
+	return function(_, _, captures)
+		return tex.in_text() and t[captures[1]]
+	end
+end
 local M = {
 	-- add cmd3char
 	s({ trig = "%f[%a\\](%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "snippet" }, {
 		d(1, makesnip, {}, { user_args = { cmd3char } }),
-	}, { condition = tex.in_text }),
+	}, { condition = makecondition(cmd3char) }),
 	-- add cmd2char
 	s({ trig = "%f[%a\\](%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "snippet" }, {
 		d(1, makesnip, {}, { user_args = { cmd2char } }),
-	}, { condition = tex.in_text }),
+	}, { condition = makecondition(cmd2char) }),
 	-- add cmd4char
 	s({ trig = "%f[%a\\](%a%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "snippet" }, {
 		d(1, makesnip, {}, { user_args = { cmd4char } }),
-	}, { condition = tex.in_text }),
+	}, { condition = makecondition(cmd4char) }),
 }
 --solve conflict between snips has different length.
 for k, v in pairs(cmds.solveConflict) do
