@@ -57,19 +57,35 @@ local cmd2char = cmds.cmd2char
 local cmd3char = cmds.cmd3char
 cmd3char.asy = "\\asymp"
 local cmd4char = cmds.cmd4char
+local function makecondition(t)
+	return function(_, _, captures)
+		return tex.in_math() and t[captures[1]]
+	end
+end
 local M = {
-	-- add cmd3char
 	s({ trig = "%f[%a\\](%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
 		d(1, makesnip, {}, { user_args = { cmd3char } }),
-	}, { condition = tex.in_math }),
+	}, { condition = makecondition(cmd3char) }),
 	-- add cmd2char
 	s({ trig = "%f[%a\\](%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
 		d(1, makesnip, {}, { user_args = { cmd2char } }),
-	}, { condition = tex.in_math }),
+	}, { condition = makecondition(cmd2char) }),
 	-- add cmd4char
 	s({ trig = "%f[%a\\](%a%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
 		d(1, makesnip, {}, { user_args = { cmd4char } }),
-	}, { condition = tex.in_math }),
+	}, { condition = makecondition(cmd4char) }),
+	-- 	-- add cmd3char
+	-- 	s({ trig = "%f[%a\\](%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
+	-- 		d(1, makesnip, {}, { user_args = { cmd3char } }),
+	-- 	}, { condition = tex.in_math }),
+	-- 	-- add cmd2char
+	-- 	s({ trig = "%f[%a\\](%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
+	-- 		d(1, makesnip, {}, { user_args = { cmd2char } }),
+	-- 	}, { condition = tex.in_math }),
+	-- 	-- add cmd4char
+	-- 	s({ trig = "%f[%a\\](%a%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
+	-- 		d(1, makesnip, {}, { user_args = { cmd4char } }),
+	-- 	}, { condition = tex.in_math }),
 }
 --solve conflict between snips has different length.
 for k, v in pairs(cmds.solveConflict) do
