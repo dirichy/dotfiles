@@ -131,6 +131,27 @@ local M = {
 		}
 	),
 	s(
+		{ trig = "ls(%a)", regTrig = true, snippetType = "autosnippet" },
+		fmta("\\tkzLabelSegment[<>](<>,<>){\\(<>\\)}<>", {
+			f(function(_, snip)
+				return position[snip.captures[1]]
+			end),
+			i(1),
+			i(2),
+			i(3),
+			i(0),
+		}),
+		{
+			condition = function(_, _, captures)
+				if position[captures[1]] == nil then
+					return false
+				else
+					return true
+				end
+			end,
+		}
+	),
+	s(
 		{ trig = "icc", snippetType = "autosnippet" },
 		fmta("\\tkzInterCC(<>,<>)(<>,<>)\\tkzGetPoints{<>}{<>}<>", {
 			i(1),
@@ -139,6 +160,47 @@ local M = {
 			i(4),
 			i(5),
 			i(6),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "dc3", snippetType = "autosnippet" },
+		fmta("\\tkzDefCircle[circum](<>,<>,<>)\\tkzGetPoint{<>}<>", {
+			i(1),
+			i(2),
+			i(3),
+			i(4),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "dcc", snippetType = "autosnippet" },
+		fmta("\\tkzDrawCircle(<>,<>)<>", {
+			i(1),
+			i(2),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "dao", snippetType = "autosnippet" },
+		fmta("\\tkzDrawArc(<>,<>)(<>)<>", {
+			i(1),
+			i(2),
+			i(3),
+			i(0),
+		}),
+		{ condition = condition }
+	),
+	s(
+		{ trig = "dep", regTrig = true, snippetType = "autosnippet" },
+		fmta([[\tkzDrawEllipse(<>,<>,<>,<>)<>]], {
+			i(1),
+			i(2),
+			i(3),
+			i(4),
 			i(0),
 		}),
 		{ condition = condition }

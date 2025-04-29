@@ -97,10 +97,18 @@ return {
 		fmta("\\triangle", {}),
 		{ condition = tex.in_math }
 	),
+	s(
+		{ trig = "sag", regTrig = true, snippetType = "autosnippet" },
+		fmta([[S_{\triangle <>}<>]], {
+			i(1),
+			i(0),
+		}),
+		{ condition = tex.in_math }
+	),
 	s({ trig = "ang", regTrig = true, snippetType = "autosnippet" }, fmta("\\angle", {}), { condition = tex.in_math }),
 	s(
 		{ trig = "arc", regTrig = true, snippetType = "autosnippet" },
-		fmta("\\widearc{<>}<>", { i(1), i(0) }),
+		fmta("\\wideparen{<>}<>", { i(1), i(0) }),
 		{ condition = tex.in_math }
 	),
 }
