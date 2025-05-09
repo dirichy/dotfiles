@@ -3,48 +3,59 @@ return {
 		vim.fn.isdirectory("/Users/dirichy/nvimtex.nvim/") == 0 and "dirichy/nvimtex.nvim",
 		dir = vim.fn.isdirectory("/Users/dirichy/nvimtex.nvim/") == 1 and "/Users/dirichy/nvimtex.nvim",
 		ft = { "tex", "latex" },
+		dependencies = {
+			"nvim-treesitter/nvim-treesitter",
+			"m00qek/baleia.nvim",
+		},
 		keys = {
 			{
 				"<leader>tv",
 				function()
-					require("nvimtex.view.zathura")()
+					require("nvimtex.view").zathura()
 				end,
-				desc = "Compile LaTeX File",
+				desc = "View Pdf",
 			},
 			{
 				"<leader>tb",
 				function()
 					vim.cmd.wall()
-					require("nvimtex.compile.arara")()
+					require("nvimtex.compile").arara()
 				end,
 				desc = "Compile LaTeX File",
+			},
+			{
+				"<leader>tl",
+				function()
+					require("nvimtex.compile").showlog()
+				end,
+				desc = "Show log file",
 			},
 		},
 		config = function()
 			require("nvimtex").setup()
 		end,
 	},
-	-- {
-	-- 	vim.fn.isdirectory("/Users/dirichy/latex.nvim/") == 0 and "dirichy/latex.nvim",
-	-- 	dir = vim.fn.isdirectory("/Users/dirichy/latex.nvim/") == 1 and "/Users/dirichy/latex.nvim",
-	-- 	ft = { "tex" },
-	-- 	config = function()
-	-- 		require("nvimtex").setup()
-	-- 	end,
-	-- },
 	{
 		enabled = true,
 		vim.fn.isdirectory("/Users/dirichy/latex_concealer.nvim/") == 0 and "dirichy/latex_concealer.nvim",
 		dir = vim.fn.isdirectory("/Users/dirichy/latex_concealer.nvim/") == 1 and "/Users/dirichy/latex_concealer.nvim",
-		ft = "tex",
-		-- keys = {
-		-- 	{
-		-- 		"<leader>tc",
-		-- 		function()
-		-- 			require("latex_concealer").setup_buf(vim.api.nvim_win_get_buf(0))
-		-- 		end,
-		-- 	},
-		-- },
+		ft = { "tex", "latex" },
+		keys = {
+			{
+				"<leader>tc",
+				function()
+					require("latex_concealer").toggle()
+				end,
+				desc = "Toggle LaTeX concealer",
+			},
+			{
+				"<leader>ul",
+				function()
+					require("latex_concealer").toggle()
+				end,
+				desc = "Toggle LaTeX concealer",
+			},
+		},
 		opts = {},
 		config = true,
 	},
