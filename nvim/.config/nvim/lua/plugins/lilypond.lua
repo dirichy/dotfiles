@@ -1,5 +1,7 @@
 return {
 	"martineausimon/nvim-lilypond-suite",
+	lazy = true,
+	ft = "lilypond",
 	config = function()
 		require("nvls").setup({
 			lilypond = {
