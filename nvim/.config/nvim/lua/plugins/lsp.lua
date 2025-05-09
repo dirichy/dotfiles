@@ -1,4 +1,6 @@
 return {
+	{ "mfussenegger/nvim-lint"
+ },
 	{
 		"neovim/nvim-lspconfig",
 		keys = {
@@ -41,11 +43,11 @@ return {
 				taplo = {},
 				clangd = {},
 			}
-      if vim.uv.os_uname().release:match("android") then
-        servers.texlab=nil
-        servers.clangd=nil
-        servers.lua_ls=nil
-      end
+			if vim.uv.os_uname().release:match("android") then
+				servers.texlab = nil
+				servers.clangd = nil
+				servers.lua_ls = nil
+			end
 			local on_attach = function(_, bufnr)
 				-- Enable completion triggered by <c-x><c-o>
 				local nmap = function(keys, func, desc)
