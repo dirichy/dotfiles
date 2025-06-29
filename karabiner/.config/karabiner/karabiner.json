@@ -1958,10 +1958,26 @@
                 },
                 "to": [
                   {
-                    "key_code": "spacebar",
-                    "modifiers": [
+                    "shell_command": "open -a \"Alfred 5.app\""
+                  }
+                ],
+                "type": "basic"
+              },
+              {
+                "from": {
+                  "key_code": "spacebar",
+                  "modifiers": {
+                    "mandatory": [
                       "left_command"
+                    ],
+                    "optional": [
+                      "any"
                     ]
+                  }
+                },
+                "to": [
+                  {
+                    "shell_command": "open -a \"Alfred 5.app\""
                   }
                 ],
                 "type": "basic"
