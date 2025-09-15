@@ -37,8 +37,21 @@ end
 
 --- arara 命令主入口，仅返回此函数
 local function clang(opts)
+	vim.cmd.write()
 	local args = vim.tbl_deep_extend("force", default_args(), opts or {})
 	Job:new(args):start()
 end
 
 vim.keymap.set("n", "<leader>tc", clang)
+-- Fix for clangd AST errors after file saves
+vim.api.nvim_create_autocmd("BufWritePost", {
+	pattern = { "*.c", "*.cpp", "*.h", "*.hpp" },
+	group = vim.api.nvim_create_augroup("clangd-reload-fix", { clear = true }),
+	callback = function()
+		-- Only reload if clangd is attached to this buffer
+		local clients = vim.lsp.get_clients({ bufnr = 0, name = "clangd" })
+		if #clients > 0 then
+			vim.cmd("silent! edit")
+		end
+	end,
+})
