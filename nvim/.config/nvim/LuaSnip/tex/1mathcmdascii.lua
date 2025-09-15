@@ -52,6 +52,25 @@ local makesnip = function(_, snip, _, con, out)
 	end
 end
 
+local makesnipwithspace = function(_, snip, _, con, out)
+	local key = snip.captures[1]
+	out = out or con[key]
+	out = out .. " "
+	if not out then
+		return sn(nil, { t(key) })
+	end
+	local _, count = string.gsub(out, "<>", "<>")
+	if count == 0 then
+		return sn(nil, { t(out) })
+	else
+		local nodes = {}
+		for index = 1, count do
+			table.insert(nodes, i(index))
+		end
+		return sn(nil, fmta(out, nodes))
+	end
+end
+
 local cmds = require("nvimtex.snip.mathsnip")
 local cmd2char = cmds.cmd2char
 local cmd3char = cmds.cmd3char
@@ -63,7 +82,10 @@ local function makecondition(t)
 	end
 end
 local M = {
-	s({ trig = "%f[%a\\](%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
+	s({ trig = "%f[%a\\](%a%a%a) ", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
+		d(1, makesnipwithspace, {}, { user_args = { cmd3char } }),
+	}, { condition = makecondition(cmd3char) }),
+	s({ trig = "%f[%a\\](%a%a%a)", wordTrig = false, regTrig = true, priority = 500 }, {
 		d(1, makesnip, {}, { user_args = { cmd3char } }),
 	}, { condition = makecondition(cmd3char) }),
 	-- add cmd2char

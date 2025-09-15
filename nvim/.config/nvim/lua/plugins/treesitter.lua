@@ -42,16 +42,16 @@ return {
 
 				keymaps = {
 					-- You can use the capture groups defined in textobjects.scm
-					["ae"] = { query = "@block.outer", desc = "Select Environment Outer" },
-					["ie"] = { query = "@block.inner", desc = "Select Environment Inner" },
+					-- ["ae"] = { query = "@block.outer", desc = "Select Environment Outer" },
+					-- ["ie"] = { query = "@block.inner", desc = "Select Environment Inner" },
 					["af"] = { query = "@function.outer", desc = "Select Function Outer" },
 					["if"] = { query = "@function.inner", desc = "Select Function Inner" },
 					["ac"] = { query = "@command.outer", desc = "Select Command Outer" },
-					["am"] = { query = "@tex.math.outer", desc = "Select Mathzone Outer" },
-					["im"] = { query = "@tex.math.inner", desc = "Select MathZone Inner" },
+					-- ["am"] = { query = "@tex.math.outer", desc = "Select Mathzone Outer" },
+					-- ["im"] = { query = "@tex.math.inner", desc = "Select MathZone Inner" },
 					-- You can optionally set descriptions to the mappings (used in the desc parameter of
 					-- nvim_buf_set_keymap) which plugins like which-key display
-					["ic"] = { query = "@command.inner", desc = "Select Command Inner" },
+					-- ["ic"] = { query = "@command.inner", desc = "Select Command Inner" },
 					-- You can also use captures from other query groups like `locals.scm`
 					["as"] = { query = "@scope", query_group = "locals", desc = "Select language scope" },
 				},

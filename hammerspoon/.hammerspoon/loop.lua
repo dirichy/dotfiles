@@ -3,18 +3,18 @@ local M = {}
 M.running = false
 -- 获取屏幕的分辨率
 local function showframe(frame)
-	if M.canvas then
-		M.canvas[1] = {
-			type = "rectangle",
-			action = "strokeAndFill",
-			strokeWidth = 5,
-			radius = 20,
-			strokeColor = { red = 1, alpha = 1 },
-			fillColor = { red = 0.3, green = 0.3, blue = 0.3, alpha = 0.5 },
-			frame = { x = frame.x + 3, y = frame.y + 3, w = frame.w - 6, h = frame.h - 6 },
-		}
-		M.canvas:show()
-	end
+	M.canvas:delete()
+	M.canvas = hs.canvas.new(M.screenFrame)
+	M.canvas[1] = {
+		type = "rectangle",
+		action = "strokeAndFill",
+		strokeWidth = 5,
+		radius = 20,
+		strokeColor = { red = 1, alpha = 1 },
+		fillColor = { red = 0.3, green = 0.3, blue = 0.3, alpha = 0.5 },
+		frame = { x = frame.x + 3, y = frame.y + 3, w = frame.w - 6, h = frame.h - 6 },
+	}
+	M.canvas:show()
 end
 M.rings = {
 	{
@@ -121,7 +121,9 @@ function M.start()
 			[8] = hs.geometry.rect({ M.screenFrame.x, M.screenFrame.h / 3, M.screenFrame.w, M.screenFrame.h * 2 / 3 }),
 		},
 	}
-	M.canvas = hs.canvas.new(M.screenFrame)
+	if not M.canvas then
+		M.canvas = hs.canvas.new(M.screenFrame)
+	end
 	M.canvas:show()
 	M.canvas:level(100)
 	ring:start({
@@ -155,8 +157,8 @@ function M.stop(abort)
 	M.running = false
 	if M.canvas then
 		M.canvas:delete()
-		M.canvas = nil
 	end
+	M.cyclyCache = {}
 	ring:stop(abort)
 end
 

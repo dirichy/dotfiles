@@ -2,8 +2,7 @@ return {
 	{ "mfussenegger/nvim-lint" },
 	{
 		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "LspAttach", -- Or `LspAttach`
-		priority = 1000, -- needs to be loaded in first
+		-- priority = 1001, -- needs to be loaded in first
 		config = function()
 			require("tiny-inline-diagnostic").setup()
 			vim.diagnostic.config({ virtual_text = false }) -- Only if needed in your configuration, if you already have native LSP diagnostics
@@ -43,7 +42,7 @@ return {
 		-- end,
 		init = function() end,
 		config = function()
-			local on_attach = function(_, bufnr)
+			local on_attach = function(client, bufnr)
 				-- Enable completion triggered by <c-x><c-o>
 				local nmap = function(keys, func, desc)
 					if desc then
@@ -54,9 +53,13 @@ return {
 				end
 
 				nmap("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-				nmap("gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-				nmap("K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
-				nmap("gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
+				nmap("gd", function()
+					return require("telescope.builtin").lsp_definitions()
+				end, "[G]oto [D]efinition")
+				-- nmap("K", "<cmd>Lspsaga hover_doc<CR>", "Hover Documentation")
+				nmap("gi", function()
+					return require("telescope.builtin").lsp_implementations()
+				end, "[G]oto [I]mplementation")
 				-- nmap("<C-k>", vim.lsp.buf.signature_help, "Signature Documentation")
 				nmap("<leader>wa", vim.lsp.buf.add_workspace_folder, "[W]orkspace [A]dd Folder")
 				nmap("<leader>wr", vim.lsp.buf.remove_workspace_folder, "[W]orkspace [R]emove Folder")
@@ -66,52 +69,14 @@ return {
 				-- nmap("<leader>D", vim.lsp.buf.type_definition, "Type [D]efinition")
 				nmap("<leader>rn", "<cmd>Lspsaga rename ++project<cr>", "[R]e[n]ame")
 				nmap("<leader>ca", "<cmd>Lspsaga code_action<CR>", "[C]ode [A]ction")
-				nmap("<leader>fd", require("telescope.builtin").diagnostics, "Find Diagnostics")
-				nmap("<leader>fr", require("telescope.builtin").lsp_references, "Find References")
+				nmap("<leader>fd", function()
+					return require("telescope.builtin").diagnostics()
+				end, "Find Diagnostics")
+				nmap("<leader>fr", function()
+					return require("telescope.builtin").lsp_references()
+				end, "Find References")
 				-- nmap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
 			end
-			local capabilities = vim.tbl_deep_extend("force", vim.lsp.protocol.make_client_capabilities(), {
-				textDocument = {
-					completion = {
-						completionItem = {
-							snippetSupport = true,
-							commitCharactersSupport = false, -- todo:
-							documentationFormat = { "markdown", "plaintext" },
-							deprecatedSupport = true,
-							preselectSupport = false, -- todo:
-							tagSupport = { valueSet = { 1 } }, -- deprecated
-							insertReplaceSupport = true, -- todo:
-							resolveSupport = {
-								properties = {
-									"documentation",
-									"detail",
-									"additionalTextEdits",
-									"command",
-									"data",
-									-- todo: support more properties? should test if it improves latency
-								},
-							},
-							insertTextModeSupport = {
-								-- todo: support adjustIndentation
-								valueSet = { 1 }, -- asIs
-							},
-							labelDetailsSupport = true,
-						},
-						completionList = {
-							itemDefaults = {
-								"commitCharacters",
-								"editRange",
-								"insertTextFormat",
-								"insertTextMode",
-								"data",
-							},
-						},
-
-						contextSupport = true,
-						insertTextMode = 1, -- asIs
-					},
-				},
-			})
 			-- local function my_root_dir(buffer, callback)
 			-- 	local fname = vim.api.nvim_buf_get_name(buffer)
 			-- 	local dir
@@ -135,7 +100,7 @@ return {
 			-- 	dir = dir or vim.fs.dirname(vim.fs.find(".git", { upward = true })[1])
 			-- 	callback(dir)
 			-- end
-			vim.lsp.config("*", { on_attach = on_attach, capabilities = capabilities })
+			vim.lsp.config("*", { on_attach = on_attach })
 			-- for _, server in ipairs({ "lua_ls", "texlab", "bashls" }) do
 			-- 	vim.lsp.config(server, {
 			-- 		on_attach = on_attach,
@@ -151,7 +116,6 @@ return {
 				pyright = {},
 				jsonls = {},
 				marksman = {},
-				volar = {},
 				dockerls = {},
 				docker_compose_language_service = {},
 				bashls = {},

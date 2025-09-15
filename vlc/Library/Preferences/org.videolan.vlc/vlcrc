@@ -1835,7 +1835,7 @@ http-password=byl417638
 [auhal] # HAL AudioUnit output
 
 # Audio volume (integer)
-auhal-volume=218
+auhal-volume=282
 
 # Last audio device (string)
 auhal-audio-device=0

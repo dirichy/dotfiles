@@ -1,29 +1,29 @@
-local function preview_hydra()
-	local Hydra = require("hydra")
-	Hydra({
-		name = "Oil Preview",
-		mode = "n",
-		body = "<localleader>",
-		hint = "<localleader>(j|k)",
-		config = { buffer = true },
-		heads = {
-			{
-				"j",
-				function()
-					require("oil.actions").preview_scroll_down.callback()
-				end,
-				{ desc = "" },
-			},
-			{
-				"k",
-				function()
-					require("oil.actions").preview_scroll_up.callback()
-				end,
-				{ desc = "" },
-			},
-		},
-	})
-end
+-- local function preview_hydra()
+-- 	local Hydra = require("hydra")
+-- 	Hydra({
+-- 		name = "Oil Preview",
+-- 		mode = "n",
+-- 		body = "<localleader>",
+-- 		hint = "<localleader>(j|k)",
+-- 		config = { buffer = true },
+-- 		heads = {
+-- 			{
+-- 				"j",
+-- 				function()
+-- 					require("oil.actions").preview_scroll_down.callback()
+-- 				end,
+-- 				{ desc = "" },
+-- 			},
+-- 			{
+-- 				"k",
+-- 				function()
+-- 					require("oil.actions").preview_scroll_up.callback()
+-- 				end,
+-- 				{ desc = "" },
+-- 			},
+-- 		},
+-- 	})
+-- end
 return {
 	{
 		"stevearc/oil.nvim",
@@ -34,7 +34,8 @@ return {
 			{
 				"-",
 				function()
-					require("oil").open(nil, nil, preview_hydra)
+					-- require("oil").open(nil, nil, preview_hydra)
+					require("oil").open(nil, nil, nil)
 				end,
 				desc = "Open parent directory",
 			},
@@ -315,7 +316,6 @@ return {
 						-- When using a function, the `items` argument are the default keymaps.
 						---@type snacks.dashboard.Item[]
 						keys = {
-
 							{
 								icon = " ",
 								key = "f",
@@ -349,6 +349,12 @@ return {
 								desc = "Lazy",
 								action = ":Lazy",
 								enabled = package.loaded.lazy ~= nil,
+							},
+							{
+								icon = "C",
+								key = ".",
+								desc = "Current Dir",
+								action = ":Oil",
 							},
 							{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
 						},
@@ -1319,15 +1325,16 @@ return {
 	-- 		local npairs = require("nvim-autopairs")
 	-- 		local Rule = require("nvim-autopairs.rule")
 	-- 		npairs.setup({
+	-- 			disable_filetype = { "tex", "latex" },
 	-- 			check_ts = true,
 	-- 			ts_config = {
 	-- 				tex = { "inline_formula", "math_environment", "displayed_equation" },
 	-- 				latex = { "inline_formula", "math_environment", "displayed_equation" },
 	-- 			},
 	-- 		})
-	-- 		npairs.add_rules({
-	-- 			Rule("``", "''", { "tex", "latex" }),
-	-- 		})
+	-- 		-- npairs.add_rules({
+	-- 		-- 	Rule("``", "''", { "tex", "latex" }),
+	-- 		-- })
 	-- 	end,
 	-- },
 	{
@@ -1347,7 +1354,7 @@ return {
 	{
 		"folke/flash.nvim",
 		lazy = true,
-		event = "VeryLazy",
+		-- event = "VeryLazy",
 		dependencies = { "rainzm/flash-zh.nvim" },
 		keys = {
 			{
@@ -1400,18 +1407,6 @@ return {
 			-- end
 		end,
 	},
-	-- {
-	--     "kamykn/spelunker.vim",
-	--     event = "VeryLazy",
-	--     config = function()
-	--         vim.g.spelunker_check_type = 2
-	--     end,
-	-- },
-	-- {
-	--     "ellisonleao/glow.nvim",
-	--     event = "VeryLazy",
-	--     config = true,
-	-- },
 	{
 		"folke/which-key.nvim",
 		dependencies = {
@@ -1453,17 +1448,30 @@ return {
 	},
 	{
 		"echasnovski/mini.ai",
-		event = "VeryLazy",
+		event = { "BufNewFile", "BufRead" },
 		config = function()
 			local ai = require("mini.ai")
 			ai.setup({
-				custom_textobjects = {},
+				custom_textobjects = require("nvimtex.textobject"),
 			})
 		end,
 	},
 	{
 		"numToStr/Comment.nvim",
-		event = "VeryLazy",
+		-- event = "VeryLazy",
+		keys = {
+			{
+				"gcc",
+				function()
+					return vim.v.count == 0 and "<Plug>(comment_toggle_linewise_current)"
+						or "<Plug>(comment_toggle_linewise_count)"
+				end,
+				expr = true,
+				desc = "Comment a line",
+			},
+			{ "gc", mode = "n", "<Plug>(comment_toggle_linewise)" },
+			{ "gc", mode = "x", "<Plug>(comment_toggle_linewise_visual)" },
+		},
 		config = function()
 			require("Comment").setup()
 			local ft = require("Comment.ft")
@@ -1566,25 +1574,63 @@ return {
 		lazy = true,
 		config = false,
 	},
-	-- {
-	-- 	"LunarVim/bigfile.nvim",
-	-- 	lazy = false,
-	-- 	config = function()
-	-- 		-- default config
-	-- 		require("bigfile").setup({
-	-- 			filesize = 2, -- size of the file in MiB, the plugin round file sizes to the closest MiB
-	-- 			pattern = { "*" }, -- autocmd pattern or function see <### Overriding the detection of big files>
-	-- 			features = { -- features to disable
-	-- 				"indent_blankline",
-	-- 				"illuminate",
-	-- 				"lsp",
-	-- 				"treesitter",
-	-- 				"syntax",
-	-- 				"matchparen",
-	-- 				"vimopts",
-	-- 				"filetype",
-	-- 			},
-	-- 		})
-	-- 	end,
-	-- },
+	{
+		"ve5li/better-goto-file.nvim",
+		config = true,
+		---@module "better-goto-file"
+		---@type better-goto-file.Options
+		opts = {},
+		keys = {
+			{
+				"gf",
+				mode = { "n" },
+				function()
+					require("better-goto-file").goto_file()
+				end,
+				silent = true,
+				desc = "Better go to file under cursor",
+			},
+			{
+				"gf",
+				mode = { "v" },
+				'<Esc>:lua require("better-goto-file").goto_file_range()<cr>',
+				silent = true,
+				desc = "Better go to file in selection",
+			},
+			-- Open in new split.
+			{
+				"gF",
+				mode = { "n" },
+				function()
+					require("better-goto-file").goto_file({ gf_command = "<C-w>f" })
+				end,
+				silent = true,
+				desc = "Better go to file under cursor in new split",
+			},
+			{
+				"gF",
+				mode = { "v" },
+				'<Esc>:lua require("better-goto-file").goto_file_range({ gf_command = "<C-w>f" })<cr>',
+				silent = true,
+				desc = "Better go to file in selection in new split",
+			},
+			-- -- Open in new tab.
+			-- {
+			-- 	"<C-w><leader>F",
+			-- 	mode = { "n" },
+			-- 	function()
+			-- 		require("better-goto-file").goto_file({ gf_command = "<C-w>gf" })
+			-- 	end,
+			-- 	silent = true,
+			-- 	desc = "Better go to file under cursor in new tab",
+			-- },
+			-- {
+			-- 	"<C-w><leader>F",
+			-- 	mode = { "v" },
+			-- 	'<Esc>:lua require("better-goto-file").goto_file_range({ gf_command = "<C-w>gf" })<cr>',
+			-- 	silent = true,
+			-- 	desc = "Better go to file in selection in new tab",
+			-- },
+		},
+	},
 }

@@ -76,7 +76,7 @@
 return {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
-	dependencies = { "L3MON4D3/LuaSnip" },
+	dependencies = { "L3MON4D3/LuaSnip", "MahanRahmati/blink-nerdfont.nvim" },
 
 	event = { "InsertEnter", "CmdlineEnter" },
 	-- use a release tag to download pre-built binaries
@@ -105,8 +105,50 @@ return {
 				"accept",
 				"fallback_to_mappings",
 			},
+			["<tab>"] = {
+				function()
+					if require("luasnip").expandable() then
+						vim.schedule(function()
+							require("luasnip").expand()
+						end)
+					end
+					if require("luasnip").jumpable(1) then
+						vim.schedule(function()
+							require("luasnip").jump(1)
+						end)
+						return true
+					else
+						return
+					end
+				end,
+				"fallback_to_mappings",
+			},
 		},
-		cmdline = { keymap = { preset = "super-tab" } },
+		completion = {
+			menu = {
+				draw = {
+					-- columns = { { "kind_icon" }, { "label", "label_description", gap = 1 } },
+					components = {
+						kind_icon = {
+							highlight = function(ctx)
+								return ctx.item.kind_hl or ctx.kind_hl
+							end,
+							text = function(ctx)
+								return ctx.item.kind_icon or ctx.kind_icon
+							end,
+						},
+					},
+				},
+			},
+		},
+		cmdline = {
+			keymap = { preset = "super-tab", ["<Tab>"] = { "show", "select_next" }, ["<S-Tab>"] = { "select_prev" } },
+			completion = {
+				menu = {
+					auto_show = true,
+				},
+			},
+		},
 
 		appearance = {
 			-- Sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -122,7 +164,41 @@ return {
 		-- elsewhere in your config, without redefining it, due to `opts_extend`(
 		snippets = { preset = "luasnip" },
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = { "lsp", "path", "snippets", "buffer", "nvimtex", "math" },
+			providers = {
+				-- nerdfont = {
+				-- 	module = "blink-nerdfont",
+				-- 	name = "Nerd Fonts",
+				-- 	score_offset = , -- Tune by preference
+				-- 	opts = { insert = true }, -- Insert nerdfont icon (default) or complete its name
+				-- },
+				nvimtex = {
+					-- transform_items = function(ctx, items)
+					-- 	for _, item in ipairs(items) do
+					-- 		item.kind_icon = "E"
+					-- 		item.kind_name = "Greek"
+					-- 	end
+					-- 	return items
+					-- end,
+					module = "nvimtex.symbol.blink",
+					name = "nvimtex",
+					score_offset = 15, -- Tune by preference
+					opts = { insert = true }, -- Insert nerdfont icon (default) or complete its name
+				},
+				math = {
+					-- transform_items = function(ctx, items)
+					-- 	for _, item in ipairs(items) do
+					-- 		item.kind_icon = "E"
+					-- 		item.kind_name = "Greek"
+					-- 	end
+					-- 	return items
+					-- end,
+					module = "nvimtex.snip.blink",
+					name = "nvimtex_math",
+					score_offset = 15, -- Tune by preference
+					opts = { insert = true }, -- Insert nerdfont icon (default) or complete its name
+				},
+			},
 		},
 	},
 	opts_extend = { "sources.default" },

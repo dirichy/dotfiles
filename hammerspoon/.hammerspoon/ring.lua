@@ -119,8 +119,10 @@ function M:delete()
 	self.rings = nil
 	self.chooser = nil
 	self.canvas:delete()
-	self.timer:stop()
-	self.timer = nil
+	if self.timer then
+		self.timer:stop()
+		self.timer = nil
+	end
 	self.choosed = nil
 end
 function M:stop(abort)

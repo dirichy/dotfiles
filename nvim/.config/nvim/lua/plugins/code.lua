@@ -79,12 +79,12 @@ return {
 							[[s/\\\)\s*[.。]/\\)\\nolinebreak[4]。/g]],
 							"-e",
 							[[s/\\\)\s*[；;]/\\)\\nolinebreak[4]；/g]],
-							"-e",
-							[[s/^(\s*)[,，]/\1，/g]],
-							"-e",
-							[[s/^(\s*)[.。]/\1。/g]],
-							"-e",
-							[[s/^(\s*)[；;]/\1；/g]],
+							-- "-e",
+							-- [[s/^(\s*)[,，]/\1，/g]],
+							-- "-e",
+							-- [[s/^(\s*)[.。]/\1。/g]],
+							-- "-e",
+							-- [[s/^(\s*)[；;]/\1；/g]],
 							"-e",
 							[[s/([，。；])\s*/\1/g]],
 						},
@@ -99,7 +99,8 @@ return {
 					rust = { "rustfmt", lsp_format = "fallback" },
 					-- Conform will run the first available formatter
 					javascript = { "prettierd", "prettier", stop_after_first = true },
-					tex = { "tex-fmt", "injected", "pangu", "puncture" },
+					tex = { "tex-fmt", "injected" }, --, "pangu", "puncture" },
+					-- tex = { "tex-fmt", "injected", "pangu", "puncture" },
 					c = { "clang-format" },
 					json = { "clang-format" },
 					zsh = { "beautysh" },
@@ -203,7 +204,7 @@ return {
 			{
 				"<leader>uz",
 				function()
-					--HACK:Neotree will break ZenMode
+					-- --HACK:Neotree will break ZenMode
 					if package.loaded["neo-tree"] then
 						vim.cmd.Neotree("close")
 					end

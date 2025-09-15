@@ -105,4 +105,4 @@ end
 local file = io.open(os.getenv("HOME") .. "/.config/karabiner/assets/complex_modifications/loop.json", "w")
 file:write(JSON:encode(loop))
 file:close()
-print(JSON:encode(loop))
+-- print(JSON:encode(loop))

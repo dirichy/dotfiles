@@ -111,7 +111,7 @@ return {
       -- corresponds to legacy "history=false".
       keep_roots = true,
       link_roots = true,
-      exit_roots = false,
+      exit_roots = true,
       link_children = false,
 
       update_events = {"InsertLeave","TextChangedI"},
@@ -230,15 +230,6 @@ return {
 		local luasnip = require("luasnip")
 		luasnip.setup(opts)
 		local key_mapper = require("mapper")
-		key_mapper.map_keymap("i", "<Tab>", function()
-			luasnip.jump(1)
-		end, {
-			condition = function()
-				return luasnip.jumpable(1)
-			end,
-			desc = "jump",
-			priority = 200,
-		})
 
 		key_mapper.map_keymap("i", "<S-Tab>", function()
 			luasnip.jump(-1)

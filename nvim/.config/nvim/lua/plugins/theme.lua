@@ -1,3 +1,4 @@
+---@alias buffer integer
 return {
 	{
 		"folke/tokyonight.nvim",
@@ -6,18 +7,6 @@ return {
 		config = function()
 			require("tokyonight").setup({
 				on_highlights = function(highlight, color)
-					highlight["@neorg.headings.5.prefix.norg"] = {
-						fg = "#2c8217",
-					}
-					highlight["@neorg.headings.5.prefix"] = {
-						fg = "#2c8217",
-					}
-					highlight["@neorg.headings.5.title.norg"] = {
-						fg = "#2c8217",
-					}
-					highlight["@neorg.headings.5.title"] = {
-						fg = "#2c8217",
-					}
 					highlight["@script"] = {
 						fg = "#bb8ade",
 					}
@@ -84,7 +73,23 @@ return {
 		dependencies = {
 			"folke/tokyonight.nvim",
 			"nvim-tree/nvim-web-devicons",
-			"linrongbin16/lsp-progress.nvim",
+			{
+				"SmiteshP/nvim-navic",
+				event = "LspAttach",
+				-- lazy = true,
+				-- dependencies = {
+				-- 	"folke/tokyonight.nvim",
+				-- 	"nvim-tree/nvim-web-devicons",
+				-- },
+				opts = {
+					lsp = { auto_attach = true },
+					highlight = true,
+					depth_limit = 4,
+					separator = " > ",
+				},
+				config = true,
+			},
+			-- "linrongbin16/lsp-progress.nvim",
 		},
 		opts = function()
 			vim.o.laststatus = vim.g.lualine_laststatue
@@ -112,12 +117,13 @@ return {
 					lualine_b = { "branch" },
 					lualine_c = {
 						function()
-							return require("lsp-progress").progress()
+							return require("nvim-navic").get_location()
+							-- return require("lsp-progress").progress()
 						end,
 					},
 					lualine_x = { "encoding", "filetype" },
 					lualine_y = { "progress" },
-					lualine_z = { "location" },
+					-- lualine_z = { "location" },
 				},
 				inactive_sections = {
 					lualine_a = {},
@@ -134,7 +140,7 @@ return {
 			}
 		end,
 		config = function(_, opts)
-			require("lsp-progress").setup({})
+			-- require("lsp-progress").setup({})
 			require("lualine").setup(opts)
 			vim.api.nvim_create_augroup("lualine_augroup", { clear = true })
 			vim.api.nvim_create_autocmd("User", {
@@ -144,26 +150,17 @@ return {
 			})
 		end,
 	},
-	{
-		"utilyre/barbecue.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"folke/tokyonight.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		opts = {
-			theme = "tokyonight",
-		},
-	},
-	{
-		"SmiteshP/nvim-navic",
-		event = "VeryLazy",
-		dependencies = {
-			"folke/tokyonight.nvim",
-			"nvim-tree/nvim-web-devicons",
-		},
-		config = true,
-	},
+	-- {
+	-- 	"utilyre/barbecue.nvim",
+	-- 	event = "LspAttach",
+	-- 	dependencies = {
+	-- 		"folke/tokyonight.nvim",
+	-- 		"nvim-tree/nvim-web-devicons",
+	-- 	},
+	-- 	opts = {
+	-- 		theme = "tokyonight",
+	-- 	},
+	-- },
 	{
 		"uga-rosa/ccc.nvim",
 		keys = {
