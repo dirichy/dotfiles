@@ -35,7 +35,7 @@ return {
 	--TODO:config this plugin
 	{
 		"folke/todo-comments.nvim",
-		event = "VeryLazy",
+		event = { "BufRead", "BufNewFile" },
 		dependencies = { "nvim-lua/plenary.nvim" },
 		opts = {},
 	},
@@ -56,7 +56,7 @@ return {
 				formatters = {
 					["tex-fmt"] = {
 						command = "tex-fmt",
-						args = { "--stdin", "--keep" },
+						args = { "--stdin", "--nowrap", "--print" },
 					},
 					["pangu"] = {
 						command = "sed",
