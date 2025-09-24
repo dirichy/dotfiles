@@ -36,20 +36,43 @@ local ms = ls.multi_snippet
 -- 	end
 -- end, { noremap = true, expr = true })
 
-local function bracket(open, close)
+local function bracket(open, close, opts)
 	return s({ trig = open, wordTrig = false, snippetType = "autosnippet" }, {
 		t(open),
 		i(1),
 		t(close),
 		i(0),
-	})
+	}, opts)
 end
-local function make_snip(brackets)
-	local result = {}
+local function make_snip(brackets, opts, tab)
+	local result = tab or {}
 	for index, value in ipairs(brackets) do
-		table.insert(result, bracket(value[1], value[2]))
+		table.insert(result, bracket(value[1], value[2], value[3] or opts))
 	end
 	return result
 end
 
-return make_snip({ { "(", ")" }, { "[", "]" }, { "{", "}" }, { '"', '"' }, { "'", "'" } })
+local M = make_snip({ { "(", ")" }, { "[", "]" }, { "{", "}" }, { '"', '"' }, { "'", "'" } }, {
+	condition = function()
+		return vim.bo.filetype ~= "tex"
+	end,
+})
+make_snip({
+	{
+		"`",
+		"'",
+		{
+			condition = function()
+				return vim.bo.filetype == "tex" and require("nvimtex.conditions.luasnip").in_text()
+			end,
+		},
+	},
+	{ "{", "}" },
+	{ "$", "$" },
+}, {
+	condition = function()
+		return vim.bo.filetype == "tex"
+	end,
+}, M)
+
+return M

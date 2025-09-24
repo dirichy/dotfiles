@@ -126,19 +126,7 @@ return {
 		},
 		completion = {
 			menu = {
-				draw = {
-					-- columns = { { "kind_icon" }, { "label", "label_description", gap = 1 } },
-					components = {
-						kind_icon = {
-							highlight = function(ctx)
-								return ctx.item.kind_hl or ctx.kind_hl
-							end,
-							text = function(ctx)
-								return ctx.item.kind_icon or ctx.kind_icon
-							end,
-						},
-					},
-				},
+				draw = {},
 			},
 		},
 		cmdline = {

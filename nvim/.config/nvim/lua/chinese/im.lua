@@ -4,6 +4,8 @@ local system = vim.uv.os_uname().sysname
 local sshtty = vim.env.SSH_TTY
 local tex = require("nvimtex.conditions.luasnip")
 local return_state = nil
+return_state = redis:get("ascii_mode")
+
 local bool_table = {
 	["true"] = true,
 	["false"] = false,

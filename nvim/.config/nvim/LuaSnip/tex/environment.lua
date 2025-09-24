@@ -142,7 +142,7 @@ M = {
 		{ trig = "[;j]j", regTrig = true, snippetType = "autosnippet" },
 		fmta(
 			[[
-      \(<>\)<>
+      \(<> \)<>
       ]],
 			{
 				i(1),

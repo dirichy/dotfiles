@@ -52,10 +52,10 @@ local makesnip = function(_, snip, _, con, out)
 	end
 end
 
-local makesnipwithspace = function(_, snip, _, con, out)
+local makesnip2 = function(_, snip, _, con, out)
 	local key = snip.captures[1]
 	out = out or con[key]
-	out = out .. " "
+	out = out .. snip.captures[2]
 	if not out then
 		return sn(nil, { t(key) })
 	end
@@ -71,31 +71,33 @@ local makesnipwithspace = function(_, snip, _, con, out)
 	end
 end
 
-local cmds = require("nvimtex.snip.mathsnip")
-local cmd2char = cmds.cmd2char
-local cmd3char = cmds.cmd3char
-cmd3char.asy = "\\asymp"
-local cmd4char = cmds.cmd4char
-local function makecondition(t)
+local cmds = require("nvimtex.snip.math").luasnip
+local function makecondition(tab)
 	return function(_, _, captures)
-		return tex.in_math() and t[captures[1]]
+		return tex.in_math() and tab[captures[1]]
 	end
 end
 local M = {
-	s({ trig = "%f[%a\\](%a%a%a) ", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
-		d(1, makesnipwithspace, {}, { user_args = { cmd3char } }),
-	}, { condition = makecondition(cmd3char) }),
-	s({ trig = "%f[%a\\](%a%a%a)", wordTrig = false, regTrig = true, priority = 500 }, {
-		d(1, makesnip, {}, { user_args = { cmd3char } }),
-	}, { condition = makecondition(cmd3char) }),
+	s({
+		trig = "%f[%a\\](%a%a%a?%a?%a?)([^%a])",
+		wordTrig = false,
+		regTrig = true,
+		priority = 500,
+		snippetType = "autosnippet",
+	}, {
+		d(1, makesnip2, {}, { user_args = { cmds } }),
+	}, { condition = makecondition(cmds) }),
+	s({ trig = "%f[%a\\](%a%a%a?%a?%a?)", wordTrig = false, regTrig = true, priority = 500 }, {
+		d(1, makesnip, {}, { user_args = { cmds } }),
+	}, { condition = makecondition(cmds) }),
 	-- add cmd2char
-	s({ trig = "%f[%a\\](%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
-		d(1, makesnip, {}, { user_args = { cmd2char } }),
-	}, { condition = makecondition(cmd2char) }),
-	-- add cmd4char
-	s({ trig = "%f[%a\\](%a%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
-		d(1, makesnip, {}, { user_args = { cmd4char } }),
-	}, { condition = makecondition(cmd4char) }),
+	-- s({ trig = "%f[%a\\](%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
+	-- 	d(1, makesnip, {}, { user_args = { cmd2char } }),
+	-- }, { condition = makecondition(cmd2char) }),
+	-- -- add cmd4char
+	-- s({ trig = "%f[%a\\](%a%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
+	-- 	d(1, makesnip, {}, { user_args = { cmd4char } }),
+	-- }, { condition = makecondition(cmd4char) }),
 	-- 	-- add cmd3char
 	-- 	s({ trig = "%f[%a\\](%a%a%a)", wordTrig = false, regTrig = true, priority = 500, snippetType = "autosnippet" }, {
 	-- 		d(1, makesnip, {}, { user_args = { cmd3char } }),
@@ -110,12 +112,12 @@ local M = {
 	-- 	}, { condition = tex.in_math }),
 }
 --solve conflict between snips has different length.
-for k, v in pairs(cmds.solveConflict) do
-	table.insert(
-		M,
-		s({ trig = k, snippetType = "autosnippet" }, {
-			d(1, makesnip, {}, { user_args = { {}, v } }),
-		}, { condition = tex.in_math })
-	)
-end
+-- for k, v in pairs(cmds.solveConflict) do
+-- 	table.insert(
+-- 		M,
+-- 		s({ trig = k, snippetType = "autosnippet" }, {
+-- 			d(1, makesnip, {}, { user_args = { {}, v } }),
+-- 		}, { condition = tex.in_math })
+-- 	)
+-- end
 return M

@@ -21,7 +21,7 @@ require("options")
 require("lazy_nvim")
 require("keymaps")
 require("autocmds")
--- require("chinese.im")
+require("chinese.im")
 
 -- local parser_config = require("nvim-treesitter.parsers").get_parser_configs()
 -- parser_config.lilypond = {
