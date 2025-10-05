@@ -14,9 +14,6 @@ schema:
 
 
 switches: # 0 默认关，1 默认开
-  - name: hammerspoon
-    reset: 0
-    states: [h,n]
   - name: ascii_mode
     reset: 0
     states: [ 中文, 西文 ]  #中英文状态
@@ -65,12 +62,13 @@ switches: # 0 默认关，1 默认开
 
 engine:
   processors:
+    - lua_processor@hammerspoon
     - ascii_composer
     - recognizer
     - key_binder
     - speller
     - punctuator
-    # - lua_processor@exe_processor #exe启动器
+    - lua_processor@exe_processor #exe启动器
     - selector
     - navigator
     - express_editor #计算

@@ -4,6 +4,7 @@ package.path = "/opt/homebrew/share/lua/5.4/?.lua;/opt/homebrew/share/lua/5.4/?/
 	.. package.path
 package.cpath = "/opt/homebrew/lib/lua/5.4/?.so;" .. package.cpath
 select_character = require("select_character")
+hammerspoon = require("hammerspoon")
 -- date_translator: 动态日期时间输入
 -- 详见 `lua/date_translator.lua`
 date_translator = require("date_translator")
