@@ -54,3 +54,5 @@ rime/Library/Rime/default.yaml
 zsh/.config/zsh/.p10k.zsh
 zsh/.config/zsh/.zsh_plugins.zsh
 zsh/.config/zsh/.zsh_history
+rime/Library/Rime/dicts
+rime/Library/Rime/opencc
