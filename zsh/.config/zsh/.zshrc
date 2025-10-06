@@ -6,6 +6,7 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of .zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
+
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
     source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
@@ -40,8 +41,8 @@ unset _rc
 [[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
 set -o vi
 fzf --zsh | eval
-source /opt/homebrew/opt/chruby/share/chruby/chruby.sh
-source /opt/homebrew/opt/chruby/share/chruby/auto.sh
-chruby ruby-3.3.5
+[[ -f /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]] && . /opt/homebrew/opt/chruby/share/chruby/chruby.sh
+[[ -f /opt/homebrew/opt/chruby/share/chruby/auto.sh ]] && .  /opt/homebrew/opt/chruby/share/chruby/auto.sh
+# chruby ruby-3.3.5
 [[ -f "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 . "${ZDOTDIR:-$HOME}/scripts/baipan/main.zsh"
