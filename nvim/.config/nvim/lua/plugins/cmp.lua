@@ -168,7 +168,7 @@ return {
 					-- 	end
 					-- 	return items
 					-- end,
-					module = "nvimtex.symbol.blink",
+					module = "nvimtex.latex.blink",
 					name = "nvimtex",
 					score_offset = 15, -- Tune by preference
 					opts = { insert = true }, -- Insert nerdfont icon (default) or complete its name

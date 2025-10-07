@@ -246,7 +246,6 @@ return {
 			luasnip.expand,
 			{ desc = "expand luasnip", condition = luasnip.expandable, priority = 200 }
 		)
-
-		require("luasnip.loaders.from_lua").load({ paths = { "~/.config/nvim/LuaSnip" } })
+		require("luasnip.loaders.from_lua").lazy_load({ paths = { "~/.config/nvim/LuaSnip" } })
 	end,
 }

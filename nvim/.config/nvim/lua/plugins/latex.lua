@@ -34,6 +34,7 @@ return {
 		},
 		config = function()
 			require("nvimtex").setup()
+			require("luasnip.loaders.from_lua").load({})
 		end,
 	},
 	{
