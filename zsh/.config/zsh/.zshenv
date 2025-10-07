@@ -32,13 +32,13 @@ path=(
 )
 export EDITOR=nvim
 export https_proxy=http://127.0.0.1:7890 http_proxy=http://127.0.0.1:7890 #all_proxy=socks5://127.0.0.1:7890
-export PATH=/opt/homebrew/bin:/Users/Shared/opt/bin:$PATH:~/Library/Python/3.9/bin:~/.local/bin
+export PATH=/opt/homebrew/bin:/Users/Shared/opt/bin:$PATH:~/Library/Python/3.9/bin
 export TERM=xterm-256color
 
 
 export XMODIFIERS=@im=fcitx
-export GTK_IM_MODULE=fcitx
-export QT_IM_MODULE=fcitx
+# export GTK_IM_MODULE=fcitx
+# export QT_IM_MODULE=fcitx
 
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
