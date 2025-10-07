@@ -1,8 +1,8 @@
 -- TODO: aaa
 return {
 	{
-		vim.fn.isdirectory("/Users/dirichy/nvimtex.nvim/") == 0 and "dirichy/nvimtex.nvim",
-		dir = vim.fn.isdirectory("/Users/dirichy/nvimtex.nvim/") == 1 and "/Users/dirichy/nvimtex.nvim",
+		vim.fn.isdirectory(vim.env.HOME .. "/nvimtex.nvim/") == 0 and "dirichy/nvimtex.nvim",
+		dir = vim.fn.isdirectory(vim.env.HOME .. "/nvimtex.nvim/") == 1 and vim.env.HOME .. "/nvimtex.nvim",
 		ft = { "tex", "latex" },
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
@@ -12,7 +12,7 @@ return {
 			{
 				"<leader>tv",
 				function()
-					require("nvimtex.view").zathura()
+					require("nvimtex.view").sioyek()
 				end,
 				desc = "View Pdf",
 			},
