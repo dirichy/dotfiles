@@ -10,6 +10,6 @@ end
 function M.im_active()
 	local output = vim.fn.system("fcitx5-remote")
 	output = string.gsub(output, "%s", "")
-	return output == 2
+	return output == "2"
 end
 return M

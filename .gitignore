@@ -41,6 +41,7 @@ lazy-lock.json
 /rime/Library/Rime/easy_english.userdb/*
 /rime/Library/Rime/math_flypy.userdb/*
 /rime/Library/Rime/sync/*
+/rime/Library/Rime/*.dict.yaml
 /rime/Library/Rime/zh-hans-t-essay-bgw.gram
 /zsh/.config/zsh/.zsh_sessions/*
 /karabiner/.config/karabiner/automatic_backups/*
@@ -53,3 +54,5 @@ rime/Library/Rime/default.yaml
 zsh/.config/zsh/.p10k.zsh
 zsh/.config/zsh/.zsh_plugins.zsh
 zsh/.config/zsh/.zsh_history
+rime/Library/Rime/dicts
+rime/Library/Rime/opencc

@@ -14,9 +14,6 @@ schema:
 
 
 switches: # 0 默认关，1 默认开
-  - name: hammerspoon
-    reset: 0
-    states: [h,n]
   - name: ascii_mode
     reset: 0
     states: [ 中文, 西文 ]  #中英文状态

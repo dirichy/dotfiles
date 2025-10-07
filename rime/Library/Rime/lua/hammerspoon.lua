@@ -1,3 +1,15 @@
+local handle = io.popen("uname -s")  -- 获取操作系统名称
+local os_name = handle:read("*a"):gsub("\n", "")
+handle:close()
+
+if os_name == "Darwin" then
+    print("This is macOS")
+elseif os_name == "Linux" then
+  return function ()
+  end
+else
+    print("Unknown OS: " .. os_name)
+end
 local redis = require("redis")
 local client = redis.connect("127.0.0.1", 6379)
 client:set("ascii_mode", true)
