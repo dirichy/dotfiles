@@ -126,6 +126,8 @@ return {
 					["gx"] = "actions.open_external",
 					["<localleader>h"] = { "actions.toggle_hidden", mode = "n" },
 					["g\\"] = { "actions.toggle_trash", mode = "n" },
+					["<C-h>"] = false,
+					["<C-l>"] = false,
 				},
 				-- Set to false to disable all of the above keymaps
 				use_default_keymaps = true,
@@ -1506,10 +1508,10 @@ return {
 	{
 		"aserowy/tmux.nvim",
 		keys = {
-			{ "<C-h>", [[<cmd>lua require("tmux").move_left()<cr>]], desc = "Move Left" },
-			{ "<C-j>", [[<cmd>lua require("tmux").move_bottom()<cr>]] },
-			{ "<C-k>", [[<cmd>lua require("tmux").move_top()<cr>]] },
-			{ "<C-l>", [[<cmd>lua require("tmux").move_right()<cr>]] },
+			-- { "<C-h>", [[<cmd>lua require("tmux").move_left()<cr>]], desc = "Move Left" },
+			-- { "<C-j>", [[<cmd>lua require("tmux").move_bottom()<cr>]] },
+			-- { "<C-k>", [[<cmd>lua require("tmux").move_top()<cr>]] },
+			-- { "<C-l>", [[<cmd>lua require("tmux").move_right()<cr>]] },
 		},
 		opts = {
 			copy_sync = {
