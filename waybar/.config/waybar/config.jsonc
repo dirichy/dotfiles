@@ -251,8 +251,8 @@
 		],
 		"min-length": 2,
 		"max-length": 2,
-		"on-click": "kitty -e ~/.config/waybar/scripts/network.sh",
-		"on-click-right": "nmcli radio wifi off && notify-send 'Wi-Fi Disabled' -i 'network-wireless-off' -r 1125",
+		"on-click": "kitty --title system_menu -e ~/.config/waybar/scripts/network.sh",
+		"on-click-right": "nmcli radio wifi off && notify-send -t 1000 'Wi-Fi Disabled' -i 'network-wireless-off' -r 1125",
 		"tooltip-format": "Gateway: {gwaddr}",
 		"tooltip-format-ethernet": "Interface: {ifname}",
 		"tooltip-format-wifi": "Network: {essid}\nIP Addr: {ipaddr}/{cidr}\nStrength: {signalStrength}%\nFrequency: {frequency} GHz",
@@ -268,8 +268,8 @@
 		"format-connected": "󰂱",
 		"min-length": 2,
 		"max-length": 2,
-		"on-click": "kitty -e ~/.config/waybar/scripts/bluetooth.sh",
-		"on-click-right": "bluetoothctl power off && notify-send 'Bluetooth Off' -i 'network-bluetooth-inactive' -r 1925",
+		"on-click": "kitty --title system_menu -e ~/.config/waybar/scripts/bluetooth.sh",
+		"on-click-right": "bluetoothctl power off && notify-send -t 1000 'Bluetooth Off' -i 'network-bluetooth-inactive' -r 1925",
 		"tooltip-format": "Device Addr: {device_address}",
 		"tooltip-format-disabled": "Bluetooth Disabled",
 		"tooltip-format-off": "Bluetooth Off",
@@ -287,7 +287,7 @@
 		"format": "{}",
 		"min-length": 2,
 		"max-length": 2,
-		"on-click": "kitty -e ~/.config/waybar/scripts/system-update.sh start"
+		"on-click": "kitty --title system_menu -e ~/.config/waybar/scripts/system-update.sh start"
 	},
 
 	/*-------------------
@@ -376,15 +376,15 @@
 		"tooltip-format": "Discharging: {time}",
 		"tooltip-format-charging": "Charging: {time}",
 		"events": {
-			"on-discharging-warning": "notify-send 'Low Battery' '{capacity}% battery remaining'",
-			"on-discharging-critical": "notify-send 'Low Battery' '{capacity}% battery remaining' -u critical",
-			"on-charging-100": "notify-send 'Battery full' 'Battery is at {capacity}%'"
+			"on-discharging-warning": "notify-send -t 1000 'Low Battery' '{capacity}% battery remaining'",
+			"on-discharging-critical": "notify-send -t 1000 'Low Battery' '{capacity}% battery remaining' -u critical",
+			"on-charging-100": "notify-send -t 1000 'Battery full' 'Battery is at {capacity}%'"
 		}
 	},
 
 	"custom/power_menu": {
 		"format": "󰤄",
-		"on-click": "kitty -e ~/.config/waybar/scripts/power-menu.sh",
+		"on-click": "kitty --title system_menu -e ~/.config/waybar/scripts/power-menu.sh",
 		"tooltip-format": "Power Menu"
 	},
 
