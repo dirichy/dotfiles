@@ -29,7 +29,7 @@ alias la='ls -lAh'
 alias l.='ls -ld .*'
 alias l='ls -lhA'
 
-alias sed=gsed
+# alias sed=gsed
 # fix common typos
 alias q='exit'
 
