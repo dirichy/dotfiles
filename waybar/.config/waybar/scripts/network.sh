@@ -20,7 +20,7 @@ ensure-enabled() {
 
 	if [[ $status == 'disabled' ]]; then
 		nmcli radio wifi on
-		notify-send 'Wi-Fi Enabled' -i 'network-wireless-on' -r 1125
+		notify-send -t 1000 'Wi-Fi Enabled' -i 'network-wireless-on' -r 1125
 	fi
 }
 
@@ -53,7 +53,7 @@ get-network-list() {
 	list=$(tail -n +2 <<<"$list" | awk '$2 != "--"')
 
 	if [[ -z $list ]]; then
-		notify-send 'Wi-Fi' 'No networks found' -i 'package-broken'
+		notify-send -t 1000 'Wi-Fi' 'No networks found' -i 'package-broken'
 		return 1
 	fi
 
@@ -83,7 +83,7 @@ select-network() {
 	if [[ -z $bssid ]]; then
 		return 1
 	elif [[ $bssid == '*' ]]; then
-		notify-send 'Wi-Fi' 'Already connected to this network' \
+		notify-send -t 1000 'Wi-Fi' 'Already connected to this network' \
 			-i 'package-install'
 		return 1
 	else
@@ -97,9 +97,9 @@ connect-to-network() {
 	echo -n 'Connecting...'
 
 	if nmcli --ask device wifi connect "$bssid"; then
-		notify-send 'Wi-Fi' 'Successfully connected' -i 'package-install'
+		notify-send -t 1000 'Wi-Fi' 'Successfully connected' -i 'package-install'
 	else
-		notify-send 'Wi-Fi' 'Failed to connect' -i 'package-purge'
+		notify-send -t 1000 'Wi-Fi' 'Failed to connect' -i 'package-purge'
 	fi
 }
 

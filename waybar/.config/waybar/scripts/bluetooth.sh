@@ -13,6 +13,12 @@ RED='\033[1;31m'
 RST='\033[0m'
 
 TIMEOUT=10
+ensure-controller(){
+  if [[ $(bluetoothctl list | grep -c .) == "0" ]]; then
+    notify-send -t 1000 "No bluetooth controller"
+    return 1
+  fi
+}
 
 ensure-on() {
 	local status
@@ -20,7 +26,7 @@ ensure-on() {
 
 	if [[ $status == 'off' ]]; then
 		bluetoothctl power on >/dev/null
-		notify-send 'Bluetooth On' -i 'network-bluetooth-activated' -r 1925
+		notify-send -t 1000 'Bluetooth On' -i 'network-bluetooth-activated' -r 1925
 	fi
 }
 
@@ -53,7 +59,7 @@ get-device-list() {
 	list=$(bluetoothctl devices | grep Device | cut -d ' ' -f 2-)
 
 	if [[ -z $list ]]; then
-		notify-send 'Bluetooth' 'No devices found' -i 'package-broken'
+		notify-send -t 1000 'Bluetooth' 'No devices found' -i 'package-broken'
 		return 1
 	fi
 
@@ -89,7 +95,7 @@ select-device() {
 		awk '{print $2}')
 
 	if [[ $connected == 'yes' ]]; then
-		notify-send 'Bluetooth' 'Already connected to this device' \
+		notify-send -t 1000 'Bluetooth' 'Already connected to this device' \
 			-i 'package-install'
 		return 1
 	else
@@ -107,7 +113,7 @@ pair-and-connect() {
 		echo -n 'Pairing...'
 
 		if ! timeout $TIMEOUT bluetoothctl pair "$address" >/dev/null; then
-			notify-send 'Bluetooth' 'Failed to pair' -i 'package-purge'
+			notify-send -t 1000 'Bluetooth' 'Failed to pair' -i 'package-purge'
 			return 1
 		fi
 	fi
@@ -115,15 +121,15 @@ pair-and-connect() {
 	echo -en '\nConnecting...'
 
 	if timeout $TIMEOUT bluetoothctl connect "$address" >/dev/null; then
-		notify-send 'Bluetooth' 'Successfully connected' -i 'package-install'
+		notify-send -t 1000 'Bluetooth' 'Successfully connected' -i 'package-install'
 	else
-		notify-send 'Bluetooth' 'Failed to connect' -i 'package-purge'
+		notify-send -t 1000 'Bluetooth' 'Failed to connect' -i 'package-purge'
 	fi
 }
 
 main() {
 	local list address
-
+  ensure-controller || exit 1
 	ensure-on
 	scan-for-devices
 	list=$(get-device-list) || exit 1

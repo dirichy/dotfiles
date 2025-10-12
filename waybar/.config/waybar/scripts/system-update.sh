@@ -43,7 +43,7 @@ update-packages() {
 		"$HELPER" -Syu
 	fi
 
-	notify-send 'Update Complete' -i 'package-installed-updated'
+	notify-send -t 1000 'Update Complete' -i 'package-installed-updated'
 
 	echo -e "\n${GRN}Update complete!${RST}\n"
 	read -rs -n 1 -p 'Press any key to exit...'
