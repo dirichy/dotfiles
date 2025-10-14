@@ -1,4 +1,4 @@
-local flag = vim.env.XDG_SESSION_DESKTOP == "hyprland"
+local flag = vim.env.XDG_CURRENT_DESKTOP == "Hyprland"
 local M = {}
 function M.is_border(direction)
 	return vim.fn.winnr() == vim.fn.winnr(direction)

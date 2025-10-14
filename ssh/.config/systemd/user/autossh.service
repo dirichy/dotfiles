@@ -1,0 +1,14 @@
+[Unit]
+After=network.target sshdgenkeys.service sshd.service
+Description=Make my pc accessable in internet
+Documentation=man:autossh
+Wants=sshdgenkeys.service sshd.service ssh-access.target
+
+[Service]
+Type=notify-reload
+ExecStart=/usr/bin/autossh -M 0 -N -R 520:localhost:22 root@47.94.86.229
+KillMode=process
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
