@@ -9,7 +9,6 @@
 # if [[ "$PWD" == "$HOME" ]]; then
 export ZDOTDIR=$HOME/.config/zsh
 # fi
-export QT_QPA_PLATFORM=wayland
 export XDG_CONFIG_HOME=${XDG_CONFIG_HOME:-$HOME/.config}
 export XDG_DATA_HOME=${XDG_DATA_HOME:-$HOME/.local/share}
 export XDG_CACHE_HOME=${XDG_CACHE_HOME:-$HOME/.cache}
@@ -36,7 +35,6 @@ export PATH=/opt/homebrew/bin:/Users/Shared/opt/bin:$PATH:~/Library/Python/3.9/b
 export TERM=xterm-256color
 
 
-export XMODIFIERS=@im=fcitx
 # export GTK_IM_MODULE=fcitx
 # export QT_IM_MODULE=fcitx
 

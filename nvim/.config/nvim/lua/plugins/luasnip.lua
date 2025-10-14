@@ -247,5 +247,9 @@ return {
 			{ desc = "expand luasnip", condition = luasnip.expandable, priority = 200 }
 		)
 		require("luasnip.loaders.from_lua").lazy_load({ paths = { "~/.config/nvim/LuaSnip" } })
+		vim.api.nvim_create_autocmd("User", {
+			pattern = "LuasnipPreExpand",
+			command = "let &undolevels = &undolevels",
+		})
 	end,
 }

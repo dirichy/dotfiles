@@ -130,10 +130,14 @@ return {
 			},
 		},
 		cmdline = {
-			keymap = { preset = "super-tab", ["<Tab>"] = { "show", "select_next" }, ["<S-Tab>"] = { "select_prev" } },
+			keymap = {
+				preset = "super-tab",
+				["<Tab>"] = { "show_and_insert", "select_next" },
+				["<S-Tab>"] = { "select_prev" },
+			},
 			completion = {
 				menu = {
-					auto_show = true,
+					auto_show = false,
 				},
 			},
 		},
