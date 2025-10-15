@@ -54,7 +54,7 @@
 		"custom/left_div#6",
 		"group/pulseaudio",
 		"custom/left_div#7",
-		"backlight",
+    "custom/backlight",
 		"custom/left_div#8",
 		"battery",
 		"custom/left_inv#2",
@@ -104,6 +104,7 @@
 		],
 		"drawer": {}
 	},
+
 	"custom/theme_switcher": {
 		"exec": "~/.config/waybar/scripts/theme-switcher.sh",
 		"return-type": "json",
@@ -348,18 +349,6 @@
 		"tooltip-format": "Input Device: {desc}"
 	},
 
-	"backlight": {
-		"format": "{icon} {percent}%",
-		"format-icons": [
-			"", "", "", "", "", "", "", "", ""
-		],
-		"min-length": 7,
-		"max-length": 7,
-		"on-scroll-up": "~/.config/waybar/scripts/backlight.sh up",
-		"on-scroll-down": "~/.config/waybar/scripts/backlight.sh down",
-		"tooltip": false
-	},
-
 	"battery": {
 		"states": {
 			"warning": 20,
@@ -386,6 +375,23 @@
 		"format": "󰤄",
 		"on-click": "kitty --title system_menu -e ~/.config/waybar/scripts/power-menu.sh",
 		"tooltip-format": "Power Menu"
+	},
+
+	"custom/backlight": {
+		"format": "{icon} {percentage}%",
+		"format-icons": [
+			"", "", "", "", "", "", "", "", ""
+		],
+		"min-length": 7,
+		"max-length": 7,
+    "exec": "~/.local/bin/hyprlua 'hypr.monitor.waybar.json()'",
+    "exec-on-event":true,
+    "interval": 5,
+    "return-type":"json",
+    "on-scroll-up": "~/.local/bin/hyprlua 'hypr.monitor.waybar.raiseBrightness()'>/dev/null",
+    "on-scroll-down": "~/.local/bin/hyprlua 'hypr.monitor.waybar.downBrightness()'>/dev/null",
+    "on-click":"~/.local/bin/hyprlua 'hypr.monitor.waybar.cyclechangespeed()'>/dev/null",
+		"tooltip": true
 	},
 
 	/*-------------------
