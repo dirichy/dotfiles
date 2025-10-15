@@ -1198,77 +1198,71 @@ return {
 	},
 	{
 		"gbprod/yanky.nvim",
-		dependencies = {
-			"kkharji/sqlite.lua",
+		event = "VeryLazy",
+		opts = {
+			ring = {
+				history_length = 100,
+				storage = "shada",
+				storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db", -- Only for sqlite storage
+				sync_with_numbered_registers = true,
+				cancel_event = "update",
+				ignore_registers = { "_" },
+				update_register_on_cycle = false,
+				permanent_wrapper = nil,
+			},
+			picker = {
+				select = {
+					action = nil, -- nil to use default put action
+				},
+				telescope = {
+					use_default_mappings = true, -- if default mappings should be used
+					mappings = nil, -- nil to use default mappings or no mappings (see `use_default_mappings`)
+				},
+			},
+			system_clipboard = {
+				sync_with_ring = true,
+				clipboard_register = nil,
+			},
+			highlight = {
+				on_put = true,
+				on_yank = true,
+				timer = 500,
+			},
+			preserve_cursor_position = {
+				enabled = true,
+			},
+			textobj = {
+				enabled = true,
+			},
 		},
 		keys = {
-			{ "p", "<Plug>(YankyPutAfter)", desc = "Yanky Put After" },
-			{ "P", "<Plug>(YankyPutBefore)", desc = "Yanky Put Before" },
-			{ "y", "<Plug>(YankyYank)", desc = "Yanky Yank" },
 			{
 				"<leader>fy",
 				function()
-					require("telescope").extensions.yank_history.yank_history()
+					require("telescope").extensions.yank_history.yank_history({})
 				end,
-				desc = "Select Yanky History",
+				mode = { "n", "x" },
+				desc = "Open Yank History",
 			},
+        -- stylua: ignore
+      { "y", "<Plug>(YankyYank)", mode = { "n", "x" }, desc = "Yank Text" },
+			{ "p", "<Plug>(YankyPutAfter)", mode = { "n", "x" }, desc = "Put Text After Cursor" },
+			{ "P", "<Plug>(YankyPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Cursor" },
+			{ "gp", "<Plug>(YankyGPutAfter)", mode = { "n", "x" }, desc = "Put Text After Selection" },
+			{ "gP", "<Plug>(YankyGPutBefore)", mode = { "n", "x" }, desc = "Put Text Before Selection" },
+			{ "[y", "<Plug>(YankyCycleForward)", desc = "Cycle Forward Through Yank History" },
+			{ "]y", "<Plug>(YankyCycleBackward)", desc = "Cycle Backward Through Yank History" },
+			{ "]p", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
+			{ "[p", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
+			{ "]P", "<Plug>(YankyPutIndentAfterLinewise)", desc = "Put Indented After Cursor (Linewise)" },
+			{ "[P", "<Plug>(YankyPutIndentBeforeLinewise)", desc = "Put Indented Before Cursor (Linewise)" },
+			{ ">p", "<Plug>(YankyPutIndentAfterShiftRight)", desc = "Put and Indent Right" },
+			{ "<p", "<Plug>(YankyPutIndentAfterShiftLeft)", desc = "Put and Indent Left" },
+			{ ">P", "<Plug>(YankyPutIndentBeforeShiftRight)", desc = "Put Before and Indent Right" },
+			{ "<P", "<Plug>(YankyPutIndentBeforeShiftLeft)", desc = "Put Before and Indent Left" },
+			{ "=p", "<Plug>(YankyPutAfterFilter)", desc = "Put After Applying a Filter" },
+			{ "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
 		},
-		opts = function()
-			local utils = require("yanky.utils")
-			local mapping = require("yanky.telescope.mapping")
-			return {
-				ring = {
-					history_length = 1000,
-					storage = "sqlite",
-					storage_path = vim.fn.stdpath("data") .. "/databases/yanky.db", -- Only for sqlite storage
-					sync_with_numbered_registers = true,
-					cancel_event = "update",
-					ignore_registers = { "_" },
-					update_register_on_cycle = false,
-				},
-				picker = {
-					select = {
-						action = nil, -- nil to use default put action
-					},
-					telescope = {
-						mappings = {
-							default = mapping.put("p"),
-							i = {
-								["<c-v>"] = mapping.put("p"),
-								["<c-b>"] = mapping.put("P"),
-								["<c-d>"] = mapping.delete(),
-								["<c-c>"] = mapping.set_register(utils.get_default_register()),
-							},
-							n = {
-								p = mapping.put("p"),
-								P = mapping.put("P"),
-								d = mapping.delete(),
-								y = mapping.set_register(utils.get_default_register()),
-							},
-						},
-					},
-				},
-				system_clipboard = {
-					sync_with_ring = true,
-					clipboard_register = nil,
-				},
-				highlight = {
-					on_put = true,
-					on_yank = true,
-					timer = 200,
-				},
-				preserve_cursor_position = {
-					enabled = true,
-				},
-				textobj = {
-					enabled = true,
-				},
-			}
-		end,
-		config = function(_, opts)
-			require("yanky").setup(opts)
-			require("telescope").load_extension("yank_history")
-		end,
 	},
 	{
 		"rainbowhxch/accelerated-jk.nvim",
