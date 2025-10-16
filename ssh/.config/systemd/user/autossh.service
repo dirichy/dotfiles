@@ -1,8 +1,8 @@
 [Unit]
-After=network.target sshdgenkeys.service sshd.service
+After=network.target sshdgenkeys.service sshd.service network-online.target network.target
 Description=Make my pc accessable in internet
 Documentation=man:autossh
-Wants=sshdgenkeys.service sshd.service ssh-access.target
+Wants=sshdgenkeys.service sshd.service ssh-access.target network-online.target
 
 [Service]
 Type=notify-reload
