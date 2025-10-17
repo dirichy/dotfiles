@@ -21,7 +21,6 @@ local function getBrightness()
 		if data then
 			output = output .. data
 		else
-			print(output)
 			current, max = string.match(
 				output,
 				"VCP%s*code%s*0x%d*%s*%(Brightness%s*%):%s*current%s*value%s*=%s*(%d*),%s*max%s*value%s*=%s*(%d*)"
