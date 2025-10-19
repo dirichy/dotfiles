@@ -3,9 +3,6 @@ local socket = require("luv").tcp
 
 -- 配置
 local TCP_PORT = 5555
-local xdg = os.getenv("XDG_RUNTIME_DIR")
-local sig = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
-local HYPR_SOCKET = xdg .. "/hypr/" .. sig .. "/.socket2.sock"
 
 -- =========================
 -- TCP Server
@@ -49,37 +46,11 @@ tcp_server:listen(128, function(err)
 	end)
 end)
 print("TCP server listening on port", TCP_PORT)
-
--- =========================
--- Hyprland Event Listener
--- =========================
-local hypr_client = uv.new_pipe(false)
-hypr_client:connect(HYPR_SOCKET, function(err)
-	if err then
-		print("Failed to connect Hyprland socket:", err)
-		return
-	end
-	print("Connected to Hyprland event socket")
-end)
-
--- 持续读取 Hyprland 事件
-local buf = ""
-hypr_client:read_start(function(err, data)
-	if err then
-		print("Hyprland read error:", err)
-		return
-	end
-	if data then
-		buf = buf .. data
-		for line in buf:gmatch("([^\n]+)\n?") do
-			local event, payload = line:match("([^>]+)>>(.+)")
-			if event and payload then
-				print("[Hyprland Event] ", event, payload)
-			end
-		end
-		-- 保留未处理残余
-		buf = buf:match("([^\n]*$)") or ""
-	end
+local check = uv.new_check()
+uv.check_start(check, function()
+	print("Executed right after uv.run starts")
+	require("config")
+	uv.check_stop(check) -- 只执行一次
 end)
 
 -- =========================

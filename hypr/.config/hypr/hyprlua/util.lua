@@ -56,6 +56,7 @@ local function cmd_with_result(command, args)
 	for index, value in ipairs(args) do
 		command = command .. " " .. value
 	end
+	print("run shell command: " .. command)
 	local pipe, err = io.popen(command)
 	assert(not err, err)
 	local result
