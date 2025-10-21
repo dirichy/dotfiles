@@ -1,0 +1,19 @@
+[Unit]
+Description=Vitual keyboard for hyprland
+Documentation=wvkbd
+PartOf=graphical-session.target
+Requires=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/wvkbd-mobintl -L 300 --hidden
+Slice=session.slice
+Restart=always
+StartLimitBurst=2
+StartLimitIntervalSec=60
+
+
+[Install]
+WantedBy=graphical-session.target
