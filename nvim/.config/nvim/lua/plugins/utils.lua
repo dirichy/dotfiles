@@ -26,6 +26,12 @@
 -- end
 return {
 	{
+		"m4xshen/hardtime.nvim",
+		lazy = false,
+		dependencies = { "MunifTanjim/nui.nvim" },
+		opts = { showmode = false },
+	},
+	{
 		"stevearc/oil.nvim",
 		---@module 'oil'
 		---@type oil.SetupOpts
@@ -1264,21 +1270,21 @@ return {
 			{ "=P", "<Plug>(YankyPutBeforeFilter)", desc = "Put Before Applying a Filter" },
 		},
 	},
-	{
-		"rainbowhxch/accelerated-jk.nvim",
-		keys = { "j", "k", "h", "l" },
-		config = function()
-			require("accelerated-jk").setup({
-				mode = "time_driven",
-				enable_deceleration = false,
-				acceleration_motions = { "j", "k", "l", "h" },
-				acceleration_limit = 300,
-				acceleration_table = { 7, 10, 13, 15, 17, 18, 19, 20 },
-				-- when 'enable_deceleration = true', 'deceleration_table = { {200, 3}, {300, 7}, {450, 11}, {600, 15}, {750, 21}, {900, 9999} }'
-				deceleration_table = { { 1000, 9999 } },
-			})
-		end,
-	},
+	-- {
+	-- 	"rainbowhxch/accelerated-jk.nvim",
+	-- 	keys = { "j", "k", "h", "l" },
+	-- 	config = function()
+	-- 		require("accelerated-jk").setup({
+	-- 			mode = "time_driven",
+	-- 			enable_deceleration = false,
+	-- 			acceleration_motions = { "j", "k", "l", "h" },
+	-- 			acceleration_limit = 300,
+	-- 			acceleration_table = { 7, 10, 13, 15, 17, 18, 19, 20 },
+	-- 			-- when 'enable_deceleration = true', 'deceleration_table = { {200, 3}, {300, 7}, {450, 11}, {600, 15}, {750, 21}, {900, 9999} }'
+	-- 			deceleration_table = { { 1000, 9999 } },
+	-- 		})
+	-- 	end,
+	-- },
 	{
 		"folke/persistence.nvim",
 		lazy = false,
@@ -1450,6 +1456,10 @@ return {
 			ai.setup({
 				custom_textobjects = require("nvimtex.textobject"),
 			})
+			vim.g.TEST = function()
+				vim.api.nvim_feedkeys("v", "n", true)
+				vim.api.nvim_win_set_cursor(0, { 2, 2 })
+			end
 		end,
 	},
 	{
