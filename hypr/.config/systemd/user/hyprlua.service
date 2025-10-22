@@ -1,0 +1,19 @@
+[Unit]
+Description=Hammerspoon-like lua ipc tool for hyprland
+PartOf=graphical-session.target
+Requires=graphical-session.target
+After=graphical-session.target
+ConditionEnvironment=WAYLAND_DISPLAY
+
+[Service]
+Type=simple
+ExecStart= /bin/bash -c 'cd ~/.config/hypr/hyprlua && ./init.lua'
+
+Slice=session.slice
+Restart=always
+StartLimitBurst=2
+StartLimitIntervalSec=60
+
+
+[Install]
+WantedBy=graphical-session.target

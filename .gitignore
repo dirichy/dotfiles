@@ -57,3 +57,4 @@ zsh/.config/zsh/.zsh_history
 rime/Library/Rime/dicts
 rime/Library/Rime/opencc
 hypr/.config/hypr/resulotion.conf
+ssh/.config/systemd/user/autossh.service

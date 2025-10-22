@@ -1,0 +1,13 @@
+[Unit]
+After=network.target sshdgenkeys.service sshd.service network-online.target network.target
+Description=Make a tmux for ssh access.
+Documentation=man:tmux
+Wants=sshdgenkeys.service sshd.service ssh-access.target network-online.target
+
+[Service]
+Type=notify-reload
+ExecStart=/usr/bin/kitty -e tmux new-session -s -d ssh
+KillMode=process
+
+[Install]
+WantedBy=multi-user.target

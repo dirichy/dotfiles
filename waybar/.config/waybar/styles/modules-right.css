@@ -21,7 +21,7 @@
 	background-color: @volume;
 	color: @backlight;
 }
-#backlight {
+#custom-backlight {
 	background-color: @backlight;
 }
 
