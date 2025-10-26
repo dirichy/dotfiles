@@ -104,4 +104,27 @@ M.cmd = setmetatable({}, {
 		end
 	end,
 })
+
+---
+---@param fn function
+---@param delay integer? time in ms
+---@return function
+M.debounce = function(fn, delay)
+	delay = delay or 200
+	local timer = nil
+	return function(...)
+		local args = { ... }
+		if timer then
+			timer:stop()
+			timer:close()
+		end
+		timer = uv.new_timer()
+		timer:start(delay, 0, function()
+			fn(table.unpack(args))
+			timer:stop()
+			timer:close()
+			timer = nil
+		end)
+	end
+end
 return M

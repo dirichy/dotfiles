@@ -1,5 +1,5 @@
 {
   "Lua.workspace.library": [
-    "~/.local/share/lua-libs/luv/library/"
+    "~/Documents/.lib/luvit-meta/library/"
   ]
 }
