@@ -46,12 +46,6 @@ tcp_server:listen(128, function(err)
 	end)
 end)
 print("TCP server listening on port", TCP_PORT)
-local check = uv.new_check()
-uv.check_start(check, function()
-	print("Executed right after uv.run starts")
-	require("config")
-	uv.check_stop(check) -- 只执行一次
-end)
 
 -- =========================
 -- 启动事件循环

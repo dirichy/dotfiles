@@ -1,7 +1,14 @@
-hypr.event.listen.workspacev2(function(data)
+local uv = require("luv")
+
+hypr.event.listen.workspacev2(hypr.debounce(function(data)
 	local workspace = string.match(data, "^(%d+)")
+	-- local timer = uv.new_timer()
+	-- timer:start(1, 0, function()
 	hypr.cmd.hyprctl("hyprpaper", "wallpaper", ",~/wallpaper/wallpaper" .. workspace .. ".JPG")
-end)
+	-- timer:stop()
+	-- timer:close()
+	-- end)
+end, 100))
 
 hypr.touch = {}
 hypr.touch.tap = function()
