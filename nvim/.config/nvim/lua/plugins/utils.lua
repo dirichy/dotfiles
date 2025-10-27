@@ -29,7 +29,18 @@ return {
 		"m4xshen/hardtime.nvim",
 		lazy = false,
 		dependencies = { "MunifTanjim/nui.nvim" },
-		opts = { showmode = false },
+		opts = {
+			showmode = false,
+			max_count = 4,
+			disable_mouse = false,
+			restriction_mode = "hint",
+			disabled_keys = {
+				["<Up>"] = false,
+				["<Down>"] = false,
+				["<Left>"] = false,
+				["<Right>"] = false,
+			},
+		},
 	},
 	{
 		"stevearc/oil.nvim",
