@@ -6,14 +6,19 @@ local uv = require("luv")
 ---@param command string
 ---@return table
 function M.get_data_from_hyprctl(command)
-	command = "hyprctl " .. command .. " -j"
-	local pipe = io.popen(command)
-	local result
-	if pipe then
-		result = json.decode(pipe:read("*a"))
-		pipe:close()
+	-- command = "hyprctl " .. command .. " -j"
+	-- local pipe = io.popen(command)
+	-- local result
+	-- if pipe then
+	-- 	result = json.decode(pipe:read("*a"))
+	-- 	pipe:close()
+	-- end
+	-- return result
+	local out, err, code = M.cmd("hyprctl", { "-j", command })
+	if code ~= 0 then
+		error(err)
 	end
-	return result
+	return json.decode(out)
 end
 
 --- return a function to get data from hyprctl
@@ -25,19 +30,21 @@ function M.function_to_get_data_from_hyprctl(command)
 	end
 end
 
-local function hyprctl_dispatch(command, ...)
+local function hyprctl_dispatch(command, arg1, ...)
 	local args = { ... }
-	command = "hyprctl dispatch " .. command
+	local arg = arg1
+	-- command = "hyprctl dispatch " .. command
+	-- if arg1 then
+	-- 	command = command .. " " .. arg1
+	-- end
 	for index, value in ipairs(args) do
-		command = command .. " " .. value
+		arg = arg .. "," .. value
 	end
-	local pipe = io.popen(command)
-	local result
-	if pipe then
-		result = pipe:read("*a")
-		pipe:close()
+	local out, err, code = M.cmd.hyprctl({ "dispatch", command, arg })
+	if code ~= 0 then
+		error(err)
 	end
-	return result
+	return out
 end
 
 M.dispatch = setmetatable({}, {
@@ -71,9 +78,107 @@ local function async_cmd(command, args, callback)
 	local handle
 	handle = uv.spawn(command, { args = args, stdio = { nil, nil, nil } }, function(code, signal)
 		uv.close(handle)
-		callback(code, signal)
+		if callback then
+			callback(code, signal)
+		end
 	end)
 	return handle
+end
+local ffi = require("ffi")
+
+ffi.cdef([[
+  typedef int pid_t;
+  typedef int ssize_t;
+
+  pid_t fork(void);
+  int pipe(int pipefd[2]);
+  int dup2(int oldfd, int newfd);
+  int close(int fd);
+  int execvp(const char *file, char *const argv[]);
+  pid_t waitpid(pid_t pid, int *wstatus, int options);
+  ssize_t read(int fd, void *buf, size_t count);
+  void _exit(int status);
+]])
+
+local function spawn_blocking(cmd, args, opts)
+	opts = opts or {}
+	local merge_err = opts.merge_err or false
+
+	local pipe_out = ffi.new("int[2]")
+	local pipe_err = ffi.new("int[2]")
+	assert(ffi.C.pipe(pipe_out) == 0)
+	if not merge_err then
+		assert(ffi.C.pipe(pipe_err) == 0)
+	end
+
+	local pid = ffi.C.fork()
+	assert(pid >= 0, "fork failed")
+
+	if pid == 0 then
+		-- 子进程
+		ffi.C.close(pipe_out[0])
+		if not merge_err then
+			ffi.C.close(pipe_err[0])
+		end
+
+		ffi.C.dup2(pipe_out[1], 1) -- stdout → pipe
+		if merge_err then
+			ffi.C.dup2(pipe_out[1], 2) -- stderr → 同一个 pipe
+		else
+			ffi.C.dup2(pipe_err[1], 2) -- stderr → 单独的 pipe
+			ffi.C.close(pipe_err[1])
+		end
+		ffi.C.close(pipe_out[1])
+
+		-- 准备 argv
+		local argv = ffi.new("char*[?]", #args + 2)
+		argv[0] = ffi.new("char[?]", #cmd + 1, cmd)
+		for i, a in ipairs(args) do
+			argv[i] = ffi.new("char[?]", #a + 1, a)
+		end
+		argv[#args + 1] = nil
+
+		ffi.C.execvp(cmd, argv)
+		ffi.C._exit(127) -- exec失败
+	end
+
+	-- 父进程
+	ffi.C.close(pipe_out[1])
+	if not merge_err then
+		ffi.C.close(pipe_err[1])
+	end
+
+	local function read_all(fd)
+		local buf = ffi.new("char[4096]")
+		local chunks = {}
+		while true do
+			local n = ffi.C.read(fd, buf, 4096)
+			if n <= 0 then
+				break
+			end
+			table.insert(chunks, ffi.string(buf, n))
+		end
+		return table.concat(chunks)
+	end
+
+	local stdout_data = read_all(pipe_out[0])
+	ffi.C.close(pipe_out[0])
+
+	local stderr_data = nil
+	if not merge_err then
+		stderr_data = read_all(pipe_err[0])
+		ffi.C.close(pipe_err[0])
+	end
+
+	local status = ffi.new("int[1]")
+	ffi.C.waitpid(pid, status, 0)
+	local code = bit.rshift(status[0], 8) -- exit code 位于高8位
+
+	if merge_err then
+		return stdout_data, code
+	else
+		return stdout_data, stderr_data, code
+	end
 end
 
 M.cmd = setmetatable({}, {
@@ -100,7 +205,7 @@ M.cmd = setmetatable({}, {
 		if opts.async then
 			return async_cmd(command, args, opts.callback)
 		else
-			return cmd_with_result(command, args)
+			return spawn_blocking(command, args)
 		end
 	end,
 })
@@ -120,11 +225,12 @@ M.debounce = function(fn, delay)
 		end
 		timer = uv.new_timer()
 		timer:start(delay, 0, function()
-			fn(table.unpack(args))
+			fn(unpack(args))
 			timer:stop()
 			timer:close()
 			timer = nil
 		end)
 	end
 end
+
 return M
