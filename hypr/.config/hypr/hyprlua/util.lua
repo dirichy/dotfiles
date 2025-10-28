@@ -30,49 +30,46 @@ function M.function_to_get_data_from_hyprctl(command)
 	end
 end
 
-local function hyprctl_dispatch(command, arg1, ...)
-	local args = { ... }
-	local arg = arg1
-	-- command = "hyprctl dispatch " .. command
-	-- if arg1 then
-	-- 	command = command .. " " .. arg1
-	-- end
-	for index, value in ipairs(args) do
-		arg = arg .. "," .. value
-	end
-	local out, err, code = M.cmd.hyprctl({ "dispatch", command, arg })
-	if code ~= 0 then
-		error(err)
-	end
-	return out
-end
-
-M.dispatch = setmetatable({}, {
+M.keyword = setmetatable({}, {
 	__index = function(t, k)
 		rawset(t, k, function(...)
-			hyprctl_dispatch(k, ...)
+			M.keyword(k, ...)
 		end)
 		return rawget(t, k)
 	end,
-	__call = function(t, command, ...)
-		hyprctl_dispatch(command, ...)
+	__call = function(t, command, arg1, ...)
+		local args = { ... }
+		local arg = arg1
+		for index, value in ipairs(args) do
+			arg = arg .. "," .. value
+		end
+		local out, err, code = M.cmd.hyprctl({ "keyword", command, arg })
+		if code ~= 0 then
+			error(err)
+		end
+		return out
 	end,
 })
-
-local function cmd_with_result(command, args)
-	for index, value in ipairs(args) do
-		command = command .. " " .. value
-	end
-	print("run shell command: " .. command)
-	local pipe, err = io.popen(command)
-	assert(not err, err)
-	local result
-	if pipe then
-		result = pipe:read("*a")
-		pipe:close()
-	end
-	return result
-end
+M.dispatch = setmetatable({}, {
+	__index = function(t, k)
+		rawset(t, k, function(...)
+			M.dispatch(k, ...)
+		end)
+		return rawget(t, k)
+	end,
+	__call = function(t, command, arg1, ...)
+		local args = { ... }
+		local arg = arg1
+		for index, value in ipairs(args) do
+			arg = arg .. "," .. value
+		end
+		local out, err, code = M.cmd.hyprctl({ "dispatch", command, arg })
+		if code ~= 0 then
+			error(err)
+		end
+		return out
+	end,
+})
 
 local function async_cmd(command, args, callback)
 	local handle

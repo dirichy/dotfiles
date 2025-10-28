@@ -1,4 +1,8 @@
 local uv = require("luv")
+local shift = hypr.keybind.modifier.SHIFT
+local ctrl = hypr.keybind.modifier.CTRL
+local alt = hypr.keybind.modifier.ALT
+local super = hypr.keybind.modifier.SUPER
 
 hypr.event.listen.workspacev2(hypr.debounce(function(data)
 	local workspace = string.match(data, "^(%d+)")
@@ -54,4 +58,9 @@ hypr.touch.edge.l.r = function()
 	hypr.dispatch.exec("ydotool key ydotool key 1:1 1:0")
 	print("esc ")
 	return "esc "
+end
+
+for index, key in ipairs({ "c", "v", "a", "x" }) do
+	hypr.keybind.bind(key, alt, { key, shift + ctrl }, "kitty")
+	hypr.keybind.bind(key, alt, { key, ctrl })
 end

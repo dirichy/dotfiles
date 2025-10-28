@@ -84,7 +84,7 @@ M.condition = {
 ---@param mod hypr.keybind.mod[]|integer
 ---@param fn function|string
 ---@param priority integer
----@param condition fun():boolean|string|string[]|nil
+---@param condition ( fun():boolean )|string|string[]|nil
 M.bind = function(key, mod, fn, condition, priority)
 	if type(fn) ~= "function" then
 		local k, m
@@ -109,17 +109,12 @@ M.bind = function(key, mod, fn, condition, priority)
 	end
 	if not M.bindlist[mod][key] then
 		M.bindlist[mod][key] = {}
-		util.cmd.hyprctl(
-			"keyword",
-			"bind",
-			mod2string(mod)
-				.. ","
-				.. key
-				.. ",exec,~/.local/bin/hyprlua 'hypr.keybind.call(\""
-				.. key
-				.. '",'
-				.. tostring(mod)
-				.. ")'"
+		util.keyword.unbind(mod2string(mod), key)
+		util.keyword.bind(
+			mod2string(mod),
+			key,
+			"exec",
+			"~/.local/bin/hyprlua 'hypr.keybind.call(\"" .. key .. '",' .. tostring(mod) .. ")'"
 		)
 	end
 	local i = 1
@@ -132,8 +127,9 @@ M.bind = function(key, mod, fn, condition, priority)
 	table.insert(M.bindlist[mod][key], i, { fn = fn, condition = condition, priority = priority })
 end
 
-function M.sendkey(key, mod)
-	return util.dispatch.sendshortcut(mod2string(mod), key, "activewindow")
+function M.sendkey(key, mod, win)
+	win = win or "activewindow"
+	return util.dispatch.sendshortcut(mod2string(mod), key, win)
 end
 
 function M.call(key, mod)
