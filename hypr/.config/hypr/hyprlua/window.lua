@@ -95,6 +95,11 @@ function M:moveToWorkspace(workspace)
 	return util.dispatch.movetoworkspace(workspace.id .. "," .. self)
 end
 
+function M.moveFocus(dir, opts)
+	local cycle = opts.mode == "cycle"
+	local win = M.focusedWindow()
+end
+
 function M:gettitle()
 	return self.title
 end

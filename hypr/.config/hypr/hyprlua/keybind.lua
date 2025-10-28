@@ -82,8 +82,8 @@ M.condition = {
 
 ---@param key string|integer
 ---@param mod hypr.keybind.mod[]|integer
----@param fn function|string
----@param priority integer
+---@param fn function|string|table
+---@param priority integer?
 ---@param condition ( fun():boolean )|string|string[]|nil
 M.bind = function(key, mod, fn, condition, priority)
 	if type(fn) ~= "function" then
@@ -140,4 +140,10 @@ function M.call(key, mod)
 	end
 	return M.sendkey(key, mod)
 end
+
+setmetatable(M, {
+	__call = function(t, ...)
+		M.bind(...)
+	end,
+})
 return M
