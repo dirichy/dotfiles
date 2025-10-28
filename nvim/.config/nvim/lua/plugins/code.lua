@@ -150,6 +150,7 @@ return {
 					["`"] = {
 						add = { "`", "'" },
 						find = "%b`'",
+						delete = "^(`)().*(')()$",
 					},
 					["e"] = {
 						add = function()
@@ -158,8 +159,10 @@ return {
 								return { { "\\begin{" .. result .. "}" }, { "\\end{" .. result .. "}" } }
 							end
 						end,
-						find = "\\begin(%b{}).*\\end%1",
-						delete = "^(\\begin%b{})().*(\\end%{})()$",
+						find = function()
+							return config.get_selection({ motion = "ae" })
+						end,
+						delete = "^(\\begin%b{})().*(\\end%b{})()$",
 					},
 					["m"] = {
 						add = function()
@@ -179,7 +182,7 @@ return {
 						end,
 						find = function()
 							return config.get_selection({
-								query = { capture = "@tex.math.outer", type = "textobjects" },
+								motion = "am",
 							})
 						end,
 						delete = function()
