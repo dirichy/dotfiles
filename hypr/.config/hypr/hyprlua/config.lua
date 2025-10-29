@@ -69,13 +69,13 @@ for index, key in ipairs({ "h", "j", "k", "l" }) do
 	local direction = { h = "l", j = "d", k = "u", l = "r" }
 	for _, mod in ipairs({ super, ctrl }) do
 		hypr.keybind.bind(key, mod, function()
-			hypr.dispatch.movefocus(direction[key])
+			hypr.window.moveFocusCross(key)
 		end)
 		hypr.keybind.bind(key, mod, function()
 			hypr.keybind.sendkey(key, ctrl)
 		end, function()
 			local win = hypr.window.focusedWindow()
-			if win:application() == "kitty" and string.match(win:gettitle(), "^.* %- Nvim$") then
+			if win and win:application() == "kitty" and string.match(win:gettitle(), "^.* %- Nvim$") then
 				return true
 			end
 			return false
