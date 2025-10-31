@@ -44,10 +44,7 @@ M.keyword = setmetatable({}, {
 			arg = arg .. "," .. value
 		end
 		local out, err, code = M.cmd.hyprctl({ "keyword", command, arg })
-		if code ~= 0 then
-			error(err)
-		end
-		return out
+		return out, err, code
 	end,
 })
 M.dispatch = setmetatable({}, {
@@ -64,10 +61,7 @@ M.dispatch = setmetatable({}, {
 			arg = arg .. "," .. value
 		end
 		local out, err, code = M.cmd.hyprctl({ "dispatch", command, arg })
-		if code ~= 0 then
-			error(err)
-		end
-		return out
+		return out, err, code
 	end,
 })
 
