@@ -11,7 +11,7 @@ local direction_table = {
 }
 function M.move_to(direction)
 	if M.is_border(direction) and flag then
-		vim.system({ "hyprctl", "dispatch", "movefocus", direction_table[direction] })
+		vim.system({ "hyprlua", 'hypr.window.moveFocusCross("' .. direction .. '")' })
 	else
 		vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>" .. direction, true, false, true), "n", false)
 	end
