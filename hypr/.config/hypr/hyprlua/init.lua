@@ -1,6 +1,8 @@
 #!/usr/bin/luajit
 hypr = {}
+hypr.json = require("cjson")
 local uv = require("luv")
+hypr.uv = uv
 local check = uv.new_check()
 uv.check_start(check, function()
 	print("Executed right after uv.run starts")

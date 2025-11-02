@@ -1,6 +1,6 @@
 local util = require("util")
-local json = require("cjson")
-local uv = require("luv")
+local json = hypr.json
+local uv = hypr.uv
 local M = {}
 M.get_dbus_item = function()
 	local dbus_item = util.cmd

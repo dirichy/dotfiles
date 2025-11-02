@@ -1,5 +1,4 @@
-local uv = require("luv")
-local socket = require("luv").tcp
+local uv = hypr.uv
 
 -- 配置
 local TCP_PORT = 5555

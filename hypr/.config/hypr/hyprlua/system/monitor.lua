@@ -1,6 +1,6 @@
 local M = {}
-local uv = require("luv")
-local json = require("cjson")
+local uv = hypr.uv
+local json = hypr.json
 local ddc = "/usr/bin/ddcutil"
 local bus = 1
 local current

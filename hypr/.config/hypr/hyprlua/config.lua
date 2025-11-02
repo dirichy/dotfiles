@@ -1,4 +1,4 @@
-local uv = require("luv")
+local uv = hypr.uv
 local shift = hypr.keybind.modifier.SHIFT
 local ctrl = hypr.keybind.modifier.CTRL
 local alt = hypr.keybind.modifier.ALT

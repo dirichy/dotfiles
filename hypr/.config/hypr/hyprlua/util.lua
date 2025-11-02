@@ -1,6 +1,6 @@
 local M = {}
-local json = require("cjson")
-local uv = require("luv")
+local json = hypr.json
+local uv = hypr.uv
 
 --- get data from "hyprctl command -j" and convert it into lua table
 ---@param command string
@@ -65,9 +65,18 @@ M.dispatch = setmetatable({}, {
 	end,
 })
 
-local function async_cmd(command, args, callback)
+local function async_cmd(command, args, opts)
+	local callback
+	if type(opts) == "function" then
+		callback = opts
+		opts = {}
+	elseif type(opts) == "table" then
+		callback = opts.callback
+	end
+	opts.args = args
+	opts.stdio = opts.stdio or { nil, nil, nil }
 	local handle
-	handle = uv.spawn(command, { args = args, stdio = { nil, nil, nil } }, function(code, signal)
+	handle = uv.spawn(command, opts, function(code, signal)
 		uv.close(handle)
 		if callback then
 			callback(code, signal)
@@ -172,6 +181,7 @@ local function spawn_blocking(cmd, args, opts)
 	end
 end
 
+---@type table<string,fun(...):string,string,number>
 M.cmd = setmetatable({}, {
 	__index = function(t, k)
 		rawset(t, k, function(...)
@@ -194,7 +204,7 @@ M.cmd = setmetatable({}, {
 			opts = table.remove(args)
 		end
 		if opts.async then
-			return async_cmd(command, args, opts.callback)
+			return async_cmd(command, args, opts)
 		else
 			return spawn_blocking(command, args)
 		end

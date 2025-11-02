@@ -2,8 +2,7 @@ local M = {}
 local xdg = os.getenv("XDG_RUNTIME_DIR")
 local sig = os.getenv("HYPRLAND_INSTANCE_SIGNATURE")
 local HYPR_SOCKET = xdg .. "/hypr/" .. sig .. "/.socket2.sock"
-local socket = require("luv").tcp
-local uv = require("luv")
+local uv = hypr.uv
 local events = setmetatable({}, {
 	__index = function(t, k)
 		rawset(t, k, {})
