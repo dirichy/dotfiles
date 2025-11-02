@@ -82,3 +82,5 @@ for index, key in ipairs({ "h", "j", "k", "l" }) do
 		end)
 	end
 end
+hypr.sbqq = require("config.sbqq")
+hypr.keybind("s", alt, hypr.sbqq.active)
