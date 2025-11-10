@@ -8,7 +8,7 @@ hypr.event.listen.workspacev2(hypr.debounce(function(data)
 	local workspace = string.match(data, "^(%d+)")
 	-- local timer = uv.new_timer()
 	-- timer:start(1, 0, function()
-	hypr.cmd.hyprctl("hyprpaper", "wallpaper", ",~/wallpaper/wallpaper" .. workspace .. ".JPG")
+	hypr.cmd.hyprctl("hyprpaper", "wallpaper", ",~/wallpaper/wallpaper" .. tostring(workspace) .. ".JPG")
 	-- timer:stop()
 	-- timer:close()
 	-- end)
@@ -82,5 +82,6 @@ for index, key in ipairs({ "h", "j", "k", "l" }) do
 		end)
 	end
 end
+hypr.keybind("n", alt, { "n", shift + ctrl })
 hypr.sbqq = require("config.sbqq")
 hypr.keybind("s", alt, hypr.sbqq.active)

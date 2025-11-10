@@ -88,8 +88,9 @@ return {
 	},
 	{
 		enabled = true,
-		vim.fn.isdirectory("/Users/dirichy/latex_concealer.nvim/") == 0 and "dirichy/latex_concealer.nvim",
-		dir = vim.fn.isdirectory("/Users/dirichy/latex_concealer.nvim/") == 1 and "/Users/dirichy/latex_concealer.nvim",
+		vim.fn.isdirectory(vim.env.HOME .. "/latex_concealer.nvim/") == 0 and "dirichy/latex_concealer.nvim",
+		dir = vim.fn.isdirectory(vim.env.HOME .. "/latex_concealer.nvim/") == 1
+			and vim.env.HOME .. "/latex_concealer.nvim",
 		ft = { "tex", "latex" },
 		keys = {
 			{
