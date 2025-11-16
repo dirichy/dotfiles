@@ -111,6 +111,10 @@ return {
 		opts = {},
 		config = true,
 	},
+	{
+		"DanielMSussman/motleyLatex.nvim",
+		config = true,
+	},
 	-- {
 	-- 	"lervag/vimtex",
 	-- 	lazy = false,
