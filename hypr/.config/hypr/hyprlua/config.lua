@@ -83,5 +83,6 @@ for index, key in ipairs({ "h", "j", "k", "l" }) do
 	end
 end
 hypr.keybind("n", alt, { "n", shift + ctrl })
-hypr.sbqq = require("config.sbqq")
-hypr.keybind("q", alt, hypr.sbqq.active)
+hypr.tencent = require("config.tencent")
+hypr.keybind("q", alt, hypr.tencent.qq.active)
+hypr.keybind("w", alt, hypr.tencent.wechat.active)

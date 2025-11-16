@@ -1,0 +1,16 @@
+[Desktop Entry]
+Name=Wechat
+Comment=New era of messaging
+TryExec=wechat
+Exec=wechat
+Icon=org.telegram.desktop
+Terminal=false
+StartupWMClass=TelegramDesktop
+Type=Application
+Categories=Chat;Network;InstantMessaging;QT;
+MimeType=x-scheme-handler/tg;x-scheme-handler/tonsite;
+Keywords=tg;chat;im;messaging;messenger;sms;tdesktop;
+# DBusActivatable=true
+# SingleMainWindow=true
+# X-GNOME-UsesNotifications=true
+# X-GNOME-SingleWindow=true
