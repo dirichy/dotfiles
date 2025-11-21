@@ -1,1 +1,1 @@
-/mihomo/.config/mihomo/config.yaml filter=git-crypt ditt=git-crypt
+/mihomo/.config/mihomo/config.yaml filter=git-crypt diff=git-crypt
