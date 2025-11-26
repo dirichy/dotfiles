@@ -8,7 +8,7 @@ return {
 	main = "nvim-treesitter.configs",
 	build = ":TSUpdate",
 	opts = {
-		ensure_installed = "all",
+		-- ensure_installed = "all",
 		highlight = {
 			enable = true,
 		},
