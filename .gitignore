@@ -58,3 +58,8 @@ rime/Library/Rime/dicts
 rime/Library/Rime/opencc
 hypr/.config/hypr/resulotion.conf
 ssh/.config/systemd/user/autossh.service
+mihomo/.config/mihomo/proxy_provider
+mihomo/.config/mihomo/rule_provider
+mihomo/.config/mihomo/GeoIP.dat
+mihomo/.config/mihomo/GeoSite.dat
+mihomo/.config/mihomo/cache.db
