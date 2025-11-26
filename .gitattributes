@@ -1,1 +1,3 @@
-/mihomo/.config/mihomo/config.yaml filter=git-crypt diff=git-crypt
+/secrets.txt filter=git-crypt
+/mihomo/.config/mihomo/config.yaml filter=mask
+/ssh/.ssh/config filter=mask
