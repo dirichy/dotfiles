@@ -64,6 +64,10 @@ function cd() {
 
 alias vlc="LANG=zh_CN.UTF-8 /Applications/VLC.app/Contents/MacOS/VLC"
 alias sshfsnas="sshfs -o follow_symlinks ldirichy:/home/dirichy /Users/dirichy/ldirichy"
-ssh(){
-  /usr/bin/ssh "$@" || reset
+sshx(){
+    autossh -M 0 \
+        -o "ServerAliveInterval=10" \
+        -o "ServerAliveCountMax=3" \
+        -t "$@" \
+        "$SHELL -lc \"tmux new -A -s ssh\" || $SHELL -l"
 }
