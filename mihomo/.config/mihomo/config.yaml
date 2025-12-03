@@ -772,7 +772,12 @@ proxy-groups:
       hidden: true,
     }
   - { name: 手动选择, <<: *use, type: select }
-  - { name: 自动选择, <<: *use, type: url-test }
+  - {
+      name: 自动选择,
+      <<: *use,
+      type: url-test,
+      exclude-filter: "免费|下载专用",
+    }
 
 rules:
   - RULE-SET,fudan-direct,DIRECT
