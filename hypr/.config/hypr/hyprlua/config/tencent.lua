@@ -31,7 +31,7 @@ M.qq.start = function()
 	local handle = uv.new_timer()
 	hypr.cmd(
 		"env",
-		"GDK_SCALE=2",
+		"GDK_SCALE=1",
 		os.getenv("HOME") .. "/.local/bin/_tencentqq",
 		"--enable-features=UseOzonePlatform",
 		"--ozone-platform=x11",
@@ -88,7 +88,7 @@ M.wechat.start = function()
 	hypr.cmd(
 		"zsh",
 		"-c",
-		'env QT_IM_MODULE="fcitx" QT_SCALE_FACTOR=2.5 _wechat --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime',
+		'env QT_IM_MODULE="fcitx" _wechat --enable-features=UseOzonePlatform --ozone-platform=wayland --enable-wayland-ime',
 		{
 			async = true,
 			callback = function()
