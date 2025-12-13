@@ -117,17 +117,19 @@ rule-providers:
   # https://awavenue.top
   # 由于 Anti-AD 误杀率高，本项目已在 1.11-241024 版本更换秋风广告规则
   fudan-direct:
-    type: file
+    type: http
     behavior: domain
     format: text
     # path可为空(仅限clash.meta 1.15.0以上版本)
-    path: ./local_rule/fudan-direct.list
+    url: "https://ghfast.top/https://raw.githubusercontent.com/dirichy/mihomo_fudan_rule/refs/heads/main/fudan-direct.list"
+    path: ./rule_provider/fudan-direct.list
   fudan:
-    type: file
+    type: http
     behavior: domain
     format: text
     # path可为空(仅限clash.meta 1.15.0以上版本)
-    path: ./local_rule/fudan.list
+    url: "https://ghfast.top/https://raw.githubusercontent.com/dirichy/mihomo_fudan_rule/refs/heads/main/fudan.list"
+    path: ./rule_provider/fudan.list
   AWAvenue-Ads:
     type: http
     behavior: domain
@@ -611,6 +613,8 @@ dns:
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - rule-set:fake-ip-filterdomain
+    - "+.launchpad.net"
+    - "launchpad.net"
   nameserver-policy:
     "+.arpa": "10.0.0.1"
     "rule-set:cndomain":
