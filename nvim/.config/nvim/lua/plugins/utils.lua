@@ -1168,6 +1168,24 @@ return {
 					augend.constant.alias.bool,
 					augend.constant.alias.alpha,
 					augend.constant.alias.Alpha,
+					augend.constant.new({
+						elements = { "<", "\\leq", "=", "\\geq", ">", "\\neq" },
+						sord = true,
+						word = false,
+						cyclic = true,
+					}),
+					augend.constant.new({
+						elements = { "\\wedge", "\\vee" },
+						sord = true,
+						word = false,
+						cyclic = true,
+					}),
+					augend.constant.new({
+						elements = { "\\forall", "\\exists" },
+						sord = true,
+						word = false,
+						cyclic = true,
+					}),
 				},
 			})
 		end,
