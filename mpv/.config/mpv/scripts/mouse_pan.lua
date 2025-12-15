@@ -14,7 +14,7 @@ local assdraw = require("mp.assdraw")
 
 options.read_options(opts, nil, function() end)
 
-function clamp(value, low, high)
+local function clamp(value, low, high)
 	if value <= low then
 		return low
 	elseif value >= high then
@@ -26,7 +26,7 @@ end
 
 local cleanup = nil -- function set up by drag-to-pan/pan-follows cursor and must be called to clean lingering state
 
-function drag_to_pan_handler(table)
+local function drag_to_pan_handler(table)
 	if cleanup then
 		cleanup()
 		cleanup = nil
@@ -110,7 +110,7 @@ function drag_to_pan_handler(table)
 	end
 end
 
-function pan_follows_cursor_handler()
+local function pan_follows_cursor_handler()
 	if cleanup then
 		cleanup()
 		cleanup = nil
@@ -160,7 +160,7 @@ function pan_follows_cursor_handler()
 	end
 end
 
-function cursor_centric_zoom_handler(amt)
+local function cursor_centric_zoom_handler(amt)
 	local zoom_inc = tonumber(amt)
 	if not zoom_inc or zoom_inc == 0 then
 		return
@@ -244,7 +244,7 @@ function cursor_centric_zoom_handler(amt)
 	)
 end
 
-function align_border(x, y)
+local function align_border(x, y)
 	local dim = mp.get_property_native("osd-dimensions")
 	if not dim then
 		return
@@ -269,7 +269,7 @@ function align_border(x, y)
 	end
 end
 
-function pan_image(axis, amount, zoom_invariant, image_constrained)
+local function pan_image(axis, amount, zoom_invariant, image_constrained)
 	amount = tonumber(amount)
 	if not amount or amount == 0 or axis ~= "x" and axis ~= "y" then
 		return
@@ -300,13 +300,13 @@ function pan_image(axis, amount, zoom_invariant, image_constrained)
 	mp.set_property_number(prop, old_pan + amount)
 end
 
-function rotate_video(amt)
+local function rotate_video(amt)
 	local rot = mp.get_property_number("video-rotate")
 	rot = (rot + amt) % 360
 	mp.set_property_number("video-rotate", rot)
 end
 
-function reset_pan_if_visible()
+local function reset_pan_if_visible()
 	local dim = mp.get_property_native("osd-dimensions")
 	if not dim then
 		return
@@ -322,9 +322,17 @@ function reset_pan_if_visible()
 		mp.command(command)
 	end
 end
-mp.add_periodic_timer(0.05, pan_follows_cursor_handler)
+local pan_timer = mp.add_periodic_timer(1, pan_follows_cursor_handler, true)
+mp.add_forced_key_binding("f", "pan-follows-cursor", function()
+	if cleanup then
+		cleanup()
+		cleanup = nil
+	else
+		pan_follows_cursor_handler()
+	end
+end)
 mp.add_key_binding(nil, "drag-to-pan", drag_to_pan_handler, { complex = true })
-mp.add_key_binding(nil, "pan-follows-cursor", pan_follows_cursor_handler, { complex = true })
+-- mp.add_key_binding(nil, "pan-follows-cursor", pan_follows_cursor_handler, { complex = true })
 mp.add_key_binding(nil, "cursor-centric-zoom", cursor_centric_zoom_handler)
 mp.add_key_binding(nil, "align-border", align_border)
 mp.add_key_binding(nil, "pan-image", pan_image)
