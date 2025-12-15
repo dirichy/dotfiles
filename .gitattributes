@@ -1,3 +1,4 @@
 /secrets.txt filter=git-crypt
 /mihomo/.config/mihomo/config.yaml filter=mask
 /ssh/.ssh/config filter=mask
+/mihomo/.config/fdu-connect/config.toml filter=mask

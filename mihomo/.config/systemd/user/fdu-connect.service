@@ -1,0 +1,14 @@
+[Unit]
+Description=FDU Connect
+Documentation=https://github.com/AkiraSalvare/fdu-connect
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Restart=on-failure
+RestartSec=5
+WorkingDirectory=%h
+ExecStart=/usr/bin/fdu-connect -config ./.config/fdu-connect/config.toml
+
+[Install]
+WantedBy=default.target
