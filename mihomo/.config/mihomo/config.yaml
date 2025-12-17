@@ -613,10 +613,14 @@ dns:
   fake-ip-filter-mode: blacklist
   fake-ip-filter:
     - rule-set:fake-ip-filterdomain
+    - rule-set:fudan
+    - rule-set:fudan-direct
     - "+.launchpad.net"
     - "launchpad.net"
   nameserver-policy:
     "+.arpa": "10.0.0.1"
+    "ruset:fudan": system
+    "ruset:fudan-direct": system
     "rule-set:cndomain":
       - https://doh.pub/dns-query
       - https://dns.alidns.com/dns-query
