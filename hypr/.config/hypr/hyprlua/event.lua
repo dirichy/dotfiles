@@ -43,8 +43,8 @@ hypr_client:connect(HYPR_SOCKET, function(err)
 	print("Connected to Hyprland event socket")
 end)
 
--- 持续读取 Hyprland 事件
 local buf = ""
+
 hypr_client:read_start(function(err, data)
 	if err then
 		print("Hyprland read error:", err)
@@ -52,15 +52,24 @@ hypr_client:read_start(function(err, data)
 	end
 	if data then
 		buf = buf .. data
-		for line in buf:gmatch("([^\n]+)\n?") do
-			local event, payload = line:match("([^>]+)>>(.+)")
-			if event and payload then
-				callback(event, payload)
-				print("[Hyprland Event] ", event, payload)
+		while true do
+			local s, e = buf:find("\n")
+			if not s then
+				break
+			end
+			local line = buf:sub(1, s - 1)
+			buf = buf:sub(e + 1)
+			if line ~= "" then
+				-- 解析事件
+				local event, payload = line:match("([^>]+)>>(.+)")
+				if event and payload then
+					callback(event, payload)
+					print("[Hyprland Event] ", event, payload)
+				else
+					print("[Hyprland Raw] ", line)
+				end
 			end
 		end
-		-- 保留未处理残余
-		buf = buf:match("([^\n]*$)") or ""
 	end
 end)
 
