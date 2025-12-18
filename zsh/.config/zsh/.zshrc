@@ -40,6 +40,8 @@ unset _rc
 # To customize prompt, run `p10k configure` or edit .p10k.zsh.
 [[ ! -f ${ZDOTDIR:-$HOME}/.p10k.zsh ]] || source ${ZDOTDIR:-$HOME}/.p10k.zsh
 set -o vi
+setopt NO_BEEP
+export SUDO_PROMPT=$'[sudo] password for %p: '
 fzf --zsh | eval
 [[ -f /opt/homebrew/opt/chruby/share/chruby/chruby.sh ]] && . /opt/homebrew/opt/chruby/share/chruby/chruby.sh
 [[ -f /opt/homebrew/opt/chruby/share/chruby/auto.sh ]] && .  /opt/homebrew/opt/chruby/share/chruby/auto.sh
