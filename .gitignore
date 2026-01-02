@@ -66,3 +66,5 @@ mihomo/.config/mihomo/cache.db
 sunshine/.config/sunshine/credentials
 sunshine/.config/sunshine/sunshine.log
 sunshine/.config/sunshine/sunshine_state.json
+mihomo/.config/mihomo/ui
+mihomo/.config/mihomo/geoip.metadb
