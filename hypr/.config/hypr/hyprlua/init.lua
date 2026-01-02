@@ -11,6 +11,7 @@ uv.check_start(check, function()
 	hypr.event = require("event")
 	hypr.cmd = require("util").cmd
 	hypr.dispatch = require("util").dispatch
+	hypr.keyword = require("util").keyword
 	hypr.debounce = require("util").debounce
 	hypr.keybind = require("keybind")
 	pcall(require, "config")
