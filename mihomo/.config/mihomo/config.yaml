@@ -689,7 +689,7 @@ proxy-groups:
       name: Fudan,
       type: url-test,
       url: "https://icourse.fudan.edu.cn",
-      proxies: [DIRECT, localhost, arch_eva, arch_dirichy],
+      proxies: [DIRECT, localhost_1081, arch_eva_1081, arch_dirichy_1081],
     }
   - { name: 广告拦截, type: select, proxies: [REJECT, DIRECT, 默认节点] }
   - { name: 境外AI, <<: *pr }
