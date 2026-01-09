@@ -6,24 +6,30 @@
       "exit-timeout": 5,
       "image-path": "desktop.png",
       "name": "Desktop",
-      "prep-cmd": [
-        {
-          "do": "/home/dirichy/.local/bin/hyprlua hypr.keyword.monitor(\"HDMI-A-1\",\"preferred\",\"auto-down\",\"1.5\")",
-          "undo": "/home/dirichy/.local/bin/hyprlua hypr.keyword.monitor(\"HDMI-A-1\",\"disabled\")"
-        }
-      ],
+      "prep-cmd": [],
       "wait-all": true
     },
     {
       "auto-detach": true,
       "exclude-global-prep-cmd": false,
       "exit-timeout": 5,
-      "image-path": "steam.png",
-      "name": "Steam Big Picture",
+      "image-path": "desktop.png",
+      "name": "Mirror",
+      "prep-cmd": [],
+      "wait-all": true
+    },
+    {
+      "auto-detach": true,
+      "cmd": [],
+      "elevated": false,
+      "exclude-global-prep-cmd": false,
+      "exit-timeout": 5,
+      "image-path": "",
+      "name": "ipad/only",
       "prep-cmd": [
         {
-          "do": "/usr/bin/test",
-          "undo": ""
+          "do": "/root/.config/sunshine/ipad/only/start.sh",
+          "undo": "/root/.config/sunshine/ipad/only/stop.sh"
         }
       ],
       "wait-all": true
@@ -35,12 +41,43 @@
       "exclude-global-prep-cmd": false,
       "exit-timeout": 5,
       "image-path": "",
-      "name": "Ipad-only",
-      "output": "/home/dirichy/test.log",
+      "name": "ipad/expand",
       "prep-cmd": [
         {
-          "do": "/root/.config/sunshine/start.sh",
-          "undo": "/root/.config/sunshine/stop.sh"
+          "do": "/root/.config/sunshine/ipad/expand/start.sh",
+          "undo": "/root/.config/sunshine/ipad/expand/stop.sh"
+        }
+      ],
+      "wait-all": true
+    },
+    {
+      "auto-detach": true,
+      "cmd": [],
+      "elevated": false,
+      "exclude-global-prep-cmd": false,
+      "exit-timeout": 5,
+      "image-path": "",
+      "name": "mac/only",
+      "prep-cmd": [
+        {
+          "do": "/root/.config/sunshine/mac/only/start.sh",
+          "undo": "/root/.config/sunshine/mac/only/stop.sh"
+        }
+      ],
+      "wait-all": true
+    },
+    {
+      "auto-detach": true,
+      "cmd": [],
+      "elevated": false,
+      "exclude-global-prep-cmd": false,
+      "exit-timeout": 5,
+      "image-path": "",
+      "name": "mac/expand",
+      "prep-cmd": [
+        {
+          "do": "/root/.config/sunshine/mac/expand/start.sh",
+          "undo": "/root/.config/sunshine/mac/expand/stop.sh"
         }
       ],
       "wait-all": true
