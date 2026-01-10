@@ -656,6 +656,10 @@ proxies:
     type: http
     server: 192.168.1.88
     port: 1081
+  - name: dell_1081
+    type: http
+    server: 192.168.1.66
+    port: 1081
   # - name: "WARP"
   #   type: wireguard
   #   server: engage.cloudflareclient.com
@@ -689,7 +693,8 @@ proxy-groups:
       name: Fudan,
       type: url-test,
       url: "https://icourse.fudan.edu.cn",
-      proxies: [DIRECT, localhost_1081, arch_eva_1081, arch_dirichy_1081],
+      proxies:
+        [DIRECT, localhost_1081, arch_eva_1081, arch_dirichy_1081, dell_1081],
     }
   - { name: 广告拦截, type: select, proxies: [REJECT, DIRECT, 默认节点] }
   - { name: 境外AI, <<: *pr }
