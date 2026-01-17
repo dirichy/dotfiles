@@ -12,9 +12,16 @@ return {
 			{
 				"<leader>tv",
 				function()
-					require("nvimtex.view").sioyek()
+					require("nvimtex.view").view()
 				end,
 				desc = "View Pdf",
+			},
+			{
+				"<leader>ts",
+				function()
+					require("nvimtex.view").sync()
+				end,
+				desc = "sync position via synctex",
 			},
 			{
 				"<leader>tb",

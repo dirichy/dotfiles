@@ -13,6 +13,9 @@ hypr.event.listen.workspacev2(hypr.debounce(function(data)
 	-- timer:close()
 	-- end)
 end, 100))
+-- hypr.event.listen.bell(hypr.debounce(function()
+-- 	hypr.cmd("/usr/bin/notify-send", "Belling")
+-- end, 1000))
 
 -- hypr.touch = {}
 -- hypr.touch.tap = function()
@@ -82,6 +85,12 @@ for index, key in ipairs({ "h", "j", "k", "l" }) do
 		end)
 	end
 end
+hypr.keybind("mouse:276", 0, { "o", ctrl }, "zen-browser")
+hypr.keybind("mouse:275", 0, { "i", ctrl }, "zen-browser")
+hypr.keybind("mouse:276", 0, { "left" }, "mpv")
+hypr.keybind("mouse:275", 0, { "right" }, "mpv")
+hypr.keybind("mouse:276", 0, { "u", ctrl }, "sioyek")
+hypr.keybind("mouse:275", 0, { "d", ctrl }, "sioyek")
 hypr.keybind("n", alt, { "n", shift + ctrl })
 hypr.tencent = require("config.tencent")
 hypr.keybind("q", alt, hypr.tencent.qq.active)

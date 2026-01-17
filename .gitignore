@@ -64,3 +64,8 @@ mihomo/.config/mihomo/GeoIP.dat
 mihomo/.config/mihomo/GeoSite.dat
 mihomo/.config/mihomo/cache.db
 hammerspoon/.hammerspoon/Spoons
+sunshine/.config/sunshine/credentials
+sunshine/.config/sunshine/sunshine.log
+sunshine/.config/sunshine/sunshine_state.json
+mihomo/.config/mihomo/ui
+mihomo/.config/mihomo/geoip.metadb

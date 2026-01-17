@@ -1,28 +1,4 @@
 # AFF
-# 如果你想支持我，可以通过我的邀请链接购买机场
-# 感谢支持
-# 1. 倾城极速 邀请码: 0jiB5uAA https://qcjs.ovh/#/register?code=0jiB5uAA
-# 2. ssLinks 邀请码: fSo2OhzH https://98a6251b6cd7471da86cca993b6dbe6f.36d.biz/#/register?code=fSo2OhzH
-
-# 一定要填我的邀请码，不填我哭给你看😭
-
-# mihomo (Clash Meta) 懒人配置
-# 版本 V1.22-250718
-# https://gist.github.com/liuran001/5ca84f7def53c70b554d3f765ff86a33
-# https://obdo.cc/meta
-# 作者: 笨蛋ovo (bdovo.cc)
-# Telegram: https://t.me/baka_not_baka
-# 关注我的 Telegram 频道谢谢喵 https://t.me/s/BDovo_Channel
-# 修改自官方示例规则 https://wiki.metacubex.one/example/#meta
-# 转载请保留此注释
-# 尽量添加了较为详尽的注释，不理解的地方建议对照 虚空终端 (Clash Meta) Docs 进行理解
-# 虚空终端 (Clash Meta) Docs 地址: https://wiki.metacubex.one
-# 不理解的地方不要乱动，如果你是小白，请按下 `Ctrl + F` 搜索 `基础配置`，只修改此部分
-
-# true 是启用
-# false 是禁用
-
-# 分组
 pr:
   &pr {
     type: select,
@@ -526,6 +502,7 @@ log-level: info
 allow-lan: true
 # socks5/http 端口
 mixed-port: 7890
+redir-port: 7892
 port: 7891
 # Meta 内核特性 https://wiki.metacubex.one/config/general
 # 统一延迟
@@ -536,6 +513,11 @@ unified-delay: true
 tcp-concurrent: true
 # 外部控制端口
 external-controller: :9090
+# to get this work please clone an ui into /path/to/mihomo/config/dir/ui
+# for example:
+# git clone https://github.com/metacubex/metacubexd.git -b gh-pages ui
+# then you can use localhost:9090/ui to attach ui controller
+external-ui: ui
 
 geodata-mode: true
 
@@ -662,17 +644,21 @@ dns:
 #     proxy: 新加坡
 
 proxies:
-  - name: fudan
+  - name: localhost_1081
     type: http
     server: 127.0.0.1
     port: 1081
-  - name: arch_eva
+  - name: arch_eva_1081
     type: http
     server: 192.168.31.88
     port: 1081
-  - name: arch_dirichy
+  - name: arch_dirichy_1081
     type: http
     server: 192.168.1.88
+    port: 1081
+  - name: dell_1081
+    type: http
+    server: 192.168.1.66
     port: 1081
   # - name: "WARP"
   #   type: wireguard
@@ -705,8 +691,10 @@ proxy-groups:
   # - { name: WARP前置, <<: *pr, exclude-type: "wireguard" }
   - {
       name: Fudan,
-      type: select,
-      proxies: [DIRECT, fudan, arch_eva, arch_dirichy],
+      type: url-test,
+      url: "https://icourse.fudan.edu.cn",
+      proxies:
+        [DIRECT, localhost_1081, arch_eva_1081, arch_dirichy_1081, dell_1081],
     }
   - { name: 广告拦截, type: select, proxies: [REJECT, DIRECT, 默认节点] }
   - { name: 境外AI, <<: *pr }
