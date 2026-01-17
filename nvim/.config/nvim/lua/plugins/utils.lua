@@ -26,6 +26,11 @@
 -- end
 return {
 	{
+		vim.fn.isdirectory(vim.env.HOME .. "/imselect.nvim/") == 0 and "dirichy/imselect.nvim",
+		dir = vim.fn.isdirectory(vim.env.HOME .. "/imselect.nvim/") == 1 and vim.env.HOME .. "/imselect.nvim",
+		config = true,
+	},
+	{
 		"m4xshen/hardtime.nvim",
 		lazy = false,
 		dependencies = { "MunifTanjim/nui.nvim" },
