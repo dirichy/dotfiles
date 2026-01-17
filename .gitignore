@@ -36,13 +36,13 @@ Temporary Items
 lazy-lock.json
 /hammerspoon/.hammerspoon/Spoons/*
 /zsh/.config/zsh/.antidote
-/rime/Library/Rime/build/*
-/rime/Library/Rime/extended.userdb/*
-/rime/Library/Rime/easy_english.userdb/*
-/rime/Library/Rime/math_flypy.userdb/*
-/rime/Library/Rime/sync/*
-/rime/Library/Rime/*.dict.yaml
-/rime/Library/Rime/zh-hans-t-essay-bgw.gram
+/rime/.local/share/fcitx5/rime/build/*
+/rime/.local/share/fcitx5/rime/extended.userdb/*
+/rime/.local/share/fcitx5/rime/easy_english.userdb/*
+/rime/.local/share/fcitx5/rime/math_flypy.userdb/*
+/rime/.local/share/fcitx5/rime/sync/*
+/rime/.local/share/fcitx5/rime/*.dict.yaml
+/rime/.local/share/fcitx5/rime/zh-hans-t-essay-bgw.gram
 /zsh/.config/zsh/.zsh_sessions/*
 /karabiner/.config/karabiner/automatic_backups/*
 
@@ -69,3 +69,4 @@ sunshine/.config/sunshine/sunshine.log
 sunshine/.config/sunshine/sunshine_state.json
 mihomo/.config/mihomo/ui
 mihomo/.config/mihomo/geoip.metadb
+zsh/.config/zsh/.zcompcache
