@@ -24,7 +24,7 @@
 # 	fi
 # 	return 0
 # }
-s(){
+function s(){
     autossh -M 0 \
         -o "ServerAliveInterval=10" \
         -o "ServerAliveCountMax=3" \
