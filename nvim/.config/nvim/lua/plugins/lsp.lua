@@ -21,7 +21,7 @@ return {
 			},
 		},
 		cmd = { "Mason", "Neoconf" },
-		event = { "BufReadPost", "BufNewFile" },
+		event = { "BufReadPre" },
 		dependencies = {
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig",
@@ -40,7 +40,7 @@ return {
 		-- 	--   require("chinese.rime").setup_rime()
 		-- 	-- end
 		-- end,
-		init = function() end,
+		-- init = function() end,
 		config = function()
 			local on_attach = function(client, bufnr)
 				-- Enable completion triggered by <c-x><c-o>
@@ -77,38 +77,7 @@ return {
 				end, "Find References")
 				-- nmap('gr', vim.lsp.buf.references, '[G]oto [R]eferences')
 			end
-			-- local function my_root_dir(buffer, callback)
-			-- 	local fname = vim.api.nvim_buf_get_name(buffer)
-			-- 	local dir
-			-- 	local dotfile_roots = {
-			-- 		"~/dotfiles/hammerspoon/.hammerspoon",
-			-- 		"~/dotfiles/karabiner/.config/karabiner",
-			-- 		"~/dotfiles/lsd/.config/lsd",
-			-- 		"~/dotfiles/nvim/.config/nvim",
-			-- 		"~/dotfiles/zathura/.config/zathura",
-			-- 		"~/dotfiles/zsh/.config/zsh",
-			-- 	}
-			-- 	local parent = vim.fn.fnamemodify(fname, ":h")
-			-- 	if vim.startswith(parent, vim.fn.expand("~/dotfiles/")) then
-			-- 		for _, root_dir in ipairs(dotfile_roots) do
-			-- 			if vim.startswith(parent, vim.fn.expand(root_dir)) then
-			-- 				dir = dir or root_dir
-			-- 			end
-			-- 		end
-			-- 		dir = dir or vim.fn.getcwd()
-			-- 	end
-			-- 	dir = dir or vim.fs.dirname(vim.fs.find(".git", { upward = true })[1])
-			-- 	callback(dir)
-			-- end
 			vim.lsp.config("*", { on_attach = on_attach })
-			-- for _, server in ipairs({ "lua_ls", "texlab", "bashls" }) do
-			-- 	vim.lsp.config(server, {
-			-- 		on_attach = on_attach,
-			-- 		capabilities = capabilities,
-			-- 		root_dir = my_root_dir,
-			-- 	})
-			-- 	vim.lsp.enable(server)
-			-- end
 			local servers = {
 				ltex = {},
 				texlab = {},
@@ -156,138 +125,17 @@ return {
 				ensure_installed = vim.tbl_keys(servers),
 				autostart = true,
 			})
-			-- require("mason-lspconfig").setup_handlers({
-			-- 	-- The first entry (without a key) will be the default handler
-			-- 	-- and will be called for each installed server that doesn't have
-			-- 	-- a dedicated handler.
-			-- 	function(server_name) -- default handler (optional)
-			-- 		require("lspconfig")[server_name].setup({
-			-- 			on_attach = on_attach,
-			-- 			capabilities = capabilities,
-			-- 			root_dir = root_dir,
-			-- 		})
-			-- 	end,
-			-- 	-- Next, you can provide a dedicated handler for specific servers.
-			-- 	-- For example, a handler override for the `rust_analyzer`:
-			-- 	-- ["latex"] = function()
-			-- 	--   require("lspconfig").latex.setup({
-			-- 	--     settings={
-			-- 	--       texlab={
-			-- 	--       diagnostics={
-			-- 	--           ignoredPatterns={
-			-- 	--             ".*"
-			-- 	--           },
-			-- 	--           allowedPatterns={"1"}
-			-- 	--         }
-			-- 	--       }
-			-- 	--     }
-			-- 	--   })
-			-- 	-- end,
-			-- 	["ltex"] = function()
-			-- 		require("lspconfig")["ltex"].setup({
-			-- 			filetypes = { "tex", "latex", "md", "markdown" },
-			-- 			root_dir = root_dir,
-			-- 			autostart = false,
-			-- 			on_attach = function(_, bufer)
-			-- 				on_attach(_, bufer)
-			-- 				require("ltex_extra").setup({
-			-- 					-- capabilities = capabilities,
-			-- 					-- on_attach = on_attach,
-			-- 					use_spellfile = false,
-			-- 					filetypes = { "latex", "tex", "bib", "markdown", "gitcommit", "text" },
-			-- 					settings = {
-			-- 						ltex = {
-			-- 							enabled = { "latex", "tex", "bib", "markdown" },
-			-- 							diagnosticSeverity = "information",
-			-- 							completionEnabled = true,
-			-- 							checkFrequency = "edit",
-			-- 							sentenceCacheSize = 2000,
-			-- 							additionalRules = {
-			-- 								enablePickyRules = true,
-			-- 								motherTongue = "zh-CN",
-			-- 							},
-			-- 							["ltex-ls"] = {
-			-- 								logLevel = "severe",
-			-- 							},
-			-- 							-- dictionary = (function()
-			-- 							-- 	-- For dictionary, search for files in the runtime to have
-			-- 							-- 	-- and include them as externals the format for them is
-			-- 							-- 	-- dict/{LANG}.txt
-			-- 							-- 	--
-			-- 							-- 	-- Also add dict/default.txt to all of them
-			-- 							-- 	local files = {}
-			-- 							-- 	for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
-			-- 							-- 		local lang = vim.fn.fnamemodify(file, ":t:r")
-			-- 							-- 		local fullpath = vim.fs.normalize(file, ":p")
-			-- 							-- 		files[lang] = { ":" .. fullpath }
-			-- 							-- 	end
-			-- 							--
-			-- 							-- 	if files.default then
-			-- 							-- 		for lang, _ in pairs(files) do
-			-- 							-- 			if lang ~= "default" then
-			-- 							-- 				vim.list_extend(files[lang], files.default)
-			-- 							-- 			end
-			-- 							-- 		end
-			-- 							-- 		files.default = nil
-			-- 							-- 	end
-			-- 							-- 	return files
-			-- 							-- end)(),
-			-- 						},
-			-- 					},
-			-- 				})
-			-- 			end,
-			-- 			capabilities = capabilities,
-			-- 			settings = {
-			-- 				ltex = {
-			-- 					enabled = { "latex", "tex", "bib", "markdown" },
-			-- 					diagnosticSeverity = "information",
-			-- 					completionEnabled = true,
-			-- 					checkFrequency = "edit",
-			-- 					sentenceCacheSize = 2000,
-			-- 					additionalRules = {
-			-- 						enablePickyRules = true,
-			-- 						motherTongue = "zh-CN",
-			-- 					},
-			-- 					["ltex-ls"] = {
-			-- 						logLevel = "severe",
-			-- 					},
-			-- 					-- dictionary = (function()
-			-- 					-- 	-- For dictionary, search for files in the runtime to have
-			-- 					-- 	-- and include them as externals the format for them is
-			-- 					-- 	-- dict/{LANG}.txt
-			-- 					-- 	--
-			-- 					-- 	-- Also add dict/default.txt to all of them
-			-- 					-- 	local files = {}
-			-- 					-- 	for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
-			-- 					-- 		local lang = vim.fn.fnamemodify(file, ":t:r")
-			-- 					-- 		local fullpath = vim.fs.normalize(file, ":p")
-			-- 					-- 		files[lang] = { ":" .. fullpath }
-			-- 					-- 	end
-			-- 					--
-			-- 					-- 	if files.default then
-			-- 					-- 		for lang, _ in pairs(files) do
-			-- 					-- 			if lang ~= "default" then
-			-- 					-- 				vim.list_extend(files[lang], files.default)
-			-- 					-- 			end
-			-- 					-- 		end
-			-- 					-- 		files.default = nil
-			-- 					-- 	end
-			-- 					-- 	return files
-			-- 					-- end)(),
-			-- 				},
-			-- 			},
-			-- 		})
-			-- 	end,
-			-- 	["rust_analyzer"] = function()
-			-- 		require("rust-tools").setup({ on_attach = on_attach, capabilities = capabilities })
-			-- 	end,
-			-- })
 		end,
 	},
 	{
 		"folke/lazydev.nvim",
 		dependencies = {
 			{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+			{
+				"DrKJeff16/wezterm-types",
+				lazy = true,
+				version = false, -- Get the latest version
+			},
 		},
 		ft = "lua",
 		priority = 1000,
@@ -295,6 +143,7 @@ return {
 			library = {
 				"~/.luarocks/lib/lua/5.1/",
 				"/opt/homebrew/lib/lua/5.4/",
+				{ path = "wezterm-types", mods = { "wezterm" } },
 				{ path = "~/Documents/.lib/LuaTeX_Lua-API/library/", words = { "tex" } },
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				{ path = "~/.hammerspoon/Spoons/EmmyLua.spoon/annotations/", words = { "hs" } },
