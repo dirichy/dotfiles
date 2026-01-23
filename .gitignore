@@ -71,3 +71,4 @@ mihomo/.config/mihomo/ui
 mihomo/.config/mihomo/geoip.metadb
 zsh/.config/zsh/.zcompcache
 karabiner/.config/karabiner/karabiner.json
+rime/.local/share/fcitx5/rime/user.yaml
