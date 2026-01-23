@@ -131,6 +131,11 @@ return {
 		"folke/lazydev.nvim",
 		dependencies = {
 			{ "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+			{
+				"DrKJeff16/wezterm-types",
+				lazy = true,
+				version = false, -- Get the latest version
+			},
 		},
 		ft = "lua",
 		priority = 1000,
@@ -138,6 +143,7 @@ return {
 			library = {
 				"~/.luarocks/lib/lua/5.1/",
 				"/opt/homebrew/lib/lua/5.4/",
+				{ path = "wezterm-types", mods = { "wezterm" } },
 				{ path = "~/Documents/.lib/LuaTeX_Lua-API/library/", words = { "tex" } },
 				{ path = "luvit-meta/library", words = { "vim%.uv" } },
 				{ path = "~/.hammerspoon/Spoons/EmmyLua.spoon/annotations/", words = { "hs" } },
