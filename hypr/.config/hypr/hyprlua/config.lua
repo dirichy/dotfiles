@@ -91,6 +91,13 @@ hypr.keybind("mouse:276", 0, { "left" }, "mpv")
 hypr.keybind("mouse:275", 0, { "right" }, "mpv")
 hypr.keybind("mouse:276", 0, { "u", ctrl }, "sioyek")
 hypr.keybind("mouse:275", 0, { "d", ctrl }, "sioyek")
+hypr.keybind("mouse:276", 0, { "t" }, function()
+	local window = hypr.window.focusedWindow()
+	return window and window:application() == "steam_app_0" and window:gettitle() == "SecretFlasherManaka"
+end)
+-- hypr.keybind("mouse:275", 0, { "d", ctrl }, "sioyek")
+--class: steam_app_0
+-- title: SecretFlasherManaka
 hypr.keybind("n", alt, { "n", shift + ctrl })
 hypr.tencent = require("config.tencent")
 hypr.keybind("q", alt, hypr.tencent.qq.active)
