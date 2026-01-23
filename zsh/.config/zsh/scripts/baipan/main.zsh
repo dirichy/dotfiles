@@ -47,7 +47,7 @@ baipan(){
         _arguments '1:百度网盘路径:_path_files -W "$__bypypath$__bypypwd"'
     }
     bls(){
-        ls "$__bypypath$__bypypwd/$1"
+        ls -l "$__bypypath$__bypypwd/$1"
     }
 
     compdef _bcp bcp
